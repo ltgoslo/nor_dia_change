@@ -1,6 +1,6 @@
-# Annotation Guidelines for Diachronic Usage Relatedness
+# Annotation Guidelines for Diachronic Usage Relatedness annotation in Norwegian
 
-(based on "[DWUG: A large Resource of Diachronic Word Usage Graphs in Four Languages](https://arxiv.org/abs/2104.08540)")
+(loosely based on "[DWUG: A large Resource of Diachronic Word Usage Graphs in Four Languages](https://arxiv.org/abs/2104.08540)")
 
 ## Introduction
 
@@ -26,7 +26,7 @@ Since language is often ambiguous, please read each sentence separately first, a
 decide upon the most plausible meaning of the target word in each sentence BEFORE
 comparing the two uses.
 
-## The judgment scale. 
+## The judgment scale
 
 The scale that you will be using for your judgments ranges
 from **1** (the two uses of the word have completely unrelated meanings) to **4** (the two
