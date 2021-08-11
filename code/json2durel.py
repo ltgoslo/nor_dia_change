@@ -27,14 +27,21 @@ outfile.write(
 
 writer = csv.writer(outfile, delimiter="\t", quoting=csv.QUOTE_MINIMAL, dialect="unix")
 
+seen = set()
+discarded_count = 0
+
 for sentence in usages:
     description = ""
-    context = sentence[1]
+    context = sentence[1].strip()
+    if context in seen:
+        discarded_count += 1
+        continue
+    seen.add(context)
     target = context.find(lemma)
     if target != -1:
         indexes_target_token = f"{target}:{target+len(lemma)}"
     else:
-        target = "0:0"
+        indexes_target_token = "0:0"
     indexes_target_sentence = f"0:{len(context)}"
     writer.writerow(
         [
@@ -49,3 +56,6 @@ for sentence in usages:
             indexes_target_sentence,
         ]
     )
+
+if discarded_count:
+    print(f"{discarded_count} duplicates discarded", file=sys.stderr)
