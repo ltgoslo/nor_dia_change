@@ -4,12 +4,12 @@
 
 ## Introduction
 
-Your task is to rate the semantic relatedness between two uses of a word. For instance, presented with a sentence pair as in (1), you are asked to rate the
+Your task is to rate the semantic relatedness between two uses of a word. For instance, presented with a sentence pair as in (0), you are asked to rate the
 semantic relatedness between the two uses of _ris_ in (a) and (b):
 
-(a) I den islandske debatten gis det ros og **ris** til systemet.
+(0a) I den islandske debatten gis det ros og **ris** til systemet.
 
-(b) Da krigen brøt ut i .1807, var briggen på hjemreise fra Middelhavet, låstet med sukker, **ris** og bomull.
+(0b) Da krigen brøt ut i .1807, var briggen på hjemreise fra Middelhavet, låstet med sukker, **ris** og bomull.
 
 ## Task structure
 
@@ -47,7 +47,7 @@ subjective opinion. However, please try to be consistent in your judgments.
 
 ## Annotation examples
 
-We now zoom into the individual rows annotation instances and provide rating examples, in order to illustrate the different degrees of relatedness
+We now zoom into the individual annotation instances and provide rating examples, in order to illustrate the different degrees of relatedness
 that you may find in the judgment task.
 Note again that these are just examples and you should provide your own subjective opinion.
 
@@ -80,9 +80,6 @@ Another example of semantically unrelated meanings is the meaning of **ris** in 
 (4b) I saltvann produseres primært grønn tang til en samlet verdi av $ 440 mill. (1973). Denne tangen spises til **ris** som en slags grønnsak.
 
 In (4a), **ris** refers to a unit of quantity of paper, while in (4b) it refers to rice.
-
-In (5a) and (5b) ...
-Note that this pair of uses is semantically distant such that ...
 
 Finally, there is also the option for you to provide the `Cannot decide` judgment (rat-
 ing: **0**).
