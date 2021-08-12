@@ -55,7 +55,7 @@ Note again that these are just examples and you should provide your own subjecti
 
 (1b) Videre omfatter bransjen produksjon av fotografisk materiell, fotokopieringsutstyr, **linser** og optiske instrumenter.
 
-The two instances of **linse** in this example are judged identical in meaning (rating: **4**),
+The two instances of **linse(n/r)** in this example are judged identical in meaning (rating: **4**),
 because both uses refer to a lens as a transmissive optical device.
 
 In the following two sentences, the word **bit** also have the identical meaning of ''piece'' (rating **4**):
