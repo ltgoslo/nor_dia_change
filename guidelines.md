@@ -71,7 +71,7 @@ meaning, as it is the case for **rev** in the next example.
 
 (3b) Etter tillatelse fra politiet kan det brukes gift til fangst av ulv, jerv og **rev** i Uleåborgs og Lapplands len. Slik tillatelse gis for én fangstsesong av gangen.
 
-Here, **rev** in (3a) refers to bank of sand, mountains or corals that do not protrude from the sea, while **rev** in (2b) refers to the animal (fox)
+Here, **rev** in (3a) refers to bank of sand, mountains or corals that do not protrude from the sea, while **rev** in (2b) refers to the animal (fox).
 
 Another example of semantically unrelated meanings is the meaning of **ris** in the following examples:
 
@@ -79,7 +79,7 @@ Another example of semantically unrelated meanings is the meaning of **ris** in 
 
 (4b) I saltvann produseres primært grønn tang til en samlet verdi av $ 440 mill. (1973). Denne tangen spises til **ris** som en slags grønnsak.
 
-In (4a), **ris** refers to a unit of quantity for paper, while in (4b) it refers to rice.
+In (4a), **ris** refers to a unit of quantity of paper, while in (4b) it refers to rice.
 
 In (5a) and (5b) ...
 Note that this pair of uses is semantically distant such that ...
