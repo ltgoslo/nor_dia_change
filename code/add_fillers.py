@@ -1,3 +1,7 @@
+#! /bin/env/ python3
+# coding: utf-8
+
+from smart_open import open
 from scipy.stats import percentileofscore
 import random
 import numpy as np
