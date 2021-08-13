@@ -81,8 +81,7 @@ Another example of semantically unrelated meanings is the meaning of **ris** in 
 
 In (4a), **ris** refers to a unit of quantity of paper, while in (4b) it refers to rice.
 
-Finally, there is also the option for you to provide the `Cannot decide` judgment (rat-
-ing: **0**).
+Finally, there is also the option for you to provide the `Cannot decide` judgment (rating: **0**).
 Please use this rating only if absolutely necessary, when you are unable to
 make a decision as to the degree of relatedness in meaning between the two bold
 words.
