@@ -39,9 +39,9 @@ This four-point scale is shown in detail below:
 
 
 Please try to ignore differences between the uses that do not impact their meaning.
-For example, _eat_ and _ate_ can express the same meaning, even though one is in present
+For example, _spiser_ and _spiste_ can express the same meaning, even though one is in present
 tense, and the other is in past tense. Also, distinctions between singular and plural
-(as in _carrot_ vs. _carrots_) are typically irrelevant for the meanings.
+(as in _treet_ vs. _trærne_) are typically irrelevant for the meanings.
 Note that there are no right or wrong answers in this task, so please provide your
 subjective opinion. However, please try to be consistent in your judgments.
 
