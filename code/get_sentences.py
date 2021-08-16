@@ -14,7 +14,7 @@ identifier = sys.argv[3]
 targets = {}
 
 for line in open(targetlistfile, "r"):
-    word, senses, period = line.strip().split("\t")
+    word = line.strip().split("\t")[0]
     targets[word.strip() + "_NOUN"] = []
 
 print(f"{len(targets)} target words to extract", file=sys.stderr)
@@ -23,7 +23,10 @@ corpus = pd.read_csv(corpusfile, index_col="ID")
 
 for idx, lemmas, raw in corpus[["LEMMAS", "RAW"]].itertuples():
     text = raw.strip()
-    language = detect(text)
+    try:
+        language = detect(text)
+    except:
+        continue
     if language != "no":
         continue
     split_lemmas = lemmas.split()
