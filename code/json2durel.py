@@ -6,6 +6,8 @@ import csv
 from smart_open import open
 import json
 import os
+from nltk.tokenize import wordpunct_tokenize
+from leven import levenshtein
 
 jsonfile = sys.argv[1]
 grouping = sys.argv[2]
@@ -37,9 +39,24 @@ for sentence in usages:
         discarded_count += 1
         continue
     seen.add(context)
-    target = context.find(lemma)
-    if target != -1:
-        indexes_target_token = f"{target}:{target+len(lemma)}"
+    tokenized_context = wordpunct_tokenize(context)
+    # First we are looking for the 100% match:
+    target_token = None
+    for token in tokenized_context:
+        if token == lemma:
+            target_token = token
+    # if no 100% match is found, let's look for similar words:
+    if not target_token:
+        current_candidate = (None, 100)
+        for token in tokenized_context:
+            distance = levenshtein(token, lemma)
+            if distance < current_candidate[1]:
+                current_candidate = (token, distance)
+        target_token = current_candidate[0]
+
+    if target_token:
+        target = context.find(target_token)
+        indexes_target_token = f"{target}:{target + len(target_token)}"
     else:
         indexes_target_token = "0:0"
     indexes_target_sentence = f"0:{len(context)}"
