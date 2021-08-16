@@ -45,13 +45,13 @@ def output_results(target_dict, rest_dict, vocablist):
         perc = np.array(target_dict[i])
         print(perc)
         candidates = set([w for w in rest_dict
-                          if np.max(np.absolute(np.array(rest_dict[w]) - perc)) < 4
+                          if np.max(np.absolute(np.array(rest_dict[w]) - perc)) < 2
                           and w not in finallist])
         if len(candidates) < 2:
             missing_perc.append(target_dict[i])
             print(f"No candidates for {i}")
             continue
-        sl = random.sample(candidates, 3)
+        sl = random.sample(candidates, 5)
         for el in sl:
             print("\t".join([el, "0", "0", "0"]), [vocab[el] for vocab in vocablist])
             finallist.add(el)
@@ -98,7 +98,7 @@ corpus_size_1 = int(sys.argv[5])
 
 intersec = set.intersection(*map(set, all_vocabs))
 
-print("Generating fillers...")
+print("Generating fillers...", file=sys.stderr)
 wordfreq = get_freqdict(targets, all_vocabs, [corpus_size_0, corpus_size_1], intersec)
 
 fillers = set()
@@ -106,16 +106,18 @@ for voc_word in intersec:
     if voc_word not in targets and voc_word.endswith("_NOUN"):
         fillers.add(voc_word)
 
-FREQ_THRESHOLD = 5  # We do not consider fillers less frequent than this
+print("Frequency filtering...", file=sys.stderr)
+FREQ_THRESHOLD = 10  # We do not consider fillers less frequent than this
 frequent_fillers = set()
 for filler in fillers:
     if vocab_0[filler] < FREQ_THRESHOLD or vocab_1[filler] < FREQ_THRESHOLD:
         continue
     else:
         frequent_fillers.add(filler)
-
+print(f"{len(frequent_fillers)} potential fillers")
 fillerfreq = get_freqdict(frequent_fillers, all_vocabs, [corpus_size_0, corpus_size_1], intersec)
 
+print("Producing results...", file=sys.stderr)
 res = output_results(wordfreq, fillerfreq, all_vocabs)
 
-print(f"{len(res)} fillers found")
+print(f"{len(res)} fillers found", file=sys.stderr)
