@@ -5,6 +5,7 @@ import sys
 import pandas as pd
 from smart_open import open
 import json
+from langdetect import detect
 
 targetlistfile = sys.argv[1]
 corpusfile = sys.argv[2]
@@ -21,11 +22,15 @@ print(f"{len(targets)} target words to extract", file=sys.stderr)
 corpus = pd.read_csv(corpusfile, index_col="ID")
 
 for idx, lemmas, raw in corpus[["LEMMAS", "RAW"]].itertuples():
+    text = raw.strip()
+    language = detect(text)
+    if language != "no":
+        continue
     split_lemmas = lemmas.split()
     bag_of_lemmas = set([w for w in split_lemmas])
     for target in targets:
         if target in bag_of_lemmas:
-            targets[target].append([split_lemmas, raw])
+            targets[target].append([split_lemmas, text])
 
 for target in targets:
     print(f"{target}: {len(targets[target])} examples found", file=sys.stderr)
