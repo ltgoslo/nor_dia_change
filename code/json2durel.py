@@ -49,6 +49,9 @@ for sentence in usages:
     if not target_token:
         current_candidate = (None, 100)
         for token in tokenized_context:
+            # We are interested only in tokens starting with the same character as lemma
+            if token[0] != lemma[0]:
+                continue
             distance = levenshtein(token, lemma)
             if distance < current_candidate[1]:
                 current_candidate = (token, distance)
