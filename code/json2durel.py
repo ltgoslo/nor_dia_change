@@ -18,8 +18,6 @@ with open(jsonfile, "r") as f:
 lemma = os.path.basename(jsonfile).split("_")[1]
 pos = "NN"
 date = os.path.basename(jsonfile).split("_")[0].split("-")[0]
-identifier = os.path.basename(jsonfile).split(".")[0]
-
 outfile = open(jsonfile.replace("json.", "tsv."), "a")
 
 
@@ -31,6 +29,7 @@ writer = csv.writer(outfile, delimiter="\t", quoting=csv.QUOTE_MINIMAL, dialect=
 
 seen = set()
 discarded_count = 0
+counter = 0
 
 for sentence in usages:
     description = ""
@@ -63,6 +62,7 @@ for sentence in usages:
     else:
         indexes_target_token = "0:0"
     indexes_target_sentence = f"0:{len(context)}"
+    identifier = f"{grouping}_{lemma}_{counter}"
     writer.writerow(
         [
             lemma,
@@ -76,6 +76,7 @@ for sentence in usages:
             indexes_target_sentence,
         ]
     )
+    counter += 1
 
 if discarded_count:
     print(f"{discarded_count} duplicates discarded", file=sys.stderr)
