@@ -36,6 +36,6 @@ etterforskning	100	0.25
 fil	118	0.25
 gress	100	0.5
 data	100	0.5
-stoff	0	0
-forhold	0	0
-damp	0	0
+stoff	100	0.75
+forhold	102	0.75
+damp	100	0.75
