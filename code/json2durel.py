@@ -12,9 +12,13 @@ from leven import levenshtein
 jsonfile = sys.argv[1]
 grouping = sys.argv[2]
 
+# Skip usages where the target word ends with a dot
+NOABBR = False
+
 with open(jsonfile, "r") as f:
     usages = json.load(f)
 
+print(f"{len(usages)} usages total in the JSON file", file=sys.stderr)
 lemma = os.path.basename(jsonfile).split("_")[1]
 pos = "NN"
 date = os.path.basename(jsonfile).split("_")[0].split("-")[0]
@@ -29,6 +33,7 @@ writer = csv.writer(outfile, delimiter="\t", quoting=csv.QUOTE_MINIMAL, dialect=
 
 seen = set()
 discarded_count = 0
+abbr_count = 0
 counter = 0
 
 for sentence in usages:
@@ -38,6 +43,10 @@ for sentence in usages:
         discarded_count += 1
         continue
     seen.add(context)
+    if NOABBR:
+        if f" {lemma}." in context.lower() or context.lower().startswith(f"{lemma}. "):
+            abbr_count += 1
+            continue
     tokenized_context = wordpunct_tokenize(context)
     # First we are looking for the 100% match:
     target_token = None
@@ -49,7 +58,7 @@ for sentence in usages:
         current_candidate = (None, 100)
         for token in tokenized_context:
             # We are interested only in tokens starting with the same character as lemma
-            if token[0] != lemma[0]:
+            if token.lower()[0] != lemma.lower()[0]:
                 continue
             distance = levenshtein(token, lemma)
             if distance < current_candidate[1]:
@@ -80,3 +89,6 @@ for sentence in usages:
 
 if discarded_count:
     print(f"{discarded_count} duplicates discarded", file=sys.stderr)
+
+if abbr_count:
+    print(f"{abbr_count} abbreviations discarded", file=sys.stderr)

@@ -10,7 +10,7 @@ THRESHOLD = int(sys.argv[1])
 words = Counter()
 
 for line in sys.stdin:
-    tokenized = line.strip()[1:-1].split()
+    tokenized = line.strip().split()
     words.update(tokenized)
 
 print("Vocabulary size before pruning:", len(words), file=sys.stderr)
