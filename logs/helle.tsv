@@ -6,7 +6,6 @@ skjerm	100	0.75
 katten	100	0.5
 kjemi	100	0.5
 pære	150	1.0
-rev	100	0.5
 tro	100	0.75
 horisont	100	0.75
 plattform	100	0.5
@@ -39,3 +38,6 @@ data	100	0.5
 stoff	100	0.75
 forhold	102	0.75
 damp	100	0.75
+rev	128	0.75
+husrom	120	0.75
+
