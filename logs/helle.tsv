@@ -40,8 +40,14 @@ forhold	102	0.75
 damp	100	0.75
 rev	128	0.75
 husrom	120	0.75
-
+-	-	-
 rådgiver	115	0.25
 kode	119	1.5
 virus	115	0.5
 særforbund	115	0.25
+kohort	115	1.0
+vert	115	0.75
+storby	116	0.5
+bystyrerepresentant	120	0.25
+oppvarming	119	1.0
+
