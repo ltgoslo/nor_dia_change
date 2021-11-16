@@ -60,7 +60,6 @@ nett	118	0.75
 driftsregnskap	115	0.5
 innstilling	122	0.5
 overflate	115	0.75
-nett	118	0.75
 mus	128	0.75
 tendens	115	0.25
 fjær	121	0.5
@@ -76,6 +75,12 @@ mappe	115	0.5
 papir	118	0.75
 virkelighet	115	0.75
 melding	119	0.5
+kjøpepress	130	0.75
+strøm	125	0.5
+tjener	116	0.5
+tape	0	0.0
+tester	0	0.0
+stryk	0	0.0
 
 
 
