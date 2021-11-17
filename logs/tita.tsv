@@ -1,4 +1,3 @@
-subset 1
 word	instances	hours
 frakk	220	1
 anfektelse	203	0.5
@@ -42,8 +41,8 @@ kart	101	0.2
 formiddagen	106	0.2
 husrom	111	0.25
 
-subset 2
-word	instances	hours
+
+
 stryk	118	0.25
 tjener	117	0.25
 strøm	143	0.25
