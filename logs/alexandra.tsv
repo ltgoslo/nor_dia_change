@@ -57,7 +57,7 @@ kreft	154	0.5
 mappe	125	0.75
 melding	126	0.5
 melk	128	0.5
-moment	0	0.0
+moment	125	0.5
 mus	130	0.5
 nett	129	0.5
 oppvarming	113	0.5
@@ -78,8 +78,8 @@ tendens	120	0.5
 terror	130	0.5
 tester	200	0.5
 tjener	111	0.5
-utakt	0	0.0
-vert	0	0.0
-vindu	0	0.0
-virkelighet	0	0.0
-virus	0	0.0
+utakt	137	0.5
+vert	110	0.5
+vindu	115	0.5
+virkelighet	140	0.5
+virus	131	0.5
