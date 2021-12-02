@@ -40,7 +40,7 @@ bølge	102	0.25
 kart	101	0.2
 formiddagen	106	0.2
 husrom	111	0.25
-
+		
 stryk	118	0.25
 tjener	117	0.25
 strøm	143	0.25
@@ -64,23 +64,23 @@ tendens	115	0.25
 driftsregnskap	114	0.25
 melk	111	0.25
 bystyrerepresentant	110	0.25
-virus 125 0.25
-mus 120 0.25
-særforbund  118	0.25
+virus	125	0.25
+mus	120	0.25
+særforbund	118	0.25
 oppvarming	113	0.25
-kode  120 0.25
-rådgiver  115 0.25
-syden	111 0.25
-terror  111 0.25
-storby  113 0.25
-vindu  111  0.25
-vert  113 0.25
-kohort  113 0.25
-overflate 112 0.25
-tavle 111 0.25
-kanal 118 0.25
-innstilling 121	0.25
-nett  135 0.5
+kode	120	0.25
+rådgiver	115	0.25
+syden	111	0.25
+terror	111	0.25
+storby	113	0.25
+vindu	111	0.25
+vert	113	0.25
+kohort	113	0.25
+overflate	112	0.25
+tavle	111	0.25
+kanal	118	0.25
+innstilling	121	0.25
+nett	135	0.5
 
 
 
