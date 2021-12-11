@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_landet_1460", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn kombinasjon av bibliotekutdannelse og universitetsutdannelse\u003cbr\u003evil sannsynligvis bli fremtidens krav her i \u003cb\u003elandet\u003c/b\u003e. inneslutter\u003cbr\u003ei sin fagkrets ett \u00e5rs studium for kandidater som har fullf\u00f8rt\u003cbr\u003egenerell eksamen og som \u00f8nsker spesialisering. Fagkretsen for\u003cbr\u003emusikkbibliotekarer ville da vaere den f\u00f8lgende: 1. Innf\u00f8ring i\u003cbr\u003emusikkhistorie. 2. Kildemateriale: biografiske oppslagsverker,\u003cbr\u003etematiske kataloger, musikkleksika, bibliografier over musikalier,\u003cbr\u003emusikk-kataloger etc\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_1460\u003cbr\u003etype: usage\u003c/p\u003e", "x": 36.54300247183068, "y": 50.84537156503879}, {"color": "#377eb8", "id": "1929-1965_landet_1627", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI 1619 bestred den britiske regjering den norske og danske\u003cbr\u003ekonges \u00abproprietet des landes Groenland\u00bb, med den begrunnelse at hans\u003cbr\u003eunders\u00e5tter ikke hadde bodd i \u003cb\u003elandet\u003c/b\u003e. Hvad saerlig Nederlandene\u003cbr\u003eangar, n\u00f8iet de sig ikk\u00e9 med okkupasjonen i 1616. Tallrike\u003cbr\u003enederlandske ekspedisjoner bes\u00f8kte i den f\u00f8lgende tid de gr\u00f8nlandske\u003cbr\u003ekyster og farvann, st\u00f8ttet ay en rekke nederlandske\u003cbr\u003eprivilegiet\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_1627\u003cbr\u003etype: usage\u003c/p\u003e", "x": 90.6410297033112, "y": 238.30826284182865}, {"color": "#377eb8", "id": "1929-1965_landet_716", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTyskerne brukte ham bevisst som skremsel fordi alle var redd\u003cbr\u003eham her i \u003cb\u003elandet\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_716\u003cbr\u003etype: usage\u003c/p\u003e", "x": -256.6109257744814, "y": 294.58149860507245}, {"color": "#377eb8", "id": "1929-1965_landet_257", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSom medlem av Riksr\u00e5det treffes han f\u00f8rste gang utover h\u00f8sten\u003cbr\u003e1524 i Bergen, hvor Riksr\u00e5det med erkebisp Olav i spissen p\u00e5 Norges\u003cbr\u003evegne opsier Christian II troskap og meddeler nam at man vil velge en\u003cbr\u003eannen konge som bedre kan regjere og forsvare \u003cb\u003elandet\u003c/b\u003e. K. deltar\u003cbr\u003ei en rekke betydningsfulle m\u00f8ter i denne for Norge vanskelige tiden,\u003cbr\u003eer 23 /8 med p\u00e5 det enstemmige valget av Frederik, Danmarks konge, til\u003cbr\u003enorsk konge under forutsetning av at han undertegner den av r\u00e5det\u003cbr\u003eutarbeidede saerlige h\u00e5ndfestning for Norge. \u2014 Mere i forgrunnen trer\u003cbr\u003eK. under det motsetningsforhold han er kommet i til VincenB Lunge, som\u003cbr\u003ep\u00e5 forskjellig vis legger sig efter K., s\u00f8ker \u00e5 frata nam hans\u003cbr\u003eforlening i Sogn hvor Vincens Lunge selv hadde len, jager K. og hans\u003cbr\u003efamilie fra g\u00e5rden og endog pr\u00f8ver \u00e5 f\u00e5 sl\u00e5tt ham ihjel\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_257\u003cbr\u003etype: usage\u003c/p\u003e", "x": -79.62126652520591, "y": -150.93186627348723}, {"color": "#377eb8", "id": "1929-1965_landet_1192", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r de s\u00e5 endelig n\u00e5dde fram i en mer eller mindre forkommen\u003cbr\u003etilstand, fikk de tildelt land av myndighetene, uten at det var\u003cbr\u003eunders\u00f8kt om det egnet seg for \u00e5kerbruk; det gjaldt bare f\u00f8rst og\u003cbr\u003efremst \u00e5 f\u00e5 dem spredt langs grensen i passende avstand, for at de\u003cbr\u003ekunne befordre post og skyss og danne et slags bevepnet vern for\u003cbr\u003e\u003cb\u003elandet\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_1192\u003cbr\u003etype: usage\u003c/p\u003e", "x": -339.69599685134756, "y": 189.25540028340535}, {"color": "#377eb8", "id": "1929-1965_landet_2242", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMed tilvising til dette meiner komiteen at det er lite\u003cbr\u003erealistisk \u00e5 ta opp framlegg om \u00e5 byggje ut nye gymnas som\u003cbr\u003estatsinstitusjonar. Komiteen ser det ogs\u00e5 slik at det er lite\u003cbr\u003erasjonelt at staten skal eige og halde ved like ei rekkje med\u003cbr\u003ebygningar for statsskolar utover \u003cb\u003elandet\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_2242\u003cbr\u003etype: usage\u003c/p\u003e", "x": -450.58662037672144, "y": 54.46339033103953}, {"color": "#377eb8", "id": "1929-1965_landet_973", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er i denne forbindelse saerlig fremhevet at de lovbefalte\u003cbr\u003eoppgaver \u2014 det vil si oppgaver som er p\u00e5lagt kommunene av staten med\u003cbr\u003eeller uten tilskudd fra denne \u2014 etter hvert har erobret en st\u00f8rre og\u003cbr\u003est\u00f8rre del av budsjettene og at disse oppgavene i alminnelighet vil\u003cbr\u003evaere tyngende fordi det som regel kreves at de skal l\u00f8ses noenlunde\u003cbr\u003elikeartet over hel\u003cb\u003ee land\u003c/b\u003eet. Med den sterke vekst av de\u003cbr\u003ekommunale oppgaver er det etterh\u00e5nden blitt noks\u00e5 mange kommuner som\u003cbr\u003eikke makter \u00e5 balansere sine budsjetter ved egen hjel\u003cspan style=\"color:#808080;\"\u003ep.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_973\u003cbr\u003etype: usage\u003c/p\u003e", "x": 136.38735354515785, "y": -141.27733150126247}, {"color": "#377eb8", "id": "1929-1965_landet_331", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDen situasjon som forel\u00e5 ved krigsutbruddet, var da slik at den\u003cbr\u003eetter forutsetningen skulle na betinget full oppsetting av\u003cbr\u003elinjestyrkene, selv om en ikke mente det forel\u00e5 umiddelbar krigsfare\u003cbr\u003efor \u003cb\u003elandet\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_331\u003cbr\u003etype: usage\u003c/p\u003e", "x": 229.73135067379198, "y": -27.5090962778826}, {"color": "#ff7f00", "id": "1929-1965_landet_79", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u2014 Det er sant at jeg var i Ukraina i to \u00e5r, men jeg var aldri\u003cbr\u003eute p\u00e5 \u003cb\u003elandet\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_79\u003cbr\u003etype: usage\u003c/p\u003e", "x": 536.586058585993, "y": 467.38377899720496}, {"color": "#4daf4a", "id": "1929-1965_landet_2337", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHan var lys og kr\u00f8llet i h\u00e5ret med kloke \u00f8yne og s\u00e5 vig og\u003cbr\u003esmidig og vakker at alle bygdens piker gjorde seg aerend og sognet til\u003cbr\u003eboden bare for \u00e5 se ham. Og dertil var han s\u00e5 dyktig i all sin\u003cbr\u003egjerning at handelsmannen aldri ville skille seg med ham. S\u00e5 var det\u003cbr\u003eengang han for ut til fiskevaeret for prinsipalen. Str\u00f8mmen bar stri\u003cbr\u003eimot, og han rodde lang\u003cb\u003es land\u003c/b\u003ee\u003cspan style=\"color:#808080;\"\u003et.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_2337\u003cbr\u003etype: usage\u003c/p\u003e", "x": 570.2411168102074, "y": -496.1656977244763}, {"color": "#f781bf", "id": "1929-1965_landet_817", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVi endret kursen til NNV, og om kvelden til N, det skulle\u003cbr\u003eskjaere inn p\u00e5\u003cb\u003e lande\u003c/b\u003et\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_landet_817\u003cbr\u003etype: usage\u003c/p\u003e", "x": -83.79068810960305, "y": -750.0}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_landet_2337", "label": "-/2/-", "to": "1929-1965_landet_79", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "3/1/1", "to": "1929-1965_landet_1192", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "3/-/1", "to": "1929-1965_landet_331", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "-/1/1", "to": "1929-1965_landet_2242", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "-/1/4", "to": "1929-1965_landet_817", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "3/1/1", "to": "1929-1965_landet_973", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "-/4/1", "to": "1929-1965_landet_257", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "-/1/-", "to": "1929-1965_landet_1627", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "-/1/-", "to": "1929-1965_landet_716", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2337", "label": "3/-/-", "to": "1929-1965_landet_1460", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_817", "label": "-/1/1", "to": "1929-1965_landet_1460", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_817", "label": "4/1/1", "to": "1929-1965_landet_1627", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_817", "label": "-/1/1", "to": "1929-1965_landet_79", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_817", "label": "-/1/-", "to": "1929-1965_landet_973", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_817", "label": "4/-/-", "to": "1929-1965_landet_257", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_817", "label": "-/1/0", "to": "1929-1965_landet_331", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "3/-/1", "to": "1929-1965_landet_1192", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "3/-/1", "to": "1929-1965_landet_2242", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "-/1/-", "to": "1929-1965_landet_1627", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "-/1/1", "to": "1929-1965_landet_331", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "3/-/-", "to": "1929-1965_landet_257", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "-/1/-", "to": "1929-1965_landet_716", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_79", "label": "3/1/-", "to": "1929-1965_landet_1460", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "-/4/4", "to": "1929-1965_landet_1627", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "4/0/-", "to": "1929-1965_landet_973", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "4/-/4", "to": "1929-1965_landet_1192", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "4/4/-", "to": "1929-1965_landet_331", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "-/4/-", "to": "1929-1965_landet_716", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "4/4/-", "to": "1929-1965_landet_2242", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_257", "label": "4/4/-", "to": "1929-1965_landet_1460", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1192", "label": "4/-/4", "to": "1929-1965_landet_973", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1192", "label": "4/4/4", "to": "1929-1965_landet_716", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1192", "label": "-/-/4", "to": "1929-1965_landet_1627", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1192", "label": "-/1/-", "to": "1929-1965_landet_331", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1192", "label": "4/3/4", "to": "1929-1965_landet_2242", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1192", "label": "-/4/-", "to": "1929-1965_landet_1460", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1627", "label": "-/4/-", "to": "1929-1965_landet_716", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1627", "label": "-/3/4", "to": "1929-1965_landet_973", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_landet_1627", "label": "-/4/4", "to": "1929-1965_landet_1460", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_331", "label": "-/4/4", "to": "1929-1965_landet_716", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_331", "label": "4/4/-", "to": "1929-1965_landet_973", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_331", "label": "4/3/-", "to": "1929-1965_landet_2242", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_landet_331", "label": "-/4/4", "to": "1929-1965_landet_1460", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_716", "label": "4/3/-", "to": "1929-1965_landet_2242", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_landet_716", "label": "4/4/4", "to": "1929-1965_landet_1460", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_716", "label": "4/-/-", "to": "1929-1965_landet_973", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2242", "label": "4/-/4", "to": "1929-1965_landet_1460", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_2242", "label": "-/2/-", "to": "1929-1965_landet_973", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_landet_1460", "label": "-/-/4", "to": "1929-1965_landet_973", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

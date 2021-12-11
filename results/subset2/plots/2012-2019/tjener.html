@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>2012-2019</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "2012-2019_tjener_371", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVerre for jenter 40 prosent av verdens 250.000 barnesoldater er\u003cbr\u003ejenter. Slik er det ogs\u00e5 i Den demokratiske republikken Kongo.\u003cbr\u003eKidnappet og brukt som sexslaver og \u003cb\u003etjenere\u003c/b\u003e av militsgrupper,\u003cbr\u003eblir de ofte avvist av familien hvis de klarer \u00e5 r\u00f8mme.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_tjener_371\u003cbr\u003etype: usage\u003c/p\u003e", "x": 380.74328327466196, "y": 55.44580606008702}, {"color": "#377eb8", "id": "2012-2019_tjener_883", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 sp\u00f8rsm\u00e5l om kontroll med plomberinger, svarer Forsvaret at\u003cbr\u003epolitiet beslutter hvem og hva slags saksforhold som skal\u003cbr\u003eetterforskes. \u2013 Av hensyn til den enkeltes rettssikkerhet, samt \u00e5\u003cbr\u003esikre en objektiv og uavhengig etterforskning, vil det vaere galt av\u003cbr\u003eForsvaret p\u00e5 dette tidspunkt \u00e5 uttale seg naermere om dette, skriver\u003cbr\u003emajor Hagen. Sjefen for Forsvarsstaben, viseadmiral Elisabeth Natvig\u003cbr\u003esvarer p\u00e5 generelt grunnlag om politiets funn i operasjon Bonanza: \u2013\u003cbr\u003eHandler disse funnene om enkeltpersoner som har beg\u00e5tt lovbrudd eller\u003cbr\u003eet system som ikke har hatt kontroll? \u2013 Jeg oppfatter at det er en\u003cbr\u003ekombinasjon av utr\u003cb\u003eo tjene\u003c/b\u003ere og for d\u00e5rlige rutine\u003cspan style=\"color:#808080;\"\u003er.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_tjener_883\u003cbr\u003etype: usage\u003c/p\u003e", "x": 121.74481667641287, "y": -518.2341346979923}, {"color": "#377eb8", "id": "2012-2019_tjener_87", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBlant dem er historien om Diana og Aktaion. Maleriet skildrer\u003cbr\u003een scene der jegeren Aktaion uforvarende kommer over jaktens gudinne,\u003cbr\u003ejomfruen Diana, mens hun blir vasket var sine \u003cb\u003etjenere\u003c/b\u003e i\u003cbr\u003eskogen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_tjener_87\u003cbr\u003etype: usage\u003c/p\u003e", "x": 108.65634313897122, "y": 707.2890126188985}, {"color": "#377eb8", "id": "2012-2019_tjener_236", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSelv om roboter blir mer og mer utbredt, er de p\u00e5 langt naer \u00e5\u003cbr\u003efungere som\u003cb\u003e tjener\u003c/b\u003ee i hjemmene v\u00e5re - forel\u00f8pig\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_tjener_236\u003cbr\u003etype: usage\u003c/p\u003e", "x": -538.0272471787703, "y": 418.4320081755341}, {"color": "#377eb8", "id": "2012-2019_tjener_181", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDyp r\u00f8d sofa og persisk teppe p\u00e5 gulvet i biblioteket p\u00e5\u003cbr\u003eDownton Abbey. Lady Rose (Lily James) later til \u00e5 kjede seg, b\u00f8kene\u003cbr\u003etil tross. Foto: ITV B\u00e5de herskap og \u003cb\u003etjenere\u003c/b\u003e engasjerer seg i\u003cbr\u003ehverandres liv p\u00e5 Downton Abbey. Foto: ITV\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_tjener_181\u003cbr\u003etype: usage\u003c/p\u003e", "x": 425.9461213427202, "y": 343.00449056254274}, {"color": "#377eb8", "id": "2012-2019_tjener_126", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn ny sesong med Downton Abbey er endelig i gang. Hvordan\u003cbr\u003etakler Mary sitt nye liv som nybakt mor og ung enke? Og hvordan g\u00e5r\u003cbr\u003edet med livene til herskap og \u003cb\u003etjenere\u003c/b\u003e p\u00e5 godset?\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_tjener_126\u003cbr\u003etype: usage\u003c/p\u003e", "x": -542.2499284954571, "y": -89.33591044140697}]);
+        edges = new vis.DataSet([{"color": "black", "from": "2012-2019_tjener_87", "label": "4/-/4", "to": "2012-2019_tjener_371", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_87", "label": "4/4/4", "to": "2012-2019_tjener_181", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_87", "label": "-/4/-", "to": "2012-2019_tjener_126", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_87", "label": "4/-/4", "to": "2012-2019_tjener_236", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_883", "label": "4/3/4", "to": "2012-2019_tjener_236", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_883", "label": "-/-/4", "to": "2012-2019_tjener_371", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_883", "label": "4/3/-", "to": "2012-2019_tjener_181", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_tjener_883", "label": "-/-/4", "to": "2012-2019_tjener_126", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_181", "label": "4/-/-", "to": "2012-2019_tjener_371", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_181", "label": "4/-/4", "to": "2012-2019_tjener_236", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_181", "label": "4/4/4", "to": "2012-2019_tjener_126", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_126", "label": "4/-/4", "to": "2012-2019_tjener_236", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_126", "label": "-/4/-", "to": "2012-2019_tjener_371", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_tjener_236", "label": "-/4/4", "to": "2012-2019_tjener_371", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

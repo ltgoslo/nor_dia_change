@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>2012-2019</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "2012-2019_fane_125", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUnder en slik \u003cb\u003efane\u003c/b\u003e kan ikke pressen oppfylle sin\u003cbr\u003eprimaerfunksjon som samfunnets vaktbikkje\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_125\u003cbr\u003etype: usage\u003c/p\u003e", "x": -401.2425762895179, "y": -343.41854861350987}, {"color": "#377eb8", "id": "2012-2019_fane_54", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDen \u003cb\u003efanen\u003c/b\u003e holdes h\u00f8yt, og tross sakenes mange\u003cbr\u003eparadokser, er det helt n\u00f8dvendig. F\u00f8r Egil Olsen kom tilbake som\u003cbr\u003elandslagssjef i 2009 var han ogs\u00e5 involvert i utenlandske\u003cbr\u003espillselskaper, dog uten \u00e5 bruke dekknavn.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_54\u003cbr\u003etype: usage\u003c/p\u003e", "x": -261.81670207818803, "y": -141.22684325821845}, {"color": "#377eb8", "id": "2012-2019_fane_35", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet var under \u003cb\u003efanen\u003c/b\u003e Forza Italia (Heia Italia)\u003cbr\u003emediemagnaten og mangemilliardaeren feide inn i det politiske liv\u003cbr\u003etidlig p\u00e5 1990-tallet\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_35\u003cbr\u003etype: usage\u003c/p\u003e", "x": -443.1856999145127, "y": -143.66264817893136}, {"color": "#377eb8", "id": "2012-2019_fane_113", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSom symbol p\u00e5 noe vi ikke \u00f8nsker i Norge, har han ogs\u00e5 blitt en\u003cbr\u003eslags menneskelig \u003cb\u003efane\u003c/b\u003e for det norske jihadistmilj\u00f8et. Krekars\u003cbr\u003efortid er ikke skikkelig opplyst, men han settes i forbindelse med\u003cbr\u003evold og drap og terror. At han defineres som en sikkerhetstrussel er\u003cbr\u003edet liten tvil om. Litt hardere i klypa\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_113\u003cbr\u003etype: usage\u003c/p\u003e", "x": -232.95451760344275, "y": -438.83331772227575}, {"color": "#377eb8", "id": "2012-2019_fane_242", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVidere ble det opplyst at \u00abLibertas\u00bb var en lovlig forening som\u003cbr\u003efikk holde m\u00f8ter og annonsere og drive offentlig agitasjon uten\u003cbr\u003ehindringer: \u00abHvad er det da for en inkonsekvent idiotisme, som kan\u003cbr\u003ediktere en konfiskasjon av denne gruppes lille \u003cb\u003efane\u003c/b\u003e ved en\u003cbr\u003eoffentlig demonstrasjon?\u00bb\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_242\u003cbr\u003etype: usage\u003c/p\u003e", "x": -156.42971925379766, "y": 41.14573831647863}, {"color": "#377eb8", "id": "2012-2019_fane_7", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI et sl\u00e5ende bilde lar Richter Strand Varg Veum marsjere tungt\u003cbr\u003eopp en bratt bergensbakke med Skansens \u003cb\u003efane\u003c/b\u003e over\u003cbr\u003eskulderen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_7\u003cbr\u003etype: usage\u003c/p\u003e", "x": -49.45800613068958, "y": -318.7274258991704}, {"color": "#ff7f00", "id": "2012-2019_fane_230", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFlere av fylkeslagene til FpU er kritiske til \u00e5rets aksjon og\u003cbr\u003eoppfordrer til boikott fordi de mener aksjonen er Israel-fiendtlig.\u003cbr\u003eDet kan diskuteres hvorvidt budskapet til \u00e5rets aksjon er direkte\u003cbr\u003epolitisk involvert eller ikke, men n\u00e5r \u00e5rets samarbeidspartner har en\u003cbr\u003eegen \u003cb\u003efane\u003c/b\u003e p\u00e5 sine nettsider med \u00abFree Palestina\u00bb, og refererer\u003cbr\u003etil en rekke varer som Sodastream, gr\u00f8nnsaker, Moroccanoil og HP-\u003cbr\u003eprodukter som noe en skal boikotte, er det tydelig at fellesnevneren\u003cbr\u003eer konflikten med Israel.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_230\u003cbr\u003etype: usage\u003c/p\u003e", "x": -97.22825571619622, "y": 650.6222882783653}, {"color": "#ff7f00", "id": "2012-2019_fane_130", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eKlikk p\u00e5 \u003cb\u003efanene\u003c/b\u003e i diagrammet for \u00e5 se forskjellene\u003cbr\u003emellom topp 5 og bunn 5 i KOSTRA-gruppe 13.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_130\u003cbr\u003etype: usage\u003c/p\u003e", "x": 65.4134335534202, "y": 519.8434118008857}, {"color": "#ff7f00", "id": "2012-2019_fane_88", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHun p\u00e5peker at endel av innholdet Twitter n\u00e5 \u00f8nsker \u00e5 kunne\u003cbr\u003eputte inn i Timeline, trolig allerede vises bak en \u003cb\u003efane\u003c/b\u003e som\u003cbr\u003eheter Discover (\u00abOppdag\u00bb, \u00abAktivitet\u00bb, \u00abWho to follow\u00bb...).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_88\u003cbr\u003etype: usage\u003c/p\u003e", "x": 296.0325043864529, "y": 422.2943707678177}, {"color": "#ff7f00", "id": "2012-2019_fane_109", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5 kan imidlertid alle f\u00e5 vite hvem som har s\u00f8kt p\u00e5 seg selv\u003cbr\u003eved \u00e5 klikke p\u00e5 en \u003cb\u003efane\u003c/b\u003e inne i s\u00f8ket som viser statistikk p\u00e5\u003cbr\u003enavn, f\u00f8dsels\u00e5r, postnummer og poststed til den som har sett p\u00e5 dine\u003cbr\u003eopplysninger.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_109\u003cbr\u003etype: usage\u003c/p\u003e", "x": 152.1297467669164, "y": 736.9134222699773}, {"color": "#ff7f00", "id": "2012-2019_fane_180", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFoto: Privat SVINDEL: Under \u003cb\u003efanen\u003c/b\u003e juli 2016 ser man tre\u003cbr\u003euttak p\u00e5 25.000 og 22.000 kroner.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fane_180\u003cbr\u003etype: usage\u003c/p\u003e", "x": 329.43168988700893, "y": 616.8080867610435}]);
+        edges = new vis.DataSet([{"color": "black", "from": "2012-2019_fane_54", "label": "3/4/-", "to": "2012-2019_fane_7", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "3/3/4", "to": "2012-2019_fane_113", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "4/4/4", "to": "2012-2019_fane_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "2/2/1", "to": "2012-2019_fane_230", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "-/4/-", "to": "2012-2019_fane_242", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "2/1/1", "to": "2012-2019_fane_180", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "2/2/1", "to": "2012-2019_fane_88", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "4/4/4", "to": "2012-2019_fane_35", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "2/2/1", "to": "2012-2019_fane_130", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_54", "label": "2/1/1", "to": "2012-2019_fane_109", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "-/4/3", "to": "2012-2019_fane_113", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "2/1/1", "to": "2012-2019_fane_130", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "2/1/1", "to": "2012-2019_fane_88", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "-/3/3", "to": "2012-2019_fane_7", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "4/4/3", "to": "2012-2019_fane_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "-/1/1", "to": "2012-2019_fane_180", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "2/2/-", "to": "2012-2019_fane_230", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "3/4/4", "to": "2012-2019_fane_242", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_35", "label": "2/1/1", "to": "2012-2019_fane_109", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "2/2/1", "to": "2012-2019_fane_113", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "2/2/1", "to": "2012-2019_fane_242", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "-/2/1", "to": "2012-2019_fane_7", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "4/4/4", "to": "2012-2019_fane_88", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "-/4/4", "to": "2012-2019_fane_130", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "-/-/4", "to": "2012-2019_fane_230", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "-/-/1", "to": "2012-2019_fane_125", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_180", "label": "-/-/4", "to": "2012-2019_fane_109", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "2/1/1", "to": "2012-2019_fane_130", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "3/3/3", "to": "2012-2019_fane_242", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "2/1/1", "to": "2012-2019_fane_109", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "2/1/1", "to": "2012-2019_fane_230", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "4/3/4", "to": "2012-2019_fane_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "3/3/3", "to": "2012-2019_fane_7", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_113", "label": "-/2/1", "to": "2012-2019_fane_88", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_fane_88", "label": "2/-/1", "to": "2012-2019_fane_125", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_fane_88", "label": "4/4/4", "to": "2012-2019_fane_230", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_88", "label": "2/1/1", "to": "2012-2019_fane_242", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_88", "label": "4/4/4", "to": "2012-2019_fane_109", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_88", "label": "2/2/-", "to": "2012-2019_fane_7", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_88", "label": "4/-/4", "to": "2012-2019_fane_130", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_130", "label": "2/1/1", "to": "2012-2019_fane_242", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_130", "label": "-/2/1", "to": "2012-2019_fane_7", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_fane_130", "label": "4/4/-", "to": "2012-2019_fane_230", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_130", "label": "2/1/1", "to": "2012-2019_fane_125", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_130", "label": "4/4/4", "to": "2012-2019_fane_109", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_242", "label": "-/3/3", "to": "2012-2019_fane_125", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_242", "label": "4/4/4", "to": "2012-2019_fane_7", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_242", "label": "2/2/1", "to": "2012-2019_fane_230", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_242", "label": "2/2/1", "to": "2012-2019_fane_109", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_230", "label": "2/1/1", "to": "2012-2019_fane_125", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_230", "label": "-/1/-", "to": "2012-2019_fane_7", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_230", "label": "-/4/4", "to": "2012-2019_fane_109", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_125", "label": "3/3/3", "to": "2012-2019_fane_7", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_125", "label": "2/1/1", "to": "2012-2019_fane_109", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_fane_7", "label": "-/2/1", "to": "2012-2019_fane_109", "weight": 1.5, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

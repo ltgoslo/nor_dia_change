@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>2012-2019</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "2012-2019_fj\u00e6r_629", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er jo en \u003cb\u003efjae\u003c/b\u003er i hatten til oss, n\u00e5 som\u003cbr\u003esponsoravtaler svikter hos andre kulturinstitusjoner\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_629\u003cbr\u003etype: usage\u003c/p\u003e", "x": -263.18642824261104, "y": -96.30272469339346}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_874", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOfte er det mest prestisje i f\u00f8rste sesong, s\u00e5 dette er en\u003cbr\u003e\u003cb\u003efjae\u003c/b\u003er i hatten for dem som lager seriene\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_874\u003cbr\u003etype: usage\u003c/p\u003e", "x": 124.1784940008553, "y": -142.30879992354647}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_225", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEventuelt rullet i tjaere og\u003cb\u003e fja\u003c/b\u003eer. 1 Fryds Pizza\u003cbr\u003ePlus\u003cspan style=\"color:#808080;\"\u003es:\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_225\u003cbr\u003etype: usage\u003c/p\u003e", "x": 92.72018678505255, "y": 155.39782696192327}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_343", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDen eller de som utf\u00f8rte ud\u00e5den er enn\u00e5 ikke tatt. Fenerbahce\u003cbr\u003evant kampen 2-1. Den mektige hjemmebanen S\u00fckr\u00fc Saracoglu var et vilt\u003cbr\u003ekok. Vinner serien Seieren var en \u003cb\u003efjae\u003c/b\u003er i hatten for laget p\u00e5\u003cbr\u003eAsia-siden av Istanbul. Galatasaray vinner likevel den tyrkiske serien\u003cbr\u003emed klar margin\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_343\u003cbr\u003etype: usage\u003c/p\u003e", "x": 53.29197845263447, "y": -74.55489096453982}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_192", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e- Det er en stor \u003cb\u003efjae\u003c/b\u003er i hatten ogs\u00e5 for trenere \u00e5 gj\u00f8re\u003cbr\u003edet bra her. Resultater er en ting, men m\u00e5ten man spiller p\u00e5, slik som\u003cbr\u003eNorge som gj\u00f8r, ved \u00e5 kombinere offensiv kraft og finesse med defensiv\u003cbr\u003eorganisering, blir lagt merke til, sier Semb. Boble Men Skullerud vil\u003cbr\u003eikke h\u00f8re snakk om hva som skjer etter EM. - Vi er i boblen her nede,\u003cbr\u003eog der skal vi vaer\u003cspan style=\"color:#808080;\"\u003ee.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_192\u003cbr\u003etype: usage\u003c/p\u003e", "x": 1.6463385053635289, "y": 159.1547006097718}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_847", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet l\u00e5 ubeskyttet i flere timer, f\u00f8r ei stokkand gikk inn for\u003cbr\u003elanding og la seg til \u00e5 ruge. - Jeg hadde plantet stemor til\u003cbr\u003emaidagene, men alt var r\u00f8sket opp for \u00e5 gj\u00f8re plass til egget. Sist\u003cbr\u003ejeg telte l\u00e5 det \u00e5tte egg der, og n\u00e5 har hun brukt andre planter fra\u003cbr\u003everandaen og sine egne \u003cb\u003efjae\u003c/b\u003er til \u00e5 dekke dem til. \u00abFjaerballer\u003cbr\u003emed luft\u00bb N\u00e5 ligger anda mesteparten av dagen i fred og ro ruger, med\u003cbr\u003eutsikt mot friidrettsanlegget og Nidelva. N\u00e5r klokka naermer seg \u00e5tte,\u003cbr\u003etar hun vingene fatt for en kveldst\u003cspan style=\"color:#808080;\"\u003eur.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_847\u003cbr\u003etype: usage\u003c/p\u003e", "x": -19.721247863020988, "y": -250.0459003079763}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_237", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e- En \u003cb\u003efjae\u003c/b\u003er i hatten Boligene er tegnet av Tag\u003cbr\u003eArkitekter\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_237\u003cbr\u003etype: usage\u003c/p\u003e", "x": -255.15946997831924, "y": -9.179333699434288}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_59", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMen for Mazda er det en \u003cb\u003efjae\u003c/b\u003er i hatten \u00e5 komme seg s\u00e5\u003cbr\u003eh\u00f8yt, med noen unntak er vel merket tradisjonelt ikke det vi mest\u003cbr\u003eforbinder med lekkert design. Ikke s\u00e5 fint inni helle\u003cspan style=\"color:#808080;\"\u003er\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_59\u003cbr\u003etype: usage\u003c/p\u003e", "x": -99.29441913992355, "y": -93.97060899894932}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_1044", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet f\u00f8rte til at fristen 31. oktober ikke blir m\u00f8tt, slik\u003cbr\u003eJohnson har lovet. * Torsdag kom Johnsons beskjed om at han \u00f8nsker\u003cbr\u003evalg 12. desember. Mistet flertallet At flertallet stemte for\u003cbr\u003eprinsippene rundt avtalen er en \u003cb\u003efjae\u003c/b\u003er i hatten for Johnson \u2013\u003cbr\u003edet er f\u00f8rste gang et flertall har vist seg for noen brexit-avtalen \u2013\u003cbr\u003emen det betyr ikke at avtalen n\u00f8dvendigvis vil g\u00e5 gjennom i en endelig\u003cbr\u003ebehandling av lovgivningen rundt det \u2013 dersom Johnson g\u00e5r videre med \u00e5\u003cbr\u003ef\u00e5 gjennom avtalen. \u00c5rsaken er at parlamentsmedlemmer da kan se sitt\u003cbr\u003esnitt til \u00e5 legge til endringsforslag for \u00e5 endre planen, enten til en\u003cbr\u003emykere brexit eller ved at den st\u00f8ttes under forutsetning av at den\u003cbr\u003elegges fram for en folkeavstemning og der blir godkjent av\u003cbr\u003efolket\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_1044\u003cbr\u003etype: usage\u003c/p\u003e", "x": 40.07243022603457, "y": -180.06167025220017}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_417", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003eFjae\u003c/b\u003er fra utrydningstruet fugl brukes i fiskefluer som\u003cbr\u003eselges over disk i Norge. Foto: Frank Lervi\u003cspan style=\"color:#808080;\"\u003ek\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_417\u003cbr\u003etype: usage\u003c/p\u003e", "x": 256.86752831387474, "y": -73.11550009211463}, {"color": "#377eb8", "id": "2012-2019_fj\u00e6r_935", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e- Dette er en \u003cb\u003efjae\u003c/b\u003er i hatten, ikke bare for oss, men for\u003cbr\u003ehele kultur-Norge\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_fj\u00e6r_935\u003cbr\u003etype: usage\u003c/p\u003e", "x": -164.77351460943004, "y": 125.84018877614767}]);
+        edges = new vis.DataSet([{"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "-/4/2", "to": "2012-2019_fj\u00e6r_847", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "-/4/4", "to": "2012-2019_fj\u00e6r_935", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "-/-/4", "to": "2012-2019_fj\u00e6r_1044", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_417", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_192", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "-/-/4", "to": "2012-2019_fj\u00e6r_59", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_874", "label": "-/-/4", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "-/4/2", "to": "2012-2019_fj\u00e6r_237", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "4/-/2", "to": "2012-2019_fj\u00e6r_935", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "4/-/2", "to": "2012-2019_fj\u00e6r_192", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_1044", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_847", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_417", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_59", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_1044", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "-/4/2", "to": "2012-2019_fj\u00e6r_237", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "4/4/2", "to": "2012-2019_fj\u00e6r_59", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "-/-/2", "to": "2012-2019_fj\u00e6r_935", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "-/4/2", "to": "2012-2019_fj\u00e6r_192", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_847", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_1044", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_192", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_1044", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_1044", "label": "-/4/4", "to": "2012-2019_fj\u00e6r_59", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_1044", "label": "4/4/4", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_1044", "label": "4/4/4", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_1044", "label": "-/-/4", "to": "2012-2019_fj\u00e6r_935", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_935", "label": "-/-/4", "to": "2012-2019_fj\u00e6r_59", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_935", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_935", "label": "4/4/4", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_935", "label": "-/4/4", "to": "2012-2019_fj\u00e6r_192", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_935", "label": "-/4/4", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_935", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_192", "label": "4/-/4", "to": "2012-2019_fj\u00e6r_59", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_192", "label": "4/4/4", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_192", "label": "4/4/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_192", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_192", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_225", "label": "-/4/2", "to": "2012-2019_fj\u00e6r_59", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_225", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_225", "label": "4/-/2", "to": "2012-2019_fj\u00e6r_629", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_225", "label": "4/4/2", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_59", "label": "4/-/-", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_59", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_343", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_59", "label": "4/-/4", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_343", "label": "4/4/4", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_343", "label": "-/-/4", "to": "2012-2019_fj\u00e6r_237", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_fj\u00e6r_237", "label": "-/4/-", "to": "2012-2019_fj\u00e6r_629", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

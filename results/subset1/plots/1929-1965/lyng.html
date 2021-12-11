@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_lyng_25", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u00abEr du gal \u2014 slokk \u2014 bare slokk,\u00bb ropte jeg. Nele heia bortover\u003cbr\u003evar bare \u003cb\u003elyng\u003c/b\u003e, knuskt\u00f8rr lyng etter den lange t\u00f8rken \u2014 lyng, s\u00e5\u003cbr\u003elangt en s\u00e5 vidda innover. lenk om det tok ild alt sammen!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_25\u003cbr\u003etype: usage\u003c/p\u003e", "x": 331.1715532396633, "y": 265.8730390087892}, {"color": "#377eb8", "id": "1929-1965_lyng_255", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eKlekk is l\u00e5 p\u00e5 alle myrer; mose og \u003cb\u003elyng\u003c/b\u003e fra ifjor stod\u003cbr\u003erimfrossent gulnende kring vasslokene; nattens kj\u00f8lige tone bl\u00e5net\u003cbr\u003eover skogene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_255\u003cbr\u003etype: usage\u003c/p\u003e", "x": 236.31133135173067, "y": 153.47978959634705}, {"color": "#377eb8", "id": "1929-1965_lyng_73", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFor en nytelse \u00e5 strekke seg i myk \u003cb\u003elyng\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_73\u003cbr\u003etype: usage\u003c/p\u003e", "x": 113.89368420923267, "y": 200.83619367637354}, {"color": "#377eb8", "id": "1929-1965_lyng_23", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eAlle sm\u00e5s\u00f8sknene til Larsens hadde revet opp \u003cb\u003elyng\u003c/b\u003e for\u003cbr\u003eoss.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_23\u003cbr\u003etype: usage\u003c/p\u003e", "x": 302.1788160328687, "y": -50.58384669179059}, {"color": "#377eb8", "id": "1929-1965_lyng_103", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBl\u00e5blek lyste l\u00f8kten gjennom nattem\u00f8rket i hotellets gang, mens\u003cbr\u003ejeg famlet mot deg for \u00e5 be deg komme. Sakte fra det fjerne h\u00f8rte jeg\u003cbr\u003edu sang. Ikke for \u00e5 trosse, ikke for \u00e5 glemme, snarere i tanker,\u003cbr\u003ekanskje litt distr\u00e9, lyttet du til noe i ditt eget indre, og i\u003cbr\u003e\u00fcbevissthet nynnet du om det. Det var hjemlands toner. Alt som du bar\u003cbr\u003emed deg, veldet frem som livets glae sterke mot, slik som gr\u00f8nne\u003cbr\u003esevjer stiger mot et lys-sl\u00f8r over treets krone, selsomt, fra dets\u003cbr\u003erot. Du var m\u00e5kevinger over hvite holmer, \u003cb\u003elyng\u003c/b\u003e som flammet\u003cbr\u003eskumv\u00e5t langs et bekkefar, f ugle f l\u00f8yt om v\u00e5ren, vinterskogens\u003cbr\u003estillhet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_103\u003cbr\u003etype: usage\u003c/p\u003e", "x": 576.6061903876544, "y": 138.54373359990913}, {"color": "#377eb8", "id": "1929-1965_lyng_231", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMen folket her vet vi ingen beskjed om, hvad der er gammelt og\u003cbr\u003ehvad der er urgammelt; det g\u00e5r omtrent i ett for dem: Flint og\u003cbr\u003ekjempehauger, gravurner og hustomter, stenalderen og Erling\u003cbr\u003eSkjalgss\u00f8nn og han \u2014 den siste, som bodde nord i utmarken under Jos-\u003cbr\u003eHoug, han, som r\u00f8vet skibene, lokket dem i \u003cb\u003eland\u003c/b\u003e p\u00e5 Rev-Tangen\u003cbr\u003emed falske bluss og brander, og som til slutt blev hengt der oppe ved\u003cbr\u003eJos-Hougen og all hans gard blev brent og \u00f8dt, ennu er de vidl\u00f8ftige\u003cbr\u003ehustomter \u00e5 se og gjerdet rundt hans innmark, hvor gresset ennu\u003cbr\u003ekjemper mot lyngen \u2014 alt dette g\u00e5r omtrent i ett for folk; de store\u003cbr\u003etidsavstander er ganske uklare.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_231\u003cbr\u003etype: usage\u003c/p\u003e", "x": 158.21945975988083, "y": -40.72922285114107}, {"color": "#377eb8", "id": "1929-1965_lyng_116", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003ePresten syntes slett ikke om dette; ti han yndet fremfor alt\u003cbr\u003ero; og uaktet egnen var avsides nok, fulgte der dog alltid liv med\u003cbr\u003ebyveien. Men for Ansgarius var den smule ferdsel en stadig kilde til\u003cbr\u003espennende situasjoner. Mens far og datter stod p\u00e5 hellen og dr\u00f8ftet,\u003cbr\u003eom de skulde f\u00f8lge veien eller g\u00e5 gjennem \u003cb\u003elyngen\u003c/b\u003e ned til\u003cbr\u003estranden, kom plutselig den unge krigsmann sprengende opad bakken og\u003cbr\u003einn i g\u00e5rden.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_116\u003cbr\u003etype: usage\u003c/p\u003e", "x": 515.2594180521128, "y": 282.5675418806259}, {"color": "#377eb8", "id": "1929-1965_lyng_67", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eInne p\u00e5 veiene g\u00e5r kanskje mennesker mellem den brune\u003cbr\u003e\u003cb\u003elyng\u003c/b\u003e og speider utover havet: G\u00e5r b\u00e5ten der ute \u00f8stover? sp\u00f8r\u003cbr\u003een. \u2014 Nei, du kan vel se den stikker til sj\u00f8s, svarer en annen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_67\u003cbr\u003etype: usage\u003c/p\u003e", "x": 485.88685325145866, "y": 88.64290728132393}, {"color": "#ff7f00", "id": "1929-1965_lyng_211", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI A spand, i f\u00f8rste halvdel av 1660-\u00e5rene nedsatt til 1 sp. Fra\u003cbr\u003e1836 16 dal. 2 ort 18 sk., i 1907 mk. 32,24, fordelt p\u00e5 10 bruk,\u003cbr\u003ehvorav bruksnr. 1, Faeby, mk. 24,52. Eiere: Under Landstad er nevnt,\u003cbr\u003ehvordan den rike korbroder Sigurd Krafs \u2014 antagelig i begynnelsen av\u003cbr\u003e1330-\u00e5rene \u2014 hadde testamentert 3 markebol eller jordegods av samme\u003cbr\u003everdi som Faeby til Kristkirken i Nidaros for gravsted til sin datter\u003cbr\u003eSolvar. Hvordan det herav utspant sig e\u003cb\u003en langvar\u003c/b\u003eig trette\u003cbr\u003emellern kirken og Vigleik p\u00e5 Lyng, er naermere omtalt under Lyng, hvor\u003cbr\u003eogs\u00e5 de ang\u00e5ende denne sak utstedte dokumenter er inntatt. Det synes\u003cbr\u003eav dette \u00e5 fremg\u00e5, at korbroderen Sigurd Krafs har eiet Faeby og f\u00f8rst\u003cbr\u003eforaert denne gard til Kristkirken; men at han siden har f\u00e5tt\u003cbr\u003eanledning til \u00e5 disponere den p\u00e5 annen m\u00e5te mot \u00e5 gi jevngodt\u003cbr\u003ejordegods ist\u003cspan style=\"color:#808080;\"\u003eeden.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_211\u003cbr\u003etype: usage\u003c/p\u003e", "x": -750.0, "y": 93.46057332619506}, {"color": "#ff7f00", "id": "1929-1965_lyng_206", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOm eiendomsretten til denne grunn var der fort prosess mellem\u003cbr\u003eLyng og Tonning, hvorved eiendommen var blitt tilkjent Lyng ved\u003cbr\u003ehjemtingsdom av 13. september 1788. Kjopesummen for Vangstad var ved\u003cbr\u003edenne \u003cb\u003eleilighet\u003c/b\u003e 1400 rdl. Eiendommen kom herefter til \u00e5 h\u00f8re\u003cbr\u003eunder Verdalsgodset.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_206\u003cbr\u003etype: usage\u003c/p\u003e", "x": -482.767192451069, "y": -496.0008623379598}, {"color": "#ff7f00", "id": "1929-1965_lyng_262", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEtterlatte brev viser ogs\u00e5 en fast og god handskrift og\u003cbr\u003ebetydelig evne til \u00e5 ordlegge seg \u003cb\u003elett\u003c/b\u003e og sikkert skriftlig. I\u003cbr\u003e1814 ble han da lensmann i Verdal, samtidig som han overtok\u003cbr\u003eforpaktningen av nordre Lyng.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_lyng_262\u003cbr\u003etype: usage\u003c/p\u003e", "x": -535.4427511555602, "y": -19.127682191897108}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_lyng_23", "label": "-/4/4", "to": "1929-1965_lyng_67", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "1/1/1", "to": "1929-1965_lyng_211", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "4/-/4", "to": "1929-1965_lyng_25", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "-/-/1", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "-/-/4", "to": "1929-1965_lyng_231", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "4/4/-", "to": "1929-1965_lyng_73", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "1/1/-", "to": "1929-1965_lyng_262", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_23", "label": "4/-/4", "to": "1929-1965_lyng_255", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "4/-/4", "to": "1929-1965_lyng_73", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "1/1/-", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "4/4/-", "to": "1929-1965_lyng_25", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "4/4/4", "to": "1929-1965_lyng_116", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "4/-/4", "to": "1929-1965_lyng_103", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "1/-/-", "to": "1929-1965_lyng_262", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "-/1/4", "to": "1929-1965_lyng_231", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_lyng_67", "label": "-/-/1", "to": "1929-1965_lyng_211", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "1/-/1", "to": "1929-1965_lyng_262", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "-/-/1", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "4/1/4", "to": "1929-1965_lyng_103", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "4/-/-", "to": "1929-1965_lyng_73", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "4/-/4", "to": "1929-1965_lyng_116", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "-/-/1", "to": "1929-1965_lyng_211", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "4/-/-", "to": "1929-1965_lyng_25", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_231", "label": "4/-/-", "to": "1929-1965_lyng_255", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_73", "label": "1/-/1", "to": "1929-1965_lyng_262", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_73", "label": "1/1/-", "to": "1929-1965_lyng_211", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_73", "label": "-/1/1", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_73", "label": "-/4/4", "to": "1929-1965_lyng_255", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_73", "label": "-/4/4", "to": "1929-1965_lyng_25", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_103", "label": "-/4/-", "to": "1929-1965_lyng_116", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_103", "label": "-/-/1", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_103", "label": "-/1/-", "to": "1929-1965_lyng_211", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_103", "label": "4/4/-", "to": "1929-1965_lyng_255", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_262", "label": "-/4/4", "to": "1929-1965_lyng_211", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_262", "label": "-/-/1", "to": "1929-1965_lyng_116", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_262", "label": "1/-/-", "to": "1929-1965_lyng_25", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_262", "label": "1/1/-", "to": "1929-1965_lyng_255", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_262", "label": "-/1/-", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_211", "label": "-/1/-", "to": "1929-1965_lyng_255", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_211", "label": "-/-/1", "to": "1929-1965_lyng_116", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_211", "label": "1/-/-", "to": "1929-1965_lyng_25", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_211", "label": "1/4/-", "to": "1929-1965_lyng_206", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_lyng_116", "label": "4/-/-", "to": "1929-1965_lyng_25", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_116", "label": "4/-/-", "to": "1929-1965_lyng_255", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_25", "label": "-/4/4", "to": "1929-1965_lyng_255", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_25", "label": "1/-/1", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_lyng_255", "label": "-/1/-", "to": "1929-1965_lyng_206", "weight": 1.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

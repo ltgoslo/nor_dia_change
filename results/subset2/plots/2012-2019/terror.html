@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>2012-2019</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "2012-2019_terror_2997", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSlik er det ingen tvil om at b\u00e5de frykten og handlingen\u003cbr\u003ekvalifiserer til definisjonen av \u003cb\u003eterror\u003c/b\u003e. I sin tale til folket\u003cbr\u003ei g\u00e5r kveld brukte president Barack Obama likevel ikke\u003cbr\u003ebegrepet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_2997\u003cbr\u003etype: usage\u003c/p\u003e", "x": -63.23327198348663, "y": 222.41407007123263}, {"color": "#377eb8", "id": "2012-2019_terror_5210", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMinst tre personer skal vaere p\u00e5grepet i Toulouse, melder\u003cbr\u003enettstedet iTele. Le Dauphin\u00e9 melder at flere personer skal vaere\u003cbr\u003earrestert i Grenoble, og at det skal vaere beslaglagt v\u00e5pen i aksjonen\u003cbr\u003ei byen, som startet klokken 1 natt til mandag. Spesial: De ble ofre\u003cbr\u003ef\u003cb\u003eor ter\u003c/b\u003eroren If\u00f8lge NTB deltok angivelig 20 politikj\u00f8ret\u00f8yer i\u003cbr\u003een aksjon i Jeumont, hvor politiet skal ha stengt gater og gjennoms\u00f8kt\u003cbr\u003een bygning. Tidslinje: Terrorangrepet i Paris Det er klart at fransk\u003cbr\u003epoliti har etterlyst Salah Abdeslam (26) verden over etter\u003cbr\u003emassedrapene i Paris. Han er \u00e9n av tre br\u00f8dre som kobles til de\u003cbr\u003egrufulle handlingene fredag, og han blir i etterlysningen p\u00e5 Interpol\u003cbr\u003ebeskrevet som farlig. 26-\u00e5ringen er f\u00f8dt og bosatt i Belgia. If\u00f8lge\u003cbr\u003eden franske statsadvokaten Fran\u00e7ois Molinser er ytterligere to\u003cbr\u003egjerningsmenn identifisert etter terrorangrepene i Paris. En av dem\u003cbr\u003eankom Hellas i oktober, men statsadvokaten understreker at det er\u003cbr\u003euklart om det syriske passet han brukte var ekte, melder AP. Den andre\u003cbr\u003eer den 28 \u00e5r gamle franskmannen Samy Amimour, som er tidligere tiltalt\u003cbr\u003efor tilknytning til terror, melder AP like etter klokken 10 mandag\u003cbr\u003emorgen. Fem terrorister identifis\u003cspan style=\"color:#808080;\"\u003eert\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_5210\u003cbr\u003etype: usage\u003c/p\u003e", "x": 27.002927890727673, "y": -594.0078821828081}, {"color": "#377eb8", "id": "2012-2019_terror_4205", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTidligere i \u00e5r ble en norsk-pakistaner (22) siktet for\u003cbr\u003e\u003cb\u003eterror\u003c/b\u003e i Syria, etter at han kom tilbake til Norge med\u003cbr\u003eskuddskader i beinet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_4205\u003cbr\u003etype: usage\u003c/p\u003e", "x": -378.75209926753416, "y": -122.13389068621915}, {"color": "#377eb8", "id": "2012-2019_terror_4048", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e- S\u00e5 det er et ja? - Ja. Men i denne konkrete saken g\u00e5r\u003cbr\u003etruselen mot Norge. Det er en grunn til at Oslo f\u00e5r mye oppmerksomhet,\u003cbr\u003emen det er ingen opplysninger som tyder p\u00e5 at det skal skje i Oslo. Vi\u003cbr\u003esom politidistrikt tar ansvaret som ligger til politimesteren i Oslo,\u003cbr\u003eog iverksetter tiltakene vi mener er n\u00f8dvendige her. Skadef\u00f8lgene kan\u003cbr\u003ebli store her, og erfaringen tilsier at hovedsteder er veldig\u003cbr\u003eattraktive m\u00e5l for \u003cb\u003eterror\u003c/b\u003e. Politiet \u00f8ker tilstedevaerelsen\u003cbr\u003eetter terrortrusle\u003cspan style=\"color:#808080;\"\u003er\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_4048\u003cbr\u003etype: usage\u003c/p\u003e", "x": 370.5770308618757, "y": -302.87891563488665}, {"color": "#377eb8", "id": "2012-2019_terror_6826", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eL\u00f8rdag ble beredskapen \u00f8kt som f\u00f8lge av \u003cb\u003eterroren\u003c/b\u003e i\u003cbr\u003eDanmark. Politifolk med maskinpistol voktet et debattm\u00f8te i regi av\u003cbr\u003eDet franske kulturinstituttet og Human Rights Human Wrongs\u003cbr\u003e2015.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_6826\u003cbr\u003etype: usage\u003c/p\u003e", "x": 558.3949311026258, "y": -92.03105478335243}, {"color": "#377eb8", "id": "2012-2019_terror_14388", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBakgrunnen er at PST n\u00e5 vurderer at trusselniv\u00e5et er h\u00f8yere, og\u003cbr\u003eat det \u00absannsynlig\u00bb at noen vil fors\u00f8ke \u00e5 gjennomf\u00f8re \u003cb\u003eterror\u003c/b\u003e i\u003cbr\u003eNorge. I dag kom meldinga om at byr\u00e5dsleder Raymond Johansen varsler\u003cbr\u003eat det vil bli ekstra sikkerhetstiltak under \u00e5rets 17. mai-feiring i\u003cbr\u003eOslo, if\u00f8lge Aftenposten. PST-sjef Benedicte Bj\u00f8rnland slo p\u00e5 en\u003cbr\u003epressekonferanse s\u00f8ndag ettermiddag fast at det er sannsynlig at Norge\u003cbr\u003ekan bli rammet av et terrorangrep i 2017.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_14388\u003cbr\u003etype: usage\u003c/p\u003e", "x": -409.4164602002951, "y": 452.223209447859}, {"color": "#377eb8", "id": "2012-2019_terror_3702", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 bakgrunn av \u003cb\u003eterror\u003c/b\u003evarselet, ble det gjort flere\u003cbr\u003etiltak. Nidarosdomen besluttet at ingen fikk g\u00e5 inn i katedralen uten\u003cbr\u003eat vesker og ryggsekker var gjennoms\u00f8kt. Vaepnet politi patruljerte\u003cbr\u003efestivalomr\u00e5det under \u00e5pningsdagen som en del av den \u00f8kte\u003cbr\u003eberedskapepen. Programsjef Jens Storli forteller at trusselen om\u003cbr\u003eterror har p\u00e5virket festivalen\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_3702\u003cbr\u003etype: usage\u003c/p\u003e", "x": 53.21063765962181, "y": -7.116695457304939}, {"color": "#377eb8", "id": "2012-2019_terror_3031", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFoto: \u00d8rjan Ellingv\u00e5g/Dagbladet BOSTON (Dagbladet): Ingulf\u003cbr\u003eNordahl (43), Janicke Ekelberg (40) og Christopher Aalholm (43) hadde\u003cbr\u003ealle kommet i m\u00e5l allerede da de to bombene eksploderte i Boston\u003cbr\u003eMarathon i g\u00e5r. Dermed unnslapp de \u003cb\u003eterroren\u003c/b\u003e med knapp\u003cbr\u003emargin.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_3031\u003cbr\u003etype: usage\u003c/p\u003e", "x": 309.6644686666355, "y": -122.1211749296096}, {"color": "#377eb8", "id": "2012-2019_terror_1095", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet mener Eivind Rindal, som selv ble skutt etter p\u00e5 Ut\u00f8ya, som\u003cbr\u003emener Breivik hadde samme innstilling som naziforbrytere n\u00e5r han\u003cbr\u003ebegikk \u003cb\u003eterroren\u003c/b\u003e 22. juli i fjor. Rindal overlevde ved \u00e5 flykte\u003cbr\u003ei b\u00e5ten \u00abReiulf\u00bb. 23-\u00e5ringen f\u00f8lger rettssaken mot mannen som pr\u00f8vde \u00e5\u003cbr\u003edrepe ham, via TV-overf\u00f8ringen til tinghuset i Trondheim.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_1095\u003cbr\u003etype: usage\u003c/p\u003e", "x": 52.12741888273238, "y": -326.27495509504394}, {"color": "#377eb8", "id": "2012-2019_terror_6800", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHun ble sjokkert da hun oppdaget f\u00f8lgene av \u00e5 jobbe i\u003cbr\u003edroneprogrammet. - Fyll og stoffmisbruk er overalt blant dem som flyr\u003cbr\u003edronene, sier hun. - Disse menneskene blir \u00f8delagt. Schei er ogs\u00e5\u003cbr\u003eoverbevist om at droneprogrammet har sin del av skylden for noe av\u003cbr\u003e\u003cb\u003eterroren\u003c/b\u003e Vesten n\u00e5 opplever.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_6800\u003cbr\u003etype: usage\u003c/p\u003e", "x": -139.99077044656383, "y": -244.8147693319485}, {"color": "#377eb8", "id": "2012-2019_terror_14908", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u00c5 skrive noe rasistisk eller hatefullt, er selvf\u00f8lgelig ikke\u003cbr\u003edet samme som \u00e5 utf\u00f8re \u003cb\u003eterror\u003c/b\u003e. Men tekst og bilde p\u00e5virker\u003cbr\u003eholdninger, slik at meninger oppst\u00e5r og vrangforestillinger naeres.\u003cbr\u003eBreiviks vrangforestilling var nettopp at Arbeiderpartiet er\u003cbr\u003eforraedere som inviterer muslimer til \u00e5 overta Norge. Olav\u003cbr\u003eOls\u003cspan style=\"color:#808080;\"\u003een\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_terror_14908\u003cbr\u003etype: usage\u003c/p\u003e", "x": -421.0233470386397, "y": -345.49344060099094}]);
+        edges = new vis.DataSet([{"color": "black", "from": "2012-2019_terror_1095", "label": "-/-/4", "to": "2012-2019_terror_14388", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "-/4/4", "to": "2012-2019_terror_6800", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "4/-/4", "to": "2012-2019_terror_2997", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "4/-/-", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "4/4/-", "to": "2012-2019_terror_4048", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "4/-/-", "to": "2012-2019_terror_3031", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "4/4/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_1095", "label": "4/-/4", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/4/4", "to": "2012-2019_terror_6800", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/4/4", "to": "2012-2019_terror_4205", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/4/4", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "-/4/-", "to": "2012-2019_terror_3031", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/4/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/4/4", "to": "2012-2019_terror_14908", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/4/-", "to": "2012-2019_terror_14388", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "4/-/4", "to": "2012-2019_terror_4048", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_2997", "label": "-/4/-", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14388", "label": "4/4/4", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14388", "label": "4/4/4", "to": "2012-2019_terror_3031", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14388", "label": "4/-/-", "to": "2012-2019_terror_4205", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14388", "label": "4/-/-", "to": "2012-2019_terror_6800", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14388", "label": "4/-/-", "to": "2012-2019_terror_14908", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "4/4/4", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "-/-/4", "to": "2012-2019_terror_4205", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "-/4/-", "to": "2012-2019_terror_3031", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "4/4/4", "to": "2012-2019_terror_4048", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "4/4/-", "to": "2012-2019_terror_14908", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "4/-/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6800", "label": "4/4/4", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4205", "label": "4/-/4", "to": "2012-2019_terror_14908", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4205", "label": "4/4/-", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4205", "label": "4/4/-", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4205", "label": "4/-/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4205", "label": "4/4/-", "to": "2012-2019_terror_3031", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4205", "label": "-/-/4", "to": "2012-2019_terror_4048", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3031", "label": "-/4/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3031", "label": "-/-/4", "to": "2012-2019_terror_4048", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3031", "label": "-/4/4", "to": "2012-2019_terror_14908", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3031", "label": "-/4/-", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3031", "label": "4/-/4", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4048", "label": "4/4/-", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4048", "label": "-/4/4", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4048", "label": "4/-/4", "to": "2012-2019_terror_14908", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_4048", "label": "-/4/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14908", "label": "-/4/-", "to": "2012-2019_terror_3702", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14908", "label": "4/4/4", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_14908", "label": "4/-/-", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3702", "label": "4/4/4", "to": "2012-2019_terror_6826", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_3702", "label": "-/4/-", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_terror_6826", "label": "4/4/-", "to": "2012-2019_terror_5210", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_ris_69", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u2014 I morra skal du f\u00e5 \u003cb\u003eris\u003c/b\u003e p\u00e5 skolen fordi du har st\u00f8li\u003cbr\u003emurstein 1 hostet det efter mig, da jeg tummelumsk av fiken sjanglet\u003cbr\u003eut d\u00f8ra og ned trappene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_69\u003cbr\u003etype: usage\u003c/p\u003e", "x": 177.46236146424704, "y": -523.6298783351582}, {"color": "#377eb8", "id": "1929-1965_ris_238", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSaerlig p\u00e5 \u00e5rsm\u00f8tene har trafikkantene luftet sine meninger, og\u003cbr\u003eder har det falt ikke s\u00e5 lite b\u00e5de av ros og\u003cb\u003e ri\u003c/b\u003es p\u00e5 de som har\u003cbr\u003ehatt med ruta \u00e5 gj\u00f8re\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_238\u003cbr\u003etype: usage\u003c/p\u003e", "x": 199.25814891194324, "y": -360.4350027267975}, {"color": "#377eb8", "id": "1929-1965_ris_127", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOg eit par dagar etter sa Karen- Anna: Du m\u00e5 ikkje st\u00e5 og flire\u003cbr\u003eoftare p\u00e5 skulen, Odin! For da f\u00e5r du \u003cb\u003eris\u003c/b\u003e. \u2014 Ja, ris var han\u003cbr\u003eikkje redd, men. Han skulle til \u00e5 vera folk likevel; han hadde vorti\u003cbr\u003ehuga p\u00e5 det. Ein dagen i neste veka fekk han ris. Dei stod og song\u003cbr\u003eslutningsverset, og dei tok i s\u00e5 overhendig rundt ikring tan. \u2014 Det\u003cbr\u003eher g\u00e5r rennande godt, det! tenkte han. Men i same stunda tytte fliren\u003cbr\u003eopp i han; og da han s\u00e5g p\u00e5 laerarinna, vart det enda verre\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_127\u003cbr\u003etype: usage\u003c/p\u003e", "x": -74.03562151771675, "y": -508.72314461821605}, {"color": "#377eb8", "id": "1929-1965_ris_256", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOg \u003cb\u003erev\u003c/b\u003e ned og veltet og s\u00f8lte seg til gjorde han hvor\u003cbr\u003ehan kom, \u2014 i g\u00e5r l\u00e5 kattematen utover golvet. Sa n\u00e5 hadde hun hengt\u003cbr\u003eriset langt nede p\u00e5 veggen s\u00e5 han kunne ha det for \u00f8ye.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_256\u003cbr\u003etype: usage\u003c/p\u003e", "x": 52.447033732777655, "y": -426.0215386821321}, {"color": "#377eb8", "id": "1929-1965_ris_47", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet annet citat i v\u00e5rt vers bringer den store, grunnleggende\u003cbr\u003eforjettelse som Gud if\u00f8lge 2 Sam. 7, 14 gjennem profeten Natan gav\u003cbr\u003eDavid dengang han hadde i sinne \u00e5 bygge et tempel for Herren, men ved\u003cbr\u003eprofeten mottok den beskjed f ra Gud at det skulde gj\u00f8res ikke av ham,\u003cbr\u003emen av hans s\u00f8nn, hvis kongetrone Gud vilde trygge til evig tid, og om\u003cbr\u003ehvem s\u00e5 ogs\u00e5 de i v\u00e5rt vers citerte ord uttales. At vi i det minste\u003cbr\u003eher ikke har nogen direkte messiansk sp\u00e5dom, fremg\u00e5r jo ganske klart\u003cbr\u003eav at det i samme vers (2 Sam. 7, 14) sies om denne Davids s\u00f8nn: \u00abN\u00e5r\u003cbr\u003ehan gj\u00f8r det som ondt er, vil jeg tukte ham med menneskers \u003cb\u003eris\u003c/b\u003e\u003cbr\u003eog med menneskebarns plager.\u00bb\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_47\u003cbr\u003etype: usage\u003c/p\u003e", "x": 407.76802327736937, "y": -364.4477663836109}, {"color": "#ff7f00", "id": "1929-1965_ris_166", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 veien kom vi forbi den store te-fabrikken med plantasjer,\u003cbr\u003esom opprinnelig ble grunnlagt av tsaren og som n\u00e5 drives av staten.\u003cbr\u003eForuten disse plantasjer har det utviklet seg atskillig privat te-\u003cbr\u003ekultur i omegnen her, og det er mange teplantninger oppetter\u003cbr\u003eskr\u00e5ningene av \u00e5sene hvor det ikke godt kan dyrkes mais eller korn.\u003cbr\u003eDenne te-dyrking synes \u00e5 l\u00f8nne seg. Teen er ikke saerlig god, ble det\u003cbr\u003esagt, og har ikke meget smak; men den blir blandet med Ceylon- te (10\u003cbr\u003e%) og skal da selges like godt som denne. \u2014 Ellers dyrkes her\u003cbr\u003eappelsiner, mandariner, meget tobakk, bambus, mais, hirse og en\u003cbr\u003eslags\u003cb\u003e ri\u003c/b\u003es ble det ogs\u00e5 sagt, som ikke trenger \u00e5 settes under\u003cbr\u003evann, og hvis dyrking derfor ikke skulle hindre bekjempelsen av\u003cbr\u003emalariaen. Foran oss s\u00e5 vi n\u00e5 en del svaere beholdere heve seg over\u003cbr\u003eslett\u003cspan style=\"color:#808080;\"\u003ea.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_166\u003cbr\u003etype: usage\u003c/p\u003e", "x": 142.85943490211676, "y": 441.33563659611497}, {"color": "#ff7f00", "id": "1929-1965_ris_76", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOg s\u00e5 kom farten med den nye verdens andre produkter, kaffe fra\u003cbr\u003eSydamerika og Java, \u003cb\u003eris\u003c/b\u003e fra Ostindia, guano fra Sydamerika og\u003cbr\u003eStillehavs\u00f8yene, salpeter fra Sydamerika, sukker fra Vestindia,\u003cbr\u003ebomull, harpiks og \u00abnaval stores\u00bb fra Sydstatene og petroleum fra\u003cbr\u003eStatene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_76\u003cbr\u003etype: usage\u003c/p\u003e", "x": 262.0726748469642, "y": 531.1284781737418}, {"color": "#4daf4a", "id": "1929-1965_ris_26", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet var \u003cb\u003eriser\u003c/b\u003e og stort folk, og siden menn fra lan* dene\u003cbr\u003e\u00f8stenfor. Tor forteller det; gudene var gamle nok til \u00e5 vite noget om\u003cbr\u003es\u00e5 \u00abforn\u00bb tid, menneskene kunde bare sp\u00f8rre. Odin og Nor som fra hver\u003cbr\u003esin kant kom til \u00abbyg* gede\u00bb nordiske land og skaffet sig makt i\u003cbr\u003elandene: det er fabel og kan enda, p\u00e5 en viss m\u00e5te, vaere historie.\u003cbr\u003eMangt og meget i kulturutviklingen som nordiske jordfund har vist\u003cbr\u003eforskerne, skyldes kanskje nye innvandrerflokker \u2014 til Norge kan slike\u003cbr\u003eflokker vaere kommet b\u00e5de fra \u00ablandene \u00f8stenfor\u00bb og s\u00f8nnen* fra.\u003cbr\u003eAllerede den tidligste bosetning i landet kan ha ophav i innvandring\u003cbr\u003efra skilte hold. Ved nordnorsk og vestnorsk kyst, fra Finnmark til\u003cbr\u003eM\u00f8re og lenger, er det funnet en rekke \u00e5pne l?o-plasser, eller\u003cbr\u003everksteder kanskje, hvor alt som l\u00e5 igjen var primitive redskaper av\u003cbr\u003eflint (og kvarts) og avfall efter tilhuggingen ; det g\u00e5r for \u00e5 vaere\u003cbr\u003ede eldste kjente minnene om mennesker i Norge. Forskerne har for*\u003cbr\u003eklart dem p\u00e5 forskjellig v\u003cspan style=\"color:#808080;\"\u003eis.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_26\u003cbr\u003etype: usage\u003c/p\u003e", "x": -733.3379916809795, "y": 355.40476161124434}, {"color": "#4daf4a", "id": "1929-1965_ris_28", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet nyttet ikke, aeserne vant 15 - Paasche I, frem, de gikk inn\u003cbr\u003ei berghelleren der Geirr\u00f8d bodde, og risene der inne skvatt til; men\u003cbr\u003edet skulde vaere fred denne FanF, Tor og Tjalve bare satte sig. Med\u003cbr\u003eett fikk de hodet i hellertaket; to jotunkvinner som l\u00e5 under stolen\u003cbr\u003ekadd\u003cb\u003ee rei\u003c/b\u003est p\u00e5 sig. Da knekket Tor \u00abde gamle ryggene\u003cspan style=\"color:#808080;\"\u003e\u00bb.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_28\u003cbr\u003etype: usage\u003c/p\u003e", "x": -749.9999999999999, "y": 155.07639337987405}, {"color": "#f781bf", "id": "1929-1965_ris_172", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet gjorde mest godt n\u00e5r kameratane terga han med at han,\u003cbr\u003eIngolf, ikkje var s\u00e5 mykje til kar at dei kosta \u003cb\u003eris\u003c/b\u003e p\u00e5 han. Men\u003cbr\u003en\u00e5r Gunnhild s\u00e5g p\u00e5 han slik ho gjorde no om dagane, da gjorde det\u003cbr\u003eikkje godt. Ho sa ikkje noko; ho heldt han ikkje verdig ril det\u003cbr\u003eeingong.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_ris_172\u003cbr\u003etype: usage\u003c/p\u003e", "x": -244.58516451449412, "y": -165.0806737241402}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_ris_127", "label": "-/-/3", "to": "1929-1965_ris_238", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "-/1/1", "to": "1929-1965_ris_76", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "-/-/1", "to": "1929-1965_ris_172", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "1/1/-", "to": "1929-1965_ris_26", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "1/-/-", "to": "1929-1965_ris_166", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "4/-/-", "to": "1929-1965_ris_256", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "-/1/1", "to": "1929-1965_ris_28", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_127", "label": "-/4/-", "to": "1929-1965_ris_69", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_28", "label": "-/-/1", "to": "1929-1965_ris_47", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_28", "label": "1/-/1", "to": "1929-1965_ris_76", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_28", "label": "-/-/4", "to": "1929-1965_ris_26", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_28", "label": "1/-/1", "to": "1929-1965_ris_238", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_28", "label": "-/1/-", "to": "1929-1965_ris_166", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_28", "label": "-/1/1", "to": "1929-1965_ris_256", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_26", "label": "1/-/-", "to": "1929-1965_ris_69", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_26", "label": "1/1/-", "to": "1929-1965_ris_256", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_26", "label": "-/-/1", "to": "1929-1965_ris_238", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_26", "label": "-/1/1", "to": "1929-1965_ris_76", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_47", "label": "-/1/-", "to": "1929-1965_ris_166", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_47", "label": "-/-/2", "to": "1929-1965_ris_76", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_47", "label": "4/-/3", "to": "1929-1965_ris_256", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_ris_47", "label": "4/4/-", "to": "1929-1965_ris_238", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_47", "label": "4/-/-", "to": "1929-1965_ris_69", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_172", "label": "-/3/1", "to": "1929-1965_ris_69", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_172", "label": "3/3/0", "to": "1929-1965_ris_238", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_172", "label": "1/1/0", "to": "1929-1965_ris_76", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_172", "label": "1/1/-", "to": "1929-1965_ris_166", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_172", "label": "-/3/-", "to": "1929-1965_ris_256", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_238", "label": "-/2/-", "to": "1929-1965_ris_256", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_238", "label": "1/1/1", "to": "1929-1965_ris_166", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_238", "label": "-/4/-", "to": "1929-1965_ris_69", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_238", "label": "-/1/1", "to": "1929-1965_ris_76", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_166", "label": "1/-/1", "to": "1929-1965_ris_256", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_166", "label": "-/-/4", "to": "1929-1965_ris_76", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_166", "label": "-/-/1", "to": "1929-1965_ris_69", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_69", "label": "-/-/4", "to": "1929-1965_ris_256", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_ris_256", "label": "1/1/2", "to": "1929-1965_ris_76", "weight": 1.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

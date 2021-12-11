@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1970-2015</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1970-2015_\u00f8rret_115", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u00d8rreten fra M\u00e5rvatnet og Vatnebuvatnet hadde IDDT-\u003cbr\u003ekonsentrasjoner p\u00e5 henholdsvis 5,7 og 16 u.g/kg, mens typiske verdier\u003cbr\u003efor de andre normalvokste \u003cb\u003e\u00f8rretbestander\u003c/b\u003e var 0,7-3\u003cbr\u003efuig/kg.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_115\u003cbr\u003etype: usage\u003c/p\u003e", "x": -301.1858706819845, "y": -241.63064006957083}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_156", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u003c/b\u003e* \u00d8rret satt ut av Norcem, * (trolig 1 somrig) 400/ \u00e5r.\u003cbr\u003e* D\u00e5rlige gytemuligheter.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_156\u003cbr\u003etype: usage\u003c/p\u003e", "x": -696.0210430236483, "y": -388.50864190983157}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_129", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u003c/b\u003e\u00d8rret utsatt Kommune: Aurskog H\u00f8land H\u00f8yde overHavet:\u003cbr\u003e22o Fiskearter: Abbor: Fiskearter: Abbor: Fiskearter Abbor: Gjedde:\u003cbr\u003eKreps: Mort: \u00d8rekyte :\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_129\u003cbr\u003etype: usage\u003c/p\u003e", "x": -420.22983194454525, "y": -472.24489448703565}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_218", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFor \u00e5 produsere mer enn 136 000 tonn oppdrettsfisk (i ferskvann\u003cbr\u003eog sj\u00f8vann) g\u00e5r det med store kvanta fersk og frossen fisk.\u003cbr\u003eFrossenvare, s\u00e5 som makrell, hestemakrell, sardiner, ansjos, atca-\u003cbr\u003emakrell, saury og sandal brukes i stor utstrekning som mat for\u003cbr\u003eyellowtail, r\u00f8d sea-bream og \u00e5l. I alt ble det brukt 650 000 tonn\u003cbr\u003efersk og frossen fisk til foring av oppdrettsfisk i 1972. I tillegg\u003cbr\u003etil dette g\u00e5r det med 60000 tonn hvitt fiskemel til produksjon av\u003cbr\u003et\u00f8rrfor. Det tilsvarer 240 000 tonn Alaska-pollack. Totalt sett brukte\u003cbr\u003eoppdrettsnaeringen ca. 900 000 tonn fisk i 1972, direkte eller\u003cbr\u003eindirekte, til for. Man har her n\u00e5dd en grense, da dette forbruket\u003cbr\u003erepresenterte nesten 10 pst. av den \u00e5rlige fiskefangsten. Spesielt av\u003cbr\u003eressursmessige \u00e5rsaker, men ogs\u00e5 fordi v\u00e5tf\u00e9ring skaper\u003cbr\u003eforurensningsproblemer ved intensivt oppdrett, s\u00f8ker man n\u00e5 \u00e5 g\u00e5 over\u003cbr\u003etil t\u00f8rrfor. \u00d8kt behov for automatisert foring stimulerer denne\u003cbr\u003eutviklingen. Gjaer og mikroorganismer produsert av jordolje har vaert\u003cbr\u003efors\u00f8kt med godt resultat ved foring \u003cb\u003eav \u00f8r\u003c/b\u003er\u003cspan style=\"color:#808080;\"\u003eet.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_218\u003cbr\u003etype: usage\u003c/p\u003e", "x": 686.7685646597726, "y": -196.09445506068036}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_125", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eLigner vekt p\u00e5 over 1 kg Gyter om h\u00f8sten p\u00e5 grus eller\u003cbr\u003esteinbunn i rennende vann. Bekker\u00f8ye kan t\u00e5le surt vann bedre enn\u003cbr\u003e\u003cb\u003e\u00f8rret\u003c/b\u003e, og brukes en del der \u00f8rreten har g\u00e5tt ut. Den er\u003cbr\u003ebitevillig, men kan ha en tendens til \u00e5 vandre ut mot havet. Bekker\u00f8ye\u003cbr\u003eer satt ut enkelte steder i Oslomarka.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_125\u003cbr\u003etype: usage\u003c/p\u003e", "x": -682.5857983706027, "y": -30.731625949609924}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_111", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI de kystnaere innsj\u00f8ene i Agder-fylkene var det en tendens til\u003cbr\u003eat\u003cb\u003e \u00f8rrete\u003c/b\u003en hadde tydelig forh\u00f8yde PCBniv\u00e5er sammenliknet med\u003cbr\u003etypiske verdier fra normalvokste \u00f8rretbestander\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_111\u003cbr\u003etype: usage\u003c/p\u003e", "x": -26.023159372629205, "y": 684.4441028184697}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_21", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u003c/b\u003e\u00d8rreten kan bli av brukbar st\u00f8rrelse og kvalitet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_21\u003cbr\u003etype: usage\u003c/p\u003e", "x": 167.680829625038, "y": -51.30511948997039}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_294", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u003c/b\u003eLaget virket s\u00e5ledes som en bank som alle inn- og\u003cbr\u003eutbetalinger passerte gjennom. 901 av samtlige anlegg var medlemmer av\u003cbr\u003elaget. Laget hadde ogs\u00e5 et betydelig salg av levende \u00d8rret, levert\u003cbr\u003edels som fiskefisk, dels til restauranter og hotel ler.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_294\u003cbr\u003etype: usage\u003c/p\u003e", "x": -113.33334170694454, "y": 96.7422312490056}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_275", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 en strekning av ca 5 km er derfor denne elva n\u00e5 tilnaermet\u003cbr\u003efisketom. Ya var tidligere en god elv for sportsfiske etter\u003cb\u003e\u003cbr\u003e\u00f8rre\u003c/b\u003et\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_275\u003cbr\u003etype: usage\u003c/p\u003e", "x": 99.93613450678366, "y": 313.8121598733825}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_120", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI selve Orkla ved Kvikne er det imidlertid fortsatt bra fiske\u003cbr\u003eetter \u003cb\u003e\u00f8rret\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_120\u003cbr\u003etype: usage\u003c/p\u003e", "x": 685.3759889145323, "y": 132.44365868706757}, {"color": "#377eb8", "id": "1970-2015_\u00f8rret_180", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u003c/b\u003e\u00d8rreten omsettes i stor grad p\u00e5 det norske markedet,\u003cbr\u003emens en mindre del blir eksportert.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_\u00f8rret_180\u003cbr\u003etype: usage\u003c/p\u003e", "x": 280.66106041451997, "y": 549.6588912883915}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "4/4/4", "to": "1970-2015_\u00f8rret_275", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "4/4/-", "to": "1970-2015_\u00f8rret_180", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "-/-/4", "to": "1970-2015_\u00f8rret_115", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "-/4/-", "to": "1970-2015_\u00f8rret_111", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "-/4/-", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "-/4/4", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "4/4/4", "to": "1970-2015_\u00f8rret_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "4/-/4", "to": "1970-2015_\u00f8rret_156", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "-/-/4", "to": "1970-2015_\u00f8rret_218", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_294", "label": "-/4/4", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "4/4/4", "to": "1970-2015_\u00f8rret_275", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "4/4/4", "to": "1970-2015_\u00f8rret_156", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "4/4/-", "to": "1970-2015_\u00f8rret_218", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "4/4/-", "to": "1970-2015_\u00f8rret_180", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "-/4/-", "to": "1970-2015_\u00f8rret_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "4/4/4", "to": "1970-2015_\u00f8rret_111", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "4/4/-", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "-/-/4", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_115", "label": "-/4/-", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "4/4/-", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "4/-/4", "to": "1970-2015_\u00f8rret_111", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "-/4/-", "to": "1970-2015_\u00f8rret_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "-/4/3", "to": "1970-2015_\u00f8rret_180", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "4/4/4", "to": "1970-2015_\u00f8rret_218", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "-/4/4", "to": "1970-2015_\u00f8rret_275", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_156", "label": "-/4/-", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "4/4/4", "to": "1970-2015_\u00f8rret_111", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "-/4/4", "to": "1970-2015_\u00f8rret_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "4/4/4", "to": "1970-2015_\u00f8rret_180", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "4/-/-", "to": "1970-2015_\u00f8rret_218", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "-/-/4", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "-/4/4", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_275", "label": "-/4/-", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_180", "label": "4/4/4", "to": "1970-2015_\u00f8rret_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_180", "label": "4/4/-", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_180", "label": "4/4/-", "to": "1970-2015_\u00f8rret_218", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_180", "label": "4/-/-", "to": "1970-2015_\u00f8rret_111", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_180", "label": "-/-/4", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_180", "label": "-/4/4", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_218", "label": "4/4/-", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_218", "label": "4/4/4", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_218", "label": "-/4/-", "to": "1970-2015_\u00f8rret_125", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_125", "label": "-/4/4", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_125", "label": "-/4/4", "to": "1970-2015_\u00f8rret_111", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_125", "label": "-/4/4", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_125", "label": "-/-/4", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_111", "label": "-/4/4", "to": "1970-2015_\u00f8rret_21", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_111", "label": "-/4/4", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_111", "label": "4/4/4", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_21", "label": "-/4/-", "to": "1970-2015_\u00f8rret_129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_21", "label": "4/-/-", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_\u00f8rret_129", "label": "-/4/4", "to": "1970-2015_\u00f8rret_120", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

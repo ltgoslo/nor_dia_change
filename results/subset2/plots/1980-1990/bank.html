@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1980-1990</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1980-1990_bank_2829", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u00ab\u003cb\u003eBanken\u003c/b\u003e fastsetter regler for kredittens omfang,\u003cbr\u003erentesatser og tilbakebetalingsvilk\u00e5r.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_2829\u003cbr\u003etype: usage\u003c/p\u003e", "x": -374.40436097235556, "y": 235.85165040082208}, {"color": "#377eb8", "id": "1980-1990_bank_4748", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBankforemngen har foresl\u00e5tt at utenlandsandelen for\u003cbr\u003e\u003cb\u003ebanker\u003c/b\u003e b\u00f8r justeres opp p\u00e5 linje med utenlandsandelen for\u003cbr\u003eindustriselskaper.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_4748\u003cbr\u003etype: usage\u003c/p\u003e", "x": -193.27619255737275, "y": -750.0}, {"color": "#377eb8", "id": "1980-1990_bank_3668", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI notatene er til dels brukt forkortelser for\u003cbr\u003epersonbetegnelser. \u00abHaa\u00bb st\u00e5r for Haave seiv, \u00abVSJ\u00bb er skatterevisor\u003cbr\u003eVidar Sti Johannesen, \u00abEAG\u00bb er avdelingssjef Gunneng i Norges\u003cbr\u003e\u003cb\u003eBank\u003c/b\u003e, \u00abNygaard\u00bb er byr\u00e5sjef Nygaard i Handelsdepartementet,\u003cbr\u003e\u00abKEF\u00bb er underdirekt\u00f8r Forsund i Skattedirektoratet, \u00abKS\u00bb direkt\u00f8r\u003cbr\u003eKnud S\u00f8yland i Skattedirkektoratet. \u00abSBS\u00bb er direkt\u00f8r Sverre B.\u003cbr\u003eSkottun i Skattedirektoratet, \u00abF-P\u00bb er byr\u00e5sjef Friis-Petersen i\u003cbr\u003eFinansdepartementet, \u00abE\u00bb er finansr\u00e5d Erichsen i Finansdepartementet,\u003cbr\u003e\u00abB.H\u00bb er regjeringsadvokat Bj\u00f8rn Haug, \u00abP.S\u00bb er kontorsjef Per Steina\u003cbr\u003ei Norges Bank, \u00abFW\u00bb er underdirekt\u00f8r Wilberg i Skattedirektoratet, \u00abF\u00bb\u003cbr\u003eog \u00abFl\u00bb er davaerende statsadvokat Flornes, \u00abD\u00bb riksadvoka\u003cspan style=\"color:#808080;\"\u003et\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_3668\u003cbr\u003etype: usage\u003c/p\u003e", "x": -91.41782779486267, "y": -409.68992595153384}, {"color": "#377eb8", "id": "1980-1990_bank_4829", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet bestemmes i fjerde punktum at en kj\u00f8pesum som er innbetalt,\u003cbr\u003eskal plasseres i offentlig godkjent \u003cb\u003ebank\u003c/b\u003e til den kan utbetales.\u003cbr\u003eDet stemmer med tvfbl \u00a7 58 at namsmyndigheten som mottar penger i\u003cbr\u003eforvaring, skal sette bel\u00f8pet i bank.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_4829\u003cbr\u003etype: usage\u003c/p\u003e", "x": 346.3944435093548, "y": 649.7499144233449}, {"color": "#377eb8", "id": "1980-1990_bank_4351", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eL\u00e5net skulle tilbakebetales til samvirkelagets konto i\u003cbr\u003eB\u00f8ndernes \u003cb\u003eBank\u003c/b\u003e, Trondheim, etter hvert som eggene ble solgt.\u003cbr\u003eEtter et brev fra avholdsorganisasjonene i bygda, vedtok styret med 3\u003cbr\u003emot 2 stemmer \u00e5 si opp kontrakten med A/S Vinmonopolet om\u003cbr\u003etomflaskesentralen og avvikle denne virksomheten.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_4351\u003cbr\u003etype: usage\u003c/p\u003e", "x": 226.3461282279494, "y": -424.14155659987995}, {"color": "#377eb8", "id": "1980-1990_bank_3609", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI l\u00e5nekontrakten var bestemt at \u003cb\u003ebanken\u003c/b\u003e kunne kreve\u003cbr\u003etilleggssikkerheter hvis utest\u00e5ende l\u00e5ns st\u00f8rrelse kom til \u00e5\u003cbr\u003eoverskride 60% av markedsverdiene p\u00e5 de pantsatte skip.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_3609\u003cbr\u003etype: usage\u003c/p\u003e", "x": 3.113627027210914, "y": 711.6426369162155}, {"color": "#377eb8", "id": "1980-1990_bank_3022", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI etterkrigstiden har \u003cb\u003ebankens\u003c/b\u003e utl\u00e5n til naeringslivet\u003cbr\u003evesentlig vaert begrenset til kreditter til fiskerinaeringen i Nord-\u003cbr\u003eNorge. L\u00e5nene er rene driftskreditter i form av kassekreditt til\u003cbr\u003evedkommende bedri\u003cspan style=\"color:#808080;\"\u003eft.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_3022\u003cbr\u003etype: usage\u003c/p\u003e", "x": 116.18853358152931, "y": 198.49637685584526}, {"color": "#377eb8", "id": "1980-1990_bank_206", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe n\u00e5gjeldende regler for avsetninger og disponering av Norges\u003cbr\u003e\u003cb\u003eBanks\u003c/b\u003e overskudd er fastsatt ved kgl res 7 februar 1986 med\u003cbr\u003ehjemmel i sentralbankloven 1985 \u00a7 28. Reglene har f\u00f8lgende ordlyd: -\u003cbr\u003e\u00ab1. Av Norges Banks overskudd avsettes til Kursreguleringsfondet\u003cbr\u003einntil dette har n\u00e5dd 20 pst. av bankens valutareserver, andre\u003cbr\u003efordringer p\u00e5 utlandet, yalutainnskudd i norske banker, valuta kj\u00f8pt\u003cbr\u003ep\u00e5 levering, norske ihendehaverobligasjoner og eventuelle andre\u003cbr\u003eengasjementer som av Hovedstyret vurderes \u00e5 ha ikke \u00fcbetydelig\u003cbr\u003ekursrisiko.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_206\u003cbr\u003etype: usage\u003c/p\u003e", "x": 332.5151228784517, "y": 321.05259475381484}, {"color": "#377eb8", "id": "1980-1990_bank_3391", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHvis denne myndighet legges til Stortinget, vil\u003cbr\u003erepresentantskapet fremdeles kunne vaere\u003cb\u003e banken\u003c/b\u003es \u00f8verste organ\u003cbr\u003ei budsjettsp\u00f8rsm\u00e5l, som bl.a. avgir budsjettforslag og foretar\u003cbr\u003enaermere fordeling innenfor rammen av Stortingets vedta\u003cspan style=\"color:#808080;\"\u003ek.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_3391\u003cbr\u003etype: usage\u003c/p\u003e", "x": -352.6223247104718, "y": -297.50450315967373}, {"color": "#377eb8", "id": "1980-1990_bank_4063", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet kan ogs\u00e5 gj\u00f8re det lettere for finske \u003cb\u003ebanker\u003c/b\u003e \u00e5\u003cbr\u003eetablere seg i visse land, dersom dette er aktuelt. 3.5.3. Tilsyns- og\u003cbr\u003ekontrollforhold\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_4063\u003cbr\u003etype: usage\u003c/p\u003e", "x": 560.4057626079768, "y": -455.24144234844437}, {"color": "#377eb8", "id": "1980-1990_bank_835", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDette markedet funksjonerer p\u00e5 den m\u00e5ten at \u003cb\u003ebankene\u003c/b\u003e kan\u003cbr\u003eskaffe seg norske kroner mot \u00e5 selge valuta til dagens kurs.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bank_835\u003cbr\u003etype: usage\u003c/p\u003e", "x": 73.7023436908222, "y": -619.6684145771346}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_bank_4748", "label": "-/4/4", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "4/4/4", "to": "1980-1990_bank_206", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "-/4/-", "to": "1980-1990_bank_4063", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "-/-/4", "to": "1980-1990_bank_2829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "-/4/-", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "4/4/4", "to": "1980-1990_bank_4351", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "4/-/4", "to": "1980-1990_bank_835", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4748", "label": "-/-/4", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "-/4/4", "to": "1980-1990_bank_3609", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "-/4/4", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "4/4/4", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "4/-/-", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "-/-/4", "to": "1980-1990_bank_206", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "-/4/-", "to": "1980-1990_bank_4829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "-/4/4", "to": "1980-1990_bank_2829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4351", "label": "-/-/4", "to": "1980-1990_bank_835", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "-/4/4", "to": "1980-1990_bank_3609", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "4/-/4", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "-/4/4", "to": "1980-1990_bank_4829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "4/4/4", "to": "1980-1990_bank_4063", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "4/4/4", "to": "1980-1990_bank_835", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "4/4/4", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "-/-/4", "to": "1980-1990_bank_2829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_206", "label": "-/4/-", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4829", "label": "4/4/-", "to": "1980-1990_bank_2829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4829", "label": "4/4/-", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4829", "label": "4/-/-", "to": "1980-1990_bank_4063", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4829", "label": "4/-/-", "to": "1980-1990_bank_3609", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4829", "label": "4/-/-", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4829", "label": "-/-/4", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4063", "label": "4/4/4", "to": "1980-1990_bank_3609", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4063", "label": "-/4/-", "to": "1980-1990_bank_2829", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4063", "label": "4/4/-", "to": "1980-1990_bank_835", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4063", "label": "4/4/-", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_4063", "label": "4/-/-", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_2829", "label": "4/-/-", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_2829", "label": "4/4/-", "to": "1980-1990_bank_3609", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_2829", "label": "4/4/-", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_2829", "label": "4/-/-", "to": "1980-1990_bank_835", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_2829", "label": "4/-/-", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_3609", "label": "4/-/-", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_3609", "label": "4/4/-", "to": "1980-1990_bank_835", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_3609", "label": "4/-/-", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_835", "label": "-/4/4", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_835", "label": "-/-/4", "to": "1980-1990_bank_3391", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_835", "label": "4/-/4", "to": "1980-1990_bank_3022", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_3022", "label": "-/-/4", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bank_3391", "label": "4/4/4", "to": "1980-1990_bank_3668", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

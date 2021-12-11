@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_tropp_43", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEbert sitter forholdsviB fast i sadlen, og de andre partiene\u003cbr\u003eventer bare p\u00e5 at front - \u003cb\u003etroppene\u003c/b\u003e skal komme tilbake og garden\u003cbr\u003eholde sitt inntog.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_43\u003cbr\u003etype: usage\u003c/p\u003e", "x": -526.1122233826344, "y": 359.41685484995793}, {"color": "#377eb8", "id": "1929-1965_tropp_726", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI samsvar med disse grunnsetninger vil \u00f8verstkommanderende ha\u003cbr\u003emyndighet til \u00e5 disponere norske \u003cb\u003etropper\u003c/b\u003e p\u00e5 en slik m\u00e5te at de\u003cbr\u003eyter det beste bidrag til Norges forsvar ut fra sunne militaere\u003cbr\u003ehensyn\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_726\u003cbr\u003etype: usage\u003c/p\u003e", "x": -283.3760996591584, "y": 542.8145798069418}, {"color": "#377eb8", "id": "1929-1965_tropp_1", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHu sene blev beskutt fra festnin* gen, og kongen seiv holdt p\u00e5\u003cbr\u003e\u00e5 bli drept av en bombe, til slutt s\u00e5tte borgerne under br\u00f8* drene\u003cbr\u003eColbj\u00f8rnsens ledelse seiv fyr p\u00e5 byen, og det lyktes ikke svenskene \u00e5\u003cbr\u003estanse liden. Vred i hu m\u00e5tte Carl den tolvte og hans \u003cb\u003etropper\u003c/b\u003e\u003cbr\u003efor* late Fredrikshald.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_1\u003cbr\u003etype: usage\u003c/p\u003e", "x": 225.10921644062083, "y": -539.3234767342658}, {"color": "#377eb8", "id": "1929-1965_tropp_662", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eNederland og Belgia var besatt, tyske \u003cb\u003etropper\u003c/b\u003e hadde n\u00e5dd\u003cbr\u003eKanalhavnene og veltet innover Frankrike fra nord og \u00f8st.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_662\u003cbr\u003etype: usage\u003c/p\u003e", "x": 264.80543585942365, "y": -189.55568794774942}, {"color": "#377eb8", "id": "1929-1965_tropp_410", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eStr\u00f8ket er saerlig kjent fra januar 1719, da mange av general\u003cbr\u003eArmfeldts\u003cb\u003e troppe\u003c/b\u003er omkom p\u00e5 marsj fra \u00d8stby \u00f8stover om \u00d8yfjell\u003cbr\u003eog Essandsj\u00f8en\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_410\u003cbr\u003etype: usage\u003c/p\u003e", "x": 73.81545746763659, "y": 607.1737443585906}, {"color": "#377eb8", "id": "1929-1965_tropp_376", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOg han forstod at nu ble v det kamp. Han f\u00f8rte frem sine\u003cbr\u003e\u003cb\u003etropper\u003c/b\u003e s\u00e5 fort som mulig var. Og det varte ikke lenge f\u00f8r det\u003cbr\u003ebar l\u00f8s, da de franske \u00e5pnet ild. Men det var heller ikke lenge f\u00f8r de\u003cbr\u003efranske blev kastet tilbake av de britiske. Men Wolfe seiv p\u00e5 den\u003cbr\u003er\u00f8dbrune hesten var alt s\u00e5ret to ganger.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_376\u003cbr\u003etype: usage\u003c/p\u003e", "x": -632.8502810822755, "y": -387.69281149194853}, {"color": "#377eb8", "id": "1929-1965_tropp_540", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHan stilte sine egne \u003cb\u003etropper\u003c/b\u003e under egen feltherre\u003cbr\u003eutnevnt av ham. Han og hans biskoper hadde ogs\u00e5 et stort antall\u003cbr\u003eslaver. Kirken var i sannhet en stat i staten.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_540\u003cbr\u003etype: usage\u003c/p\u003e", "x": -19.94335570092226, "y": -594.955987326855}, {"color": "#377eb8", "id": "1929-1965_tropp_620", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe allierte planene om \u00e5 angripe Trondheim fra nord og s\u00f8r ble\u003cbr\u003eoppgitt, og da en kapitulasjon ble ansett som det eneste alternativ\u003cbr\u003eble de britiske \u003cb\u003etroppene\u003c/b\u003e trukket ut over \u00c5ndalsnes igjen i\u003cbr\u003edagene 28. april til 1. mai. En britisk jager f\u00f8rte HOK til Troms\u00f8 og\u003cbr\u003egeneral H vinden Haug overga etter ordre fra general Ruge de\u003cbr\u003egjenvaerende norske troppene i Romsdal 3. mai. E. Nord-Norge. 70.\u003cbr\u003eGeneral Fleisoher var p\u00e5 inspeksjonsreise i \u00d8st-Finnmark da han om\u003cbr\u003eettermiddagen 8. april ble orientert pr. telefon fra Harstad om den\u003cbr\u003etruende situasjonen\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_620\u003cbr\u003etype: usage\u003c/p\u003e", "x": -203.93495235069201, "y": -48.13732980731478}, {"color": "#377eb8", "id": "1929-1965_tropp_739", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDessuten har han under etterforskingen gitt en rettslig\u003cbr\u003eforklaring av 7. mai 1949. * Welhaven hadde natten mellom 8. og 9.\u003cbr\u003eapril flere samtaler med davaerende justisminister Terje Wold, som ga\u003cbr\u003eham Regjeringens ordre om under enhver omstendighet \u00e5 bli p\u00e5 sin plass\u003cbr\u003eog ta imot de tyske\u003cb\u003e troppe\u003c/b\u003er og ivareta befolkningens interesser\u003cbr\u003ep\u00e5 beste m\u00e5te. Umiddelbart etter at de f\u00f8rste tyske tropper var rykket\u003cbr\u003einn i Oslo, tr\u00e5dte de i forbindelse med Welhaven, som ga dem beskjed\u003cbr\u003eom den ordre han hadde f\u00e5tt. Senere p\u00e5 dagen den 9. april var Welhaven\u003cbr\u003eflere ganger i telefonforbindelse med Regjeringen p\u00e5 Hamar og i\u003cbr\u003eElverum, og p\u00e5 Regjeringens foranledning hadde han samme dag noen\u003cbr\u003esamtaler med den tyske minister dr. Braiier. Den 10. april innfant\u003cbr\u003esjefen for Geheime Feldpolizei, Korvetten-kapit\u00e5n Meissner, seg p\u00e5\u003cbr\u003eWelhavens kontor, hvor han i den f\u00f8lgende tid var i stadige\u003cbr\u003ekonferanser\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_739\u003cbr\u003etype: usage\u003c/p\u003e", "x": 41.672112505601184, "y": -171.98895027933924}, {"color": "#377eb8", "id": "1929-1965_tropp_657", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVidere norsk motstand hvis de allierte trakk seg ut, var\u003cbr\u003eh\u00e5pl\u00f8s. \u2014 Regjeringen ble enig om at Koht skulle m\u00f8te Giinther i Lule\u00e5\u003cbr\u003emandag formiddag 3. juni for \u00e5 dr\u00f8fte sp\u00f8rsm\u00e5let oim\u003cbr\u003edemarkasjonslinje, og det ble trukket opp visse linjer for de tilbud\u003cbr\u003eKoht skulle komme med. I tilfelle det var n\u00f8dvendig \u00e5 oppn\u00e5 en\u003cbr\u003eordning, skulle en ikke motsette seg ati svenske \u003cb\u003etropper\u003c/b\u003e\u003cbr\u003eovertok bevoktningen p\u00e5 begge sider av denne linje og i tilfelle ogs\u00e5\u003cbr\u003ebevoktningen av Narvik. ! )\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_657\u003cbr\u003etype: usage\u003c/p\u003e", "x": -408.70178245224145, "y": -114.58495418320784}, {"color": "#377eb8", "id": "1929-1965_tropp_225", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 et \u00f8ieblikk er geledet dannet, Sousa skingrer fra hundre\u003cbr\u003ehorn, i forrykende fart setter de av g\u00e5rde med stjernebanneret i\u003cbr\u003espissen, det viftes med flagg kra vinduene, det er begeistring i\u003cbr\u003eluften, blodet hvirvler som trommehvirvler gjennem \u00e5rene, hal Joh\u003cbr\u003eAmerica, dere kom allikevel? Bir! Fire admiralskib p\u00e5 rad og rekke\u003cbr\u003eutenfor vinduene, England, Amerika, Frankrike, Japan, og rundt omkring\u003cbr\u003ekryssere og kanonb\u00e5ter, svart og hvitt st\u00e5l til ankers, med kanonene\u003cbr\u003einnover mot byen, og flaggene flommende trassig p\u00e5 stedet marsj i\u003cbr\u003emonsunen! Kilometer av piggtr\u00e5d rundt byen, \u003cb\u003etropper\u003c/b\u003e p\u00e5 vakt\u003cbr\u003eoveralt, l\u00f8pegraver, sandsekker, barrikader, en forsvarslinje p\u00e5 21\u003cbr\u003emiles, svaere, r\u00f8slige skikkelser ruvende allesteds over\u003cbr\u003ekineBerin6NFden, leirb\u00e5l llaininende tett i tett Aenneui den Borte,\u003cbr\u003elcineBiBke natt. Og nve tropper, nye kryssere hver dag, The British\u003cbr\u003eEmpire seiler igjen og igjen inn p\u00e5 Shanghai N2vn, og intet skib er\u003cbr\u003edet siste. I iskald, rullende kuling over Spanskesj\u00f8en, i farvann av\u003cbr\u003esol og krysopas gjennem Middelhavet, i tropenes dampende,\u003cbr\u003eoljeglinsende hete, overalt er khaki underveis\u003cspan style=\"color:#808080;\"\u003e!\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_tropp_225\u003cbr\u003etype: usage\u003c/p\u003e", "x": 360.00010273034735, "y": 199.13947689642907}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_tropp_662", "label": "4/-/4", "to": "1929-1965_tropp_739", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "4/4/-", "to": "1929-1965_tropp_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "4/4/4", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "-/-/4", "to": "1929-1965_tropp_726", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "4/4/4", "to": "1929-1965_tropp_43", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "4/4/-", "to": "1929-1965_tropp_620", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "4/4/-", "to": "1929-1965_tropp_410", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_662", "label": "4/4/-", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "-/4/4", "to": "1929-1965_tropp_620", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "-/4/4", "to": "1929-1965_tropp_739", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "4/4/4", "to": "1929-1965_tropp_540", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "4/0/4", "to": "1929-1965_tropp_410", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "-/4/-", "to": "1929-1965_tropp_43", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "-/4/-", "to": "1929-1965_tropp_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "-/-/4", "to": "1929-1965_tropp_376", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_726", "label": "-/4/-", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "-/4/-", "to": "1929-1965_tropp_620", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "-/4/4", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "-/4/-", "to": "1929-1965_tropp_739", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "4/-/-", "to": "1929-1965_tropp_376", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "4/-/4", "to": "1929-1965_tropp_410", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "4/-/-", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_43", "label": "-/4/-", "to": "1929-1965_tropp_225", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_225", "label": "4/4/-", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_225", "label": "4/4/-", "to": "1929-1965_tropp_540", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_225", "label": "-/4/-", "to": "1929-1965_tropp_410", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_225", "label": "4/4/4", "to": "1929-1965_tropp_739", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_225", "label": "4/4/-", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_225", "label": "-/-/4", "to": "1929-1965_tropp_620", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_620", "label": "4/4/4", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_620", "label": "4/4/-", "to": "1929-1965_tropp_410", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_620", "label": "4/4/4", "to": "1929-1965_tropp_376", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_620", "label": "-/4/4", "to": "1929-1965_tropp_739", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_620", "label": "-/4/-", "to": "1929-1965_tropp_540", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_620", "label": "-/-/4", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_410", "label": "-/4/-", "to": "1929-1965_tropp_739", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_410", "label": "4/4/4", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_410", "label": "4/-/-", "to": "1929-1965_tropp_540", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_739", "label": "-/4/4", "to": "1929-1965_tropp_376", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_739", "label": "4/4/-", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_739", "label": "-/4/4", "to": "1929-1965_tropp_540", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_540", "label": "-/4/-", "to": "1929-1965_tropp_376", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_540", "label": "4/-/-", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_540", "label": "4/4/-", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_376", "label": "4/4/-", "to": "1929-1965_tropp_657", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_376", "label": "4/4/4", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_tropp_657", "label": "-/4/4", "to": "1929-1965_tropp_1", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

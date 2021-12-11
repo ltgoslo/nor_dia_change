@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_linse_163", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u2014 D.] 9) Konveks \u003cb\u003elinse\u003c/b\u003e \u2014 D, K 35, 36. 10) Linsen som\u003cbr\u003eforst\u00f8rrelsesglass \u2014 lupe. [11) Fotografiapparatet\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_163\u003cbr\u003etype: usage\u003c/p\u003e", "x": 338.5859755149688, "y": 139.22282568795393}, {"color": "#377eb8", "id": "1929-1965_linse_184", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSlik som \u00f8ynene er plasert kan de ikke begge samtidig rettes\u003cbr\u003emot et bestemt punkt, og piggh\u00e5en har derfor et monokulaert syn.\u003cbr\u003eLinsemuskelen kan forandre\u003cb\u003e linsen\u003c/b\u003es stilling og til en viss grad\u003cbr\u003einnstille p\u00e5 skarpt syn, men ikke med slik presisjon som hos mennesker\u003cbr\u003eog andre h\u00f8yere dyr\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_184\u003cbr\u003etype: usage\u003c/p\u003e", "x": -34.97511652648551, "y": 403.95163023489687}, {"color": "#ff7f00", "id": "1929-1965_linse_247", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHelt mangler kali felt spat, muskovitt, biotitt og epidot.\u003cbr\u003e(rrunnmassen synes etter dette \u00e5 ha vaert gjenstand for en betydelig\u003cbr\u003eomkrystallisasjon, mens en silifisering utenfra her ikke med sikkerhet\u003cbr\u003ekan \\xw ises. 2. Det smale belte av kvartskeratofyr vest for H\u00f8la naer\u003cbr\u003eFossa ved Lygrefjorden virker p\u00e5 overflaten finb\u00e5ndet laget, med\u003cbr\u003etydelige foldingsakser, ofte med 3 4mm bred\u003cb\u003ee lins\u003c/b\u003eer av kvarts,\u003cbr\u003esom rager opp p\u00e5 overflate\u003cspan style=\"color:#808080;\"\u003en.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_247\u003cbr\u003etype: usage\u003c/p\u003e", "x": -331.76919944928414, "y": -446.486978847034}, {"color": "#ff7f00", "id": "1929-1965_linse_94", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBergartene i Huddingsdalen ligner meget p\u00e5 Liming-avdelingens\u003cbr\u003ebergarter i Skarmodalen i omr\u00e5det p\u00e5 nordsiden av B\u00f8rgefjell-massivet\u003cbr\u003e(Strand 1955, s. 63). I begge omr\u00e5der best\u00e5r avdelingens av sterkt\u003cbr\u003egr\u00f8nnfargete klorittrike og tildels hornblendef\u00f8rende skifrer med\u003cbr\u003einnleirete lag eller striper av hvit kvarts-albitt-bergart. Som\u003cbr\u003eintrusjon i Liming-avdelingens gr\u00f8nne kalkskifer i Storbekken fantes\u003cbr\u003een desimetertykk \u003cb\u003elinse\u003c/b\u003e av en lys finkornet meta-\u003cbr\u003etrondhjemittporfyr med I\u201421 \u20142 mm store firkantete innsprengninger av\u003cbr\u003ealbitt.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_94\u003cbr\u003etype: usage\u003c/p\u003e", "x": -470.951886692901, "y": -95.94606561979644}, {"color": "#ff7f00", "id": "1929-1965_linse_107", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eAt det har sirkulert kiselsyref\u00f8rende vandige oppl\u00f8sninger i\u003cbr\u003eomr\u00e5det framg\u00e5r ogs\u00e5 av at glimmerskifrene i Bomfjell\u2014\u00d8rtfjellomr\u00e5det\u003cbr\u003emange steder er fulle av sm\u00e5 forvredne slirer og \u003cb\u003elinser\u003c/b\u003e av\u003cbr\u003ekvarts.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_107\u003cbr\u003etype: usage\u003c/p\u003e", "x": -48.105270570985944, "y": -750.0}, {"color": "#ff7f00", "id": "1929-1965_linse_77", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI grunnmassen ses spredte sm\u00e5 skarpkantete kvartskorn samt\u003cbr\u003esekundaere\u003cb\u003e linse\u003c/b\u003er av kalkspat med kloritt. Nord\u00f8st for\u003cbr\u003eDalsvatnet er tatt pr\u00f8ver av sandstein og arkoseartet sandstein\u003cbr\u003e(muligens for en del opknust trondhjemitt) like i gabbrogrensen og av\u003cbr\u003ekataklastisk gabbro fra grensen\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_77\u003cbr\u003etype: usage\u003c/p\u003e", "x": -80.62063722679193, "y": -473.25398136701375}, {"color": "#ff7f00", "id": "1929-1965_linse_29", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUnders\u00f8kelsene i dagen vanskeliggj\u00f8res imidlertid av nedramlet\u003cbr\u003eur. S\u00e5 langt inn som p\u00e5 Sk\u00e5rvasseidet har jeg selv sett noen\u003cbr\u003enalvmeter-lanze \u003cb\u003elinser\u003c/b\u003e av magnetitt i granittgneisen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_29\u003cbr\u003etype: usage\u003c/p\u003e", "x": -61.874029717704424, "y": -325.94258012670315}, {"color": "#ff7f00", "id": "1929-1965_linse_100", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDen granittiske gneis som forekommer i st\u00f8rre sammenhengende f\u003cbr\u003eelter i den sydlige del av omr\u00e5det er en sterkt skifrig finkornet\u003cbr\u003egneis av lys eller r\u00f8dlig farge. Den skiller seg tydelig fra den meget\u003cbr\u003emer grovkornete bergart i \u003cb\u003elinsene\u003c/b\u003e i glimmergneisene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_linse_100\u003cbr\u003etype: usage\u003c/p\u003e", "x": -328.5661872667212, "y": -291.7032975278339}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_linse_184", "label": "2/-/-", "to": "1929-1965_linse_100", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_184", "label": "2/-/1", "to": "1929-1965_linse_247", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_linse_184", "label": "2/1/-", "to": "1929-1965_linse_29", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_linse_184", "label": "2/-/-", "to": "1929-1965_linse_77", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_184", "label": "2/-/-", "to": "1929-1965_linse_94", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_184", "label": "3/-/-", "to": "1929-1965_linse_163", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_107", "label": "-/-/1", "to": "1929-1965_linse_163", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_107", "label": "4/4/-", "to": "1929-1965_linse_247", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_107", "label": "-/4/4", "to": "1929-1965_linse_77", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_107", "label": "-/-/4", "to": "1929-1965_linse_29", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_77", "label": "-/1/1", "to": "1929-1965_linse_163", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_77", "label": "-/-/4", "to": "1929-1965_linse_247", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_77", "label": "-/4/-", "to": "1929-1965_linse_100", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_77", "label": "-/4/4", "to": "1929-1965_linse_29", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_100", "label": "-/-/4", "to": "1929-1965_linse_29", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_100", "label": "2/1/-", "to": "1929-1965_linse_163", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_linse_100", "label": "4/-/4", "to": "1929-1965_linse_247", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_100", "label": "4/-/-", "to": "1929-1965_linse_94", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_94", "label": "4/4/4", "to": "1929-1965_linse_247", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_94", "label": "2/-/-", "to": "1929-1965_linse_163", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_94", "label": "-/4/-", "to": "1929-1965_linse_29", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_163", "label": "-/-/1", "to": "1929-1965_linse_247", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_linse_163", "label": "2/1/-", "to": "1929-1965_linse_29", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_linse_29", "label": "-/4/-", "to": "1929-1965_linse_247", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

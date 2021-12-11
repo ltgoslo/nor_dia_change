@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1980-1990</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1980-1990_kohort_107", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI LOGLIN-utskriften er for \u00f8vrig summen over alle kategorier 0.\u003cbr\u003eSom eksempel kan vi ta tabell 9.1, som tar for seg de samme modeller\u003cbr\u003esom i tabell 7.2.1. I modell 4 ser vi at summen over \u003cb\u003ekohortene\u003c/b\u003e\u003cbr\u003eer 0 (-0,50-0,25-0,07+0,09+0,23+0,50=0).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_107\u003cbr\u003etype: usage\u003c/p\u003e", "x": -185.74071931243802, "y": -293.3538013624549}, {"color": "#377eb8", "id": "1980-1990_kohort_51", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e135 Interaksjonen mellom \u003cb\u003ekohort\u003c/b\u003e og\u003cbr\u003ef\u00f8rstef\u00f8dselstidspunkt i modell b som inneholder alle interaksjonene\u003cbr\u003esamt alle hovedeffektene 135 Interaksjonen mellom alder og barnetall i\u003cbr\u003emodell 9.11 a som bare inneholder denne interaksjonen samt alle\u003cbr\u003ehovedeffektene ..\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_51\u003cbr\u003etype: usage\u003c/p\u003e", "x": -142.09761347879098, "y": 98.50084346738262}, {"color": "#377eb8", "id": "1980-1990_kohort_74", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDette kan betraktes som et konstantalternativ, idet vi antar at\u003cbr\u003ede varighetsavhengige r\u00e5tene holder seg p\u00e5 samme niv\u00e5. En annen\u003cbr\u003el\u00f8sning kunne for eksempel ha vaert \u00e5 gj\u00f8re en ekstrapolering av den\u003cbr\u003e\u00f8kningen som har funnet sted i disse r\u00e5tene de siste \u00e5rene. Figur\u003cbr\u003e6.5.1. Skilsmisseintensiteter i f\u00f8rste ekteskap blant kvinner som\u003cbr\u003egifter seg n\u00e5r de er 20 \u00e5r, for virkelige og syntetiske\u003cb\u003e\u003cbr\u003ekohorte\u003c/b\u003e\u003cspan style=\"color:#808080;\"\u003er\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_74\u003cbr\u003etype: usage\u003c/p\u003e", "x": 292.7133327420083, "y": 14.399641847330729}, {"color": "#377eb8", "id": "1980-1990_kohort_112", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r det gjelder interaksjonen mellom \u003cb\u003ekohort\u003c/b\u003e og\u003cbr\u003eplassering av f\u00f8rstef\u00f8dsel, ser vi en struktur som kommer tydelig fram\u003cbr\u003ei den kompliserte modellen (tabell 9.10 b), roen i mindre grad i den\u003cbr\u003eenkleste modellen (tabell 9.10 a).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_112\u003cbr\u003etype: usage\u003c/p\u003e", "x": 76.41076105232402, "y": -331.0608300437122}, {"color": "#377eb8", "id": "1980-1990_kohort_113", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet ser vi tydelig ved \u00e5 sammenlikne for eksempel annen og\u003cbr\u003efjerde kolonne, dvs. de som fikk barn med ektefellen f\u00f8r de giftet\u003cbr\u003eseg, og de som fikk barn i l\u00f8pet av 7-24 m\u00e5neder. Tabell 9.9 a]\u003cbr\u003eInteraksjonen mellom alder og f\u00f8rstef \u00f8dselstidspunkt i modell som\u003cbr\u003ebare inneholder denne interaksjonen samt alle hovedeffektene b]\u003cbr\u003eInteraksjonen mellom alder og f\u00f8rstef \u00f8dselstidspunkt i modell som\u003cbr\u003einneholder alle interaksjonene samt alle hovedeffektene. Tabell 9.10\u003cbr\u003ea] Interaksjonen mellom \u003cb\u003ekohort\u003c/b\u003e og f\u00f8rstef \u00f8dselstidspunkt i\u003cbr\u003emodell som bare inneholder denne interaksjonen samt alle\u003cbr\u003ehovedeffektene b) Interaksjonen mellom kohort og\u003cbr\u003ef\u00f8rstef\u00f8dselstidspunkt i modell som inneholder alle interaksjonene\u003cbr\u003esamt alle hovedeffektene. Tabell 9.11 a) Interaksjon mellom alder og\u003cbr\u003ebarnetall i modell som bare inneholder denne interaksjonen samt alle\u003cbr\u003ehovedeffekter. bj Interaksjon mellom alder og barnetall i modell som\u003cbr\u003einneholder alle interaksjonene samt alle hovedeffekter. Tabell 9.12 a]\u003cbr\u003eInteraksjon mellom kohort og barnetall i modell som bare inneholder\u003cbr\u003edenne interaksjonen samt alle hovedeffekter. b) Interaksjon mellom\u003cbr\u003ekohort og barnetall i modell som inneholder alle interaksjonene samt\u003cbr\u003ealle hovedeffekter.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_113\u003cbr\u003etype: usage\u003c/p\u003e", "x": -45.968964826555236, "y": -294.9032426031829}, {"color": "#377eb8", "id": "1980-1990_kohort_71", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSiden det er en del tilfeldig variasjon, kan vi alternativt\u003cbr\u003etenke oss \u00e5 sl\u00e5 sammen enkelte varighetsintervaller og sammenlikne\u003cbr\u003eniv\u00e5et ved for eksempel varighet 5-6 \u00e5r med niv\u00e5et ved 10-12 \u00e5r. Da\u003cbr\u003eblir det en reduksjon p\u00e5 omtrent 30 prosent for de som giftet seg f\u00f8r\u003cbr\u003ede var 22 \u00e5r, og 10 prosent for de som giftet seg da de var 23-25 \u00e5r.\u003cbr\u003eDet ser med andre ord ut til \u00e5 vaere ulik intensitetsprofil for de\u003cbr\u003eulike aldersgruppene innenfor\u003cb\u003e kohorten\u003c/b\u003ee 1950-1954\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_71\u003cbr\u003etype: usage\u003c/p\u003e", "x": -94.30183005982275, "y": -154.07058128358676}, {"color": "#377eb8", "id": "1980-1990_kohort_120", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eAnslagene p\u00e5 brutto-innflytting Netto-veksten i tallet p\u00e5\u003cbr\u003epersoner i hver \u003cb\u003ekohort\u003c/b\u003e er lik netto-innflyttingen minus\u003cbr\u003ed\u00f8dsfallene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_120\u003cbr\u003etype: usage\u003c/p\u003e", "x": -262.9872734390958, "y": 27.15171454044159}, {"color": "#377eb8", "id": "1980-1990_kohort_109", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn viss forsiktighet bor imidlertid utvises, siden beregningene\u003cbr\u003eomfatter forskjellige \u003cb\u003ekohorter\u003c/b\u003e og aldersgrupper ved de\u003cbr\u003eforskjellige varighetene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_109\u003cbr\u003etype: usage\u003c/p\u003e", "x": -407.4827962692665, "y": -133.58851594785088}, {"color": "#377eb8", "id": "1980-1990_kohort_49", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e2.1 Skilsmisser i en del industrialiserte land i 1980. Pr. 1000\u003cbr\u003eav befolkningen 27 4.4.1 Publiserte og beregnede skilsmisserater 37\u003cbr\u003e4.4.2 Antall skilsmisser publisert og beregnet 38 6.5.1 Andel oppl\u00f8ste\u003cbr\u003eekteskap i syntetiske \u003cb\u003ekohorter\u003c/b\u003e basert p\u00e5 periodedata, etter\u003cbr\u003eobservasjons\u00e5r, gifterm\u00e5lsalder og ekteskapsvarighet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_49\u003cbr\u003etype: usage\u003c/p\u003e", "x": -419.09087505139166, "y": 29.66310046061782}, {"color": "#377eb8", "id": "1980-1990_kohort_18", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDisse \u003cb\u003ekohort\u003c/b\u003efaktorene kan bringes inn i formelverkene\u003cbr\u003efra de tidligere avsnitt, ved \u00e5 mulitiplisere hver kohort med sin\u003cbr\u003ekohortfaktor. Det er videre nyttig \u00e5 bringe inn en demografisk\u003cbr\u003eavkastningsrate, definert som den rente som bringer likhet i n\u00e5verdien\u003cbr\u003efor samlede pensjonspremie (skatt) betalt og samlede ytelser mottatt\u003cbr\u003e(pensjon).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_18\u003cbr\u003etype: usage\u003c/p\u003e", "x": 151.28268017622057, "y": -197.14199052194522}, {"color": "#377eb8", "id": "1980-1990_kohort_4", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eAndelen av kvinnene som hadde f\u00f8dt f\u00f8rste barn ved 20 \u00e5rs\u003cbr\u003ealderen, har \u00f8kt for hver \u003cb\u003ekohort\u003c/b\u003e etter den f\u00f8rste, kvinner f\u00f8dt\u003cbr\u003e1912 \u2014 20.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_kohort_4\u003cbr\u003etype: usage\u003c/p\u003e", "x": -41.98288026956494, "y": -12.21584801204948}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_kohort_120", "label": "4/4/4", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "-/4/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "4/4/-", "to": "1980-1990_kohort_51", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "-/4/-", "to": "1980-1990_kohort_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "4/4/4", "to": "1980-1990_kohort_107", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "4/-/-", "to": "1980-1990_kohort_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "4/-/4", "to": "1980-1990_kohort_109", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "-/-/4", "to": "1980-1990_kohort_74", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "-/4/-", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_120", "label": "4/4/4", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "-/4/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "-/-/4", "to": "1980-1990_kohort_107", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "4/-/4", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "4/-/-", "to": "1980-1990_kohort_74", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "-/-/4", "to": "1980-1990_kohort_109", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "4/-/-", "to": "1980-1990_kohort_51", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "4/-/-", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_4", "label": "4/-/4", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "4/4/4", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "-/4/4", "to": "1980-1990_kohort_107", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "4/-/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "4/-/-", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "4/-/-", "to": "1980-1990_kohort_51", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "4/4/-", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_18", "label": "-/4/4", "to": "1980-1990_kohort_74", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "4/0/-", "to": "1980-1990_kohort_51", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "-/4/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "-/4/4", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "-/4/-", "to": "1980-1990_kohort_107", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "4/-/4", "to": "1980-1990_kohort_74", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "4/4/-", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_109", "label": "-/4/-", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_107", "label": "-/4/4", "to": "1980-1990_kohort_51", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_107", "label": "-/4/4", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_107", "label": "-/4/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_107", "label": "-/-/4", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_107", "label": "4/4/-", "to": "1980-1990_kohort_74", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_107", "label": "4/4/-", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_51", "label": "4/4/4", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_51", "label": "-/4/-", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_51", "label": "4/4/4", "to": "1980-1990_kohort_74", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_51", "label": "-/4/4", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_51", "label": "-/-/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_74", "label": "4/4/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_74", "label": "4/-/4", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_74", "label": "4/-/-", "to": "1980-1990_kohort_112", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_112", "label": "4/-/-", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_112", "label": "4/4/4", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_112", "label": "-/4/4", "to": "1980-1990_kohort_113", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_113", "label": "4/4/4", "to": "1980-1990_kohort_49", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_113", "label": "4/-/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_kohort_49", "label": "-/-/4", "to": "1980-1990_kohort_71", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

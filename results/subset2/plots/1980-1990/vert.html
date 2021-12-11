@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1980-1990</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1980-1990_vert_26", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eProgrammet for m\u00f8tet \u003cb\u003evar\u003c/b\u003e lagt opp av L\u00e5nsstyrelsen i\u003cbr\u003eGoteborgs och Bohus l\u00e5n. Utvalget vil uttrykke sin takk til de svenske\u003cbr\u003everter og arrang\u00f8rer.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_vert_26\u003cbr\u003etype: usage\u003c/p\u003e", "x": -530.9046194968007, "y": -224.4442751052259}, {"color": "#377eb8", "id": "1980-1990_vert_0", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe andre eiendelene var: tre brus, kamera, pipe og stapper,\u003cbr\u003ehasj, kniv og tobakk; det i motsetning til andre tilstelninger av\u003cbr\u003esamme opprinnelse, da bestanddelene hadde \u003cb\u003evaer\u003c/b\u003et sprit, \u00f8l eller\u003cbr\u003evin og takk for det! Jeg ankom residensen - ble mottatt av verten Belv\u003cbr\u003e- og gikk direkte inn i stua der de aerb\u00f8dig inviterte gjestene befant\u003cbr\u003eseg og ble hilst velkommen med et nikk her og et annet der; jeg satte\u003cbr\u003emeg ned, blikket festet seg p\u00e5 bordet som allerede var overfylt av\u003cbr\u003ealkoholholdige drikkevare\u003cspan style=\"color:#808080;\"\u003er.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_vert_0\u003cbr\u003etype: usage\u003c/p\u003e", "x": -626.4942503760046, "y": 169.7228358721139}, {"color": "#377eb8", "id": "1980-1990_vert_10", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDen vanligste m\u00e5ten \u00e5 \u00abeie\u00bb en leilighet p\u00e5 er - if\u00f8lge den\u003cbr\u003eengelske advokatens fremstilling - f\u00f8lgende: Kj\u00f8peren erverver en\u003cbr\u003elangtidsleiekontrakt (for en leilighet) som kan selges eller leies ut\u003cbr\u003evidere. Serviceytelser i eiendommen ytes enten av \u003cb\u003everten\u003c/b\u003e eller\u003cbr\u003eet administrasjonsselskap (som er kontrollert av verten eller av\u003cbr\u003eleilighetsinnehaverne i fellesskap).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_vert_10\u003cbr\u003etype: usage\u003c/p\u003e", "x": -485.2498910901647, "y": -651.7419015532095}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_vert_0", "label": "-/4/3", "to": "1980-1990_vert_10", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_vert_0", "label": "4/-/4", "to": "1980-1990_vert_26", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_vert_26", "label": "-/4/4", "to": "1980-1990_vert_10", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

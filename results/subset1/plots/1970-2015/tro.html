@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1970-2015</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1970-2015_tro_2159", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn god\u003cb\u003etro\u003c/b\u003eende gavemottaker kan etter annet ledd ikke\u003cbr\u003eholdes ansvarlig for mer enn den berikelsen som er oppn\u00e5dd ved gaven.\u003cbr\u003eDet utbyttet vedkommende i god tro eventuelt har vunnet i tidsrommet\u003cbr\u003ef\u00f8r kreditoren gikk til s\u00f8ksm\u00e5l for \u00e5 kreve dekning, kan heller ikke\u003cbr\u003ekreves tilbakef\u00f8rt.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_2159\u003cbr\u003etype: usage\u003c/p\u003e", "x": -336.5799024709139, "y": -423.39879443402975}, {"color": "#377eb8", "id": "1970-2015_tro_1453", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe faktiske kravene til god \u003cb\u003etro\u003c/b\u003e er relativt strenge.\u003cbr\u003eSannhet p\u00e5 sin side fritar ikke alltid for ansvar. 9.8.3\u003cbr\u003eForh\u00e5ndskontroll\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_1453\u003cbr\u003etype: usage\u003c/p\u003e", "x": 529.2039608627508, "y": -77.33277413566996}, {"color": "#377eb8", "id": "1970-2015_tro_913", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI den komit\u00e9innstilling som ble fremlagt i februar 1968 var det\u003cbr\u003es\u00e5ledes ikke foretatt noen generell vurdering av forhold som har\u003cbr\u003esammenheng med den penge og kredittpolitikk som hadde vaert f\u00f8rt.\u003cbr\u003eKomiteen syntes \u00e5 ha liten\u003cb\u003e tr\u003c/b\u003eo p\u00e5 at tekniske tiltak for \u00e5\u003cbr\u003eoppn\u00e5 en effektivisering av kapital markedet, ville kunne bidra noe\u003cbr\u003evesentlig til \u00f8kning av den totale sparing i samfunnet\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_913\u003cbr\u003etype: usage\u003c/p\u003e", "x": 321.67163372163014, "y": 7.984640437646868}, {"color": "#377eb8", "id": "1970-2015_tro_2507", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDommer Sk\u00e5re dokumenterte sin hengivenhet eller \u003cb\u003etro\u003c/b\u003e p\u00e5\u003cbr\u003euholdbar juridisk teori i ekstrem grad ved \u00e5 vise til og bygge p\u00e5\u003cbr\u003efremstillingen hos Johs. Andenaes i dennes bok om spesiell\u003cbr\u003estrafferett\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_2507\u003cbr\u003etype: usage\u003c/p\u003e", "x": -184.26882208027163, "y": -25.658658144481304}, {"color": "#377eb8", "id": "1970-2015_tro_3683", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eNyere rettspraksis viser imidlertid at det ved vurderi7ngen av\u003cbr\u003ekravet til god \u003cb\u003etro\u003c/b\u003e i samiske brukerrelasjoner vil bli tatt\u003cbr\u003eh\u00f8yde for at det ofte har vaert en spr\u00e5klig og kulturell barriere\u003cbr\u003emellom de samiske rettspretendentene og det \u00f8vrige samfunnet, og at\u003cbr\u003edet derfor vil bli stilt lempeligere krav til brukernes gode tro enn\u003cbr\u003eellers\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_3683\u003cbr\u003etype: usage\u003c/p\u003e", "x": -35.990223572474115, "y": -479.2268623555849}, {"color": "#377eb8", "id": "1970-2015_tro_778", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er n\u00e5 langt mindre \u003cb\u003etro\u003c/b\u003e p\u00e5 betydningen av\u003cbr\u003eprisstabilisering for r\u00e5varer ettersom de strukturelle endringer har\u003cbr\u003egitt en varig reduksjon i den globale ettersp\u00f8rselen etter mange\u003cbr\u003er\u00e5varer.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_778\u003cbr\u003etype: usage\u003c/p\u003e", "x": -107.96342313691017, "y": -169.47829372602573}, {"color": "#377eb8", "id": "1970-2015_tro_348", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUtkastet synes ikke \u00e5 g\u00e5 lenger i \u00e5 gi andre adgang til \u00e5 oppta\u003cbr\u003el\u00e5n eller stille garantier enn det som ellers har vaert vanlig. For s\u00e5\u003cbr\u003evidt synes utkastet ikke \u00e5 reise problemer i forhold til Grunnlovens\u003cbr\u003eregler om myndigheten til \u00e5 oppta statsl\u00e5n. Utkastet \u00a7 5 siste ledd\u003cbr\u003efastsl\u00e5r at avtale inng\u00e5tt i strid med bestemmelsen, dvs. avtaler som\u003cbr\u003eg\u00e5r utover fullmakter selskapet har etter loven, ikke skal vaere\u003cbr\u003egyldige. Imidlertid forutsetter utkastet at en medkontrahent kan vinne\u003cbr\u003erett dersom han har vaert i g\u003cb\u003eod \u003c/b\u003et\u003cspan style=\"color:#808080;\"\u003ero.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_348\u003cbr\u003etype: usage\u003c/p\u003e", "x": 453.2777956172725, "y": -357.8758092393321}, {"color": "#377eb8", "id": "1970-2015_tro_3772", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDepartementet har vurdert om straffelovens \u00a7 349 a som bl.a.\u003cbr\u003erammer forretningsdrivende som nekter person tjenester p\u00e5 grunn av\u003cbr\u003erase, \u003cb\u003etro\u003c/b\u003e eller homofil leveform uttrykkelig b\u00f8r nevne HIV-\u003cbr\u003epositive.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_3772\u003cbr\u003etype: usage\u003c/p\u003e", "x": -406.07040760656463, "y": -191.89330246030266}, {"color": "#377eb8", "id": "1970-2015_tro_1365", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet kan ogs\u00e5 vaere verdt \u00e5 merke seg at foreldre bosatt i Oslo\u003cbr\u003eog Akershus i minst grad gir uforbeholdent st\u00f8tte til at et slikt\u003cbr\u003eutvalg kan f\u00e5 utrettet noe, mens st\u00f8rst forh\u00e5pninger har de som er\u003cbr\u003ebosatt i Midt-Norge. Det kan alts\u00e5 se ut som periferien har mer\u003cb\u003e\u003cbr\u003etr\u003c/b\u003eo p\u00e5 statlige ordninger\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_1365\u003cbr\u003etype: usage\u003c/p\u003e", "x": -111.27722992202858, "y": 143.72255860224448}, {"color": "#ff7f00", "id": "1970-2015_tro_2107", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVeiledergruppen fra denne kommunen fikk i utgangspunktet liten\u003cbr\u003e\u003cb\u003etro\u003c/b\u003e p\u00e5 etablerere fra egen kommune\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_tro_2107\u003cbr\u003etype: usage\u003c/p\u003e", "x": -500.19729222949707, "y": 431.7659631368493}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1970-2015_tro_3772", "label": "3/-/3", "to": "1970-2015_tro_2507", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "-/4/3", "to": "1970-2015_tro_2159", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "3/2/1", "to": "1970-2015_tro_2107", "weight": 2.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "3/3/1", "to": "1970-2015_tro_1453", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "3/4/1", "to": "1970-2015_tro_778", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "3/-/-", "to": "1970-2015_tro_1365", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "3/3/-", "to": "1970-2015_tro_3683", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3772", "label": "3/-/1", "to": "1970-2015_tro_913", "weight": 2.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "3/4/-", "to": "1970-2015_tro_2507", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "3/4/-", "to": "1970-2015_tro_778", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "3/4/1", "to": "1970-2015_tro_1365", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "4/-/-", "to": "1970-2015_tro_3683", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "-/3/-", "to": "1970-2015_tro_913", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "3/-/-", "to": "1970-2015_tro_2107", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2159", "label": "4/-/4", "to": "1970-2015_tro_348", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_348", "label": "4/-/4", "to": "1970-2015_tro_3683", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_348", "label": "3/4/1", "to": "1970-2015_tro_778", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_348", "label": "-/-/4", "to": "1970-2015_tro_1453", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_348", "label": "-/4/1", "to": "1970-2015_tro_2507", "weight": 2.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_348", "label": "-/-/1", "to": "1970-2015_tro_2107", "weight": 1.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_348", "label": "-/-/1", "to": "1970-2015_tro_913", "weight": 1.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3683", "label": "-/4/-", "to": "1970-2015_tro_1365", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3683", "label": "4/4/4", "to": "1970-2015_tro_1453", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3683", "label": "-/4/1", "to": "1970-2015_tro_913", "weight": 2.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_3683", "label": "4/-/1", "to": "1970-2015_tro_2107", "weight": 2.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_3683", "label": "-/4/-", "to": "1970-2015_tro_2507", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_3683", "label": "3/4/-", "to": "1970-2015_tro_778", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_2107", "label": "-/4/-", "to": "1970-2015_tro_2507", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2107", "label": "4/4/-", "to": "1970-2015_tro_778", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2107", "label": "-/-/1", "to": "1970-2015_tro_1453", "weight": 1.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2107", "label": "-/-/4", "to": "1970-2015_tro_1365", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_1453", "label": "4/-/3", "to": "1970-2015_tro_2507", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_1453", "label": "3/4/1", "to": "1970-2015_tro_913", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_1453", "label": "-/-/1", "to": "1970-2015_tro_778", "weight": 1.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_1453", "label": "3/4/-", "to": "1970-2015_tro_1365", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_tro_913", "label": "4/4/-", "to": "1970-2015_tro_2507", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_913", "label": "-/4/-", "to": "1970-2015_tro_1365", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_913", "label": "4/4/-", "to": "1970-2015_tro_778", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2507", "label": "4/-/-", "to": "1970-2015_tro_1365", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_2507", "label": "4/-/-", "to": "1970-2015_tro_778", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_tro_1365", "label": "-/4/4", "to": "1970-2015_tro_778", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

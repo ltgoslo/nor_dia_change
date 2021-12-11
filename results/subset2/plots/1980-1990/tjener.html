@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1980-1990</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1980-1990_tjener_28", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUten arbeidsomhet og n\u00f8ysomhet ville det neppe blitt noen\u003cbr\u003evelstand. B\u00f8ndenes velstand ville nok ogs\u00e5 blitt betydelig redusert om\u003cbr\u003ederes arbeidshjelp - husmennene og \u003cb\u003etjenerne\u003c/b\u003e - skulle hatt den\u003cbr\u003esamme \u00e5rsinntekt som dem. Husmennene kom imidlertid aldri til \u00e5\u003cbr\u003eutgj\u00f8re noen stor flokk i V\u00e5le.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_28\u003cbr\u003etype: usage\u003c/p\u003e", "x": -75.79157306392102, "y": 154.6138422415444}, {"color": "#377eb8", "id": "1980-1990_tjener_38", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSom regel fungerer imidlertid FK-eres forhold til\u003cbr\u003e\u003cb\u003etjenere\u003c/b\u003e uten problemer av noen art. SOSIALT LIV \u0027vem er FK-erne\u003cbr\u003esammen med i fritiden?\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_38\u003cbr\u003etype: usage\u003c/p\u003e", "x": 491.15319374259644, "y": -528.946021752946}, {"color": "#377eb8", "id": "1980-1990_tjener_29", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVi vet ikke hvor mange fridager \u003cb\u003etjenerne\u003c/b\u003e fikk i l\u00f8pet av\u003cbr\u003e\u00e5ret, men vi vet hvorledes b\u00f8ndene i V\u00e5le kommunestyre s\u00e5 p\u00e5 dette\u003cbr\u003eforholdet s\u00e5 seint som i 1901.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_29\u003cbr\u003etype: usage\u003c/p\u003e", "x": 153.12468291061518, "y": -178.01515943841417}, {"color": "#377eb8", "id": "1980-1990_tjener_46", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 h\u00f8sttinget det \u00e5ret var Oblo Flekstad anklaga for \u00e5 ha\u003cbr\u003estj\u00e5let et sildegarn p\u00e5 fjorden av husmann Oluf Andersen p\u00e5 Fanes og\u003cbr\u003em\u00e5tte svare erstatning for det. P\u00e5 det neste tinget, i januar 1691,\u003cbr\u003evar Guttorm Rekkebo (Rekbu) innstevna for ulovlig vedhogst i skogen\u003cbr\u003etil enka p\u00e5 Feset; p\u00e5 neste vinterting ble f.eks. drengen Anders\u003cbr\u003eJohansen d\u00f8mt for overfall, \u003cb\u003etjeneren\u003c/b\u003e Johan d\u00f8mt til to uker\u003cbr\u003evatn og br\u00f8d p\u00e5 \u00abm\u00f8rkestuen\u00bb i en leierm\u00e5lsak, Jon Valberg og Jon\u003cbr\u003eGaltvik var uenige om et naust osv.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_46\u003cbr\u003etype: usage\u003c/p\u003e", "x": -209.17325107798027, "y": 465.8869865062939}, {"color": "#377eb8", "id": "1980-1990_tjener_0", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe som fra n\u00e5 av har skatteland i Sverige, skal vaere svenske\u003cbr\u003eunders\u00e5tter med hele sin familie,\u003cb\u003e tjener\u003c/b\u003ee og husmenn\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_0\u003cbr\u003etype: usage\u003c/p\u003e", "x": -446.8995725359332, "y": 172.09349651518284}, {"color": "#377eb8", "id": "1980-1990_tjener_27", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI dette l\u00e5 det som var av velstand. Det skulle dekke skatter og\u003cbr\u003eavgifter og fordeles mellom b\u00f8ndene, husmennene, \u003cb\u003etjenerne\u003c/b\u003e og de\u003cbr\u003efattige.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_27\u003cbr\u003etype: usage\u003c/p\u003e", "x": 125.87066514868167, "y": 435.01067957661945}, {"color": "#377eb8", "id": "1980-1990_tjener_30", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDa fikk kommunestyret anledning til \u00e5 uttale seg om et forslag\u003cbr\u003etil ny \u00abTyendelovgivning\u00bb, og dette angikk i h\u00f8y grad tjenestefolkenes\u003cbr\u003efritid. I V\u00e5le kommunestyre var det full enighet om at man ville g\u00e5\u003cbr\u003eimot lovbefalt fritid. N\u00e5r det gjaldt arbeidsdagens lengde, heter det\u003cbr\u003ei vedtaket fra V\u00e5le: \u00abMan vil anbefale at arbeidet som regel b\u00f8r\u003cbr\u003eslutte klokken 9 aften, dog b\u00f8r \u003cb\u003etjeneren\u003c/b\u003e ikke efter denne tid\u003cbr\u003eforlate huset uten husbondens tilladelse \u0026gt;. Og n\u00e5r det gjaldt\u003cbr\u003eferier, ble det fattet f\u00f8lgende vedtak: \u00abFerien b\u00f8r ikke settes lenger\u003cbr\u003eenn til 7 dager \u00e5rlig.\u00bb\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_30\u003cbr\u003etype: usage\u003c/p\u003e", "x": 750.0, "y": -66.00728520797686}, {"color": "#377eb8", "id": "1980-1990_tjener_14", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eInformasjonsutvalget sier bl. a. f\u00f8lgende om forholdet mellom\u003cbr\u003ede offentlige myndigheter og den enkelte samfunnsborger: \u00abDet\u003cbr\u003eoffentlige er s\u00e5vel myndighet for den enkelte samfunnsborger som hans\u003cbr\u003e\u003cb\u003etjener\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_14\u003cbr\u003etype: usage\u003c/p\u003e", "x": -155.5551482278738, "y": -230.64880659625416}, {"color": "#377eb8", "id": "1980-1990_tjener_10", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHer b\u00f8r ogs\u00e5 menigheten kjenne et ansvar overfor sine\u003cbr\u003e\u003cb\u003etjenere\u003c/b\u003e og vise dem omsorg i forb\u00f8nn og samtale, likesom\u003cbr\u003ebiskopen ut fra sitt tilsynsansvar b\u00f8r ha en l\u00f8pende kontakt med\u003cbr\u003ekirkens ansatte for \u00e5 veilede og rettlede dem i sp\u00f8rsm\u00e5l om tro og\u003cbr\u003eliv.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_10\u003cbr\u003etype: usage\u003c/p\u003e", "x": -506.2755442730544, "y": -422.31100430084444}, {"color": "#377eb8", "id": "1980-1990_tjener_17", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI vid forstand vitner gode tjenester derfor om dannelse eller\u003cbr\u003eom respekt overfor de brukere det er det offentliges oppgave \u00e5\u003cbr\u003ebetjene. Jeg tror at det vi i dag opplever, er en overgang fra staten\u003cbr\u003esom herre til staten som \u003cb\u003etjener\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_tjener_17\u003cbr\u003etype: usage\u003c/p\u003e", "x": -83.26684138166796, "y": -718.2779998208683}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_tjener_27", "label": "4/-/4", "to": "1980-1990_tjener_28", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_27", "label": "4/-/3", "to": "1980-1990_tjener_14", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_tjener_27", "label": "-/4/-", "to": "1980-1990_tjener_10", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_27", "label": "-/-/4", "to": "1980-1990_tjener_46", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_27", "label": "-/3/-", "to": "1980-1990_tjener_38", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_27", "label": "-/-/4", "to": "1980-1990_tjener_0", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_27", "label": "-/4/-", "to": "1980-1990_tjener_30", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "-/4/-", "to": "1980-1990_tjener_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "-/-/4", "to": "1980-1990_tjener_30", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "-/4/-", "to": "1980-1990_tjener_28", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "4/4/3", "to": "1980-1990_tjener_10", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "4/-/-", "to": "1980-1990_tjener_38", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "-/4/-", "to": "1980-1990_tjener_46", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "4/4/-", "to": "1980-1990_tjener_14", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_29", "label": "4/-/-", "to": "1980-1990_tjener_0", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_38", "label": "-/-/4", "to": "1980-1990_tjener_28", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_38", "label": "4/3/4", "to": "1980-1990_tjener_14", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_38", "label": "4/-/-", "to": "1980-1990_tjener_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_38", "label": "4/3/4", "to": "1980-1990_tjener_30", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_38", "label": "4/3/-", "to": "1980-1990_tjener_0", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_tjener_38", "label": "4/-/3", "to": "1980-1990_tjener_10", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_tjener_17", "label": "4/4/-", "to": "1980-1990_tjener_46", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_17", "label": "4/4/-", "to": "1980-1990_tjener_30", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_17", "label": "4/4/-", "to": "1980-1990_tjener_10", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_17", "label": "4/4/4", "to": "1980-1990_tjener_14", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_46", "label": "-/-/4", "to": "1980-1990_tjener_30", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_46", "label": "4/4/3", "to": "1980-1990_tjener_14", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_46", "label": "4/4/4", "to": "1980-1990_tjener_0", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_46", "label": "4/-/-", "to": "1980-1990_tjener_28", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_46", "label": "4/-/-", "to": "1980-1990_tjener_10", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_14", "label": "4/4/3", "to": "1980-1990_tjener_28", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_14", "label": "4/4/3", "to": "1980-1990_tjener_0", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_14", "label": "-/4/3", "to": "1980-1990_tjener_30", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_tjener_14", "label": "-/-/3", "to": "1980-1990_tjener_10", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_0", "label": "-/4/-", "to": "1980-1990_tjener_10", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_0", "label": "4/-/4", "to": "1980-1990_tjener_28", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_tjener_30", "label": "4/-/3", "to": "1980-1990_tjener_10", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_tjener_28", "label": "4/-/3", "to": "1980-1990_tjener_10", "weight": 3.5, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_bit_370", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe eller de andre, som snakker aeren av henne, det\u003cb\u003e\u003cbr\u003ebi\u003c/b\u003etterste annet om saken enn hva I s\u00e5dan har f\u00e5tt laget til\u00bb sa\u003cbr\u003eSalve bistert og foraktelig. Han hadde en trang til \u00e5 forsvare\u003cbr\u003eElisabeth ennu for de andre, skj\u00f8nt han dessverre alt hadde felt henne\u003cbr\u003ei sitt hjerte og f\u00f8lte seg syk, nesten svimlende innvendig. \u00abJeg har\u003cbr\u003etilfeldigvis en kunnskap om hvordan det henger sammen,\u00bb l\u00f8y han, idet\u003cbr\u003ehan koldt og skarpt s\u00e5 henne inn i ansiktet, \u00abog,\u00bb her fl\u00f8y han opp og\u003cbr\u003eslo voldsomt i bordet \u00abjeg spiser ikke en bit ien slik klaffertunges\u003cbr\u003ehus! forst\u00e5r De, madam!\u00bb med et: \u00abVaer s\u00e5 god \u00e5 gj\u00f8\u003cspan style=\"color:#808080;\"\u003ere\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_bit_370\u003cbr\u003etype: usage\u003c/p\u003e", "x": 82.55181266602301, "y": 250.23726742269525}, {"color": "#377eb8", "id": "1929-1965_bit_172", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMan fant den siste sittende d\u00f8d, klaedd i sin skinndrakt, med\u003cbr\u003evatter p\u00e5 og en\u003cb\u003e bi\u003c/b\u003et flesk i h\u00e5nden. Hermetikkboksene l\u00e5 ur\u00f8rt\u003cbr\u003erundt omkring, men saltmatt\u00f8nnene var halvspist\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_bit_172\u003cbr\u003etype: usage\u003c/p\u003e", "x": -79.96003857364083, "y": 281.4235895660708}, {"color": "#377eb8", "id": "1929-1965_bit_318", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eImidlertid forhastet vi oss ikke, men satte oss til \u00e5 spise\u003cbr\u003eigjen, da det efter Ivers mening var uvisst n\u00e5r vi senere kunde f\u00e5\u003cbr\u003eleilighet til \u00e5 ta oss en \u003cb\u003ebit\u003c/b\u003e mat. Jeg har ogs\u00e5 senere ofte\u003cbr\u003esett gamle reinjegere gj\u00f8re det samme. Straks de p\u00e5 lengere hold har\u003cbr\u003eopdaget rein, er det f\u00f8rste de gj\u00f8r \u00e5 ta til nisteskreppen og f\u00e5 sig\u003cbr\u003emat. Men min egen erfaring har derimot laert mig at man alltid gj\u00f8r\u003cbr\u003erettest i straks \u00e5 g\u00e5 p\u00e5, dels fordi der kan komme folk g\u00e5ende og\u003cbr\u003eskremme eller \u00abvinde\u00bb dyrene, dels fordi andre jegere kan vaere i\u003cbr\u003efarvannet, dels fordi dyrene kanskje nettop kan st\u00e5 p\u00e5 et guns* tig\u003cbr\u003elende n\u00e5r man opdager dem, men ved \u00e5 g\u00e5 snart kommer over p\u00e5 ugunstig\u003cbr\u003eterreng. Ligger dyrene, kan man like s\u00e5 godt eller helst holde m\u00e5ltid\u003cbr\u003es\u00e5 naer dem som mulig enn langt fra dem. Men Harald rettet sig efter\u003cbr\u003eIver, og jeg som den yngste m\u00e5tte naturligvis rette mig efter Harald.\u003cbr\u003eVi fortsatte alts\u00e5 vel til mote v\u00e5rt m\u00e5ltid, tendte s\u00e5 snaddene v\u00e5re\u003cbr\u003eog lunket s\u00e5 av sted i nord\u00f8stlig retning for \u00e5 komme under vinden.\u003cbr\u003eMidt gjen\u0026lt;= nem dalen rinner en temmelig stor be\u003cspan style=\"color:#808080;\"\u003ekk.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_bit_318\u003cbr\u003etype: usage\u003c/p\u003e", "x": 82.00406630591438, "y": 98.3664238031151}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_bit_370", "label": "4/4/4", "to": "1929-1965_bit_318", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_bit_370", "label": "4/4/4", "to": "1929-1965_bit_172", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_bit_318", "label": "4/4/4", "to": "1929-1965_bit_172", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

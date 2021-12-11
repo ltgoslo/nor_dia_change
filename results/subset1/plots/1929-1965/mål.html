@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>1929-1965</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "1929-1965_m\u00e5l_1419", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet m\u00e5 vaere et\u003cb\u003e m\u00e5\u003c/b\u003el \u00e5 s\u00f8ke \u00e5 utvikle evnen til\u003cbr\u003etallvurdering\u003cspan style=\"color:#808080;\"\u003e:\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_1419\u003cbr\u003etype: usage\u003c/p\u003e", "x": -165.09227660001062, "y": 380.8845562982191}, {"color": "#377eb8", "id": "1929-1965_m\u00e5l_1867", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eH\u00f8rfeldt fors\u00f8kte av og til \u00e5 komme inn p\u00e5 den andre, men det\u003cbr\u003elyktes ham ikke, og det blev et av hans \u003cb\u003em\u00e5l\u003c/b\u003e \u00e5 f\u00e5 ham inn i sin\u003cbr\u003ekrets.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_1867\u003cbr\u003etype: usage\u003c/p\u003e", "x": -46.02474752207919, "y": 160.2019687385743}, {"color": "#377eb8", "id": "1929-1965_m\u00e5l_3766", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eKomiteen ser det som et \u003cb\u003em\u00e5l\u003c/b\u003e \u00e5 komme fram til en ordning\u003cbr\u003ehvor stat og kommune gir tilskudd som svarer til minst $/lg av\u003cbr\u003edriftsutgiftene. Imidlertid vil komiteen foresl\u00e5 at bel\u00f8pet i forste\u003cbr\u003eomgang stipuieres til kr. 6.500,- pr. barnehageavdeling a. 20 barn og\u003cbr\u003ekr. 8.000,- pr. dagne imsavdeling.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_3766\u003cbr\u003etype: usage\u003c/p\u003e", "x": -338.8007365725981, "y": 61.66021488148384}, {"color": "#ff7f00", "id": "1929-1965_m\u00e5l_2238", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eIngen som en mor kan baere glemsel, h\u00e5nsord, hat, forakt ingen\u003cbr\u003es\u00e5 takknemlig vaere n\u00e5r et kjaerlig ord blir sagt. Er enn alt kun natt\u003cbr\u003e\u2014 o gjerne ser dog hun en h\u00e5bets stjerne. Er enn ofte sjelens drakt\u003cbr\u003ehelt med syndens smuss belagt, alltid dog en flik hun finner som om\u003cbr\u003ebarn og uskyld minner. Hvad en kvinne er og eier, gir hun, ut\u003cb\u003een\u003cbr\u003e\u003c/b\u003em\u00e5l og tall, for sitt store moderkall \u2014 ungdom, sundhet, vennskap,\u003cbr\u003evaner, interesse, dr\u00f8mmer, planer, kallets pris hun aldri\u003cbr\u003evei\u003cspan style=\"color:#808080;\"\u003eer.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_2238\u003cbr\u003etype: usage\u003c/p\u003e", "x": 287.21703991162974, "y": -249.81338379068382}, {"color": "#ff7f00", "id": "1929-1965_m\u00e5l_2801", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eLov om utd. og godkj. av sykepleiere (6/5-49, 23/6-50) .. 402\u003cbr\u003e1949. 28/1. Kgl. res. om salg av vaksine m. v. fra Folkehelseinst 416\u003cbr\u003e1/2. Rundskr. om ferieloven 416 23/2. Lagm.rettsdom om ansvar for\u003cbr\u003eovers\u00f8ster og sykehusets eier 423 5/3. Skr. om syketrygd for pleiere\u003cbr\u003eunder studieopphold uten lands 426 29/3. Skr. om r\u00f8ntgenpersonalets\u003cbr\u003eferie 429 29/4. Kgl. res. om oppvask av servise 438 30/4. Rundskr. om\u003cbr\u003eutgifter ved behandling av tuberkul\u00f8se .... 441 30/4. Rundskr. om\u003cbr\u003estreptomycin 443 2/5. Rundskr. om registrering av sykepleiere 443 6/5.\u003cbr\u003eKgl. res. om ikrafttreden av loven om sykepleiere og regler for\u003cbr\u003esykepleier\u00e5det 444 30/5. Skr. om portoutgifter for r\u00f8ntgentbilder 446\u003cbr\u003e10/6. Kgl. res. om underjordm\u00f8dre ved Kvinneklinikken i Bergen 448\u003cbr\u003e24/6. Lov om tjenesteplikt 449 8/7. Lov om endr. i brennevinsloven\u003cbr\u003e(fond til helsefor\u003cb\u003em\u00e5l\u003c/b\u003e og sykehus) 453 28/7. Lover om\u003cbr\u003eepileptikere og \u00e5ndssvake 459\u201460 9/8. Rundskr. om serologiske og\u003cbr\u003ebakteriologiske pr\u00f8ver 464 8/9. H.R.dom om erstatningskrav fra\u003cbr\u003ebetjening smittet av tuberkulose 465 Side 9/9. Rundskr. om\u003cbr\u003eanbudsforskriftene 465 17/9. Rundskr. om l\u00f8nn til tjenestemenn.\u003cbr\u003evikarer, som ikke blir medlem av pensjonskassen 466 24/9. Rundskr. om\u003cbr\u003em\u00e5l og vekt 467 27/9. Skr. om legers ansvar, operasjon, legemidler 467\u003cbr\u003e21/11. Skr. om opptagelse av jordm\u00f8dre p\u00e5 sykepleieskole 473 6/12.\u003cbr\u003eRundskr. om pleie- og rekonvalesenthjem (2/6-47) 474 27/12. Skr. om\u003cbr\u003eendr. i reglementet for tjenestemann ved Sophies Minde (29/7-50) 479\u003cbr\u003e29/12. Skr. om endringer i reglementet for tjenestemenn ved\u003cbr\u003eRikshospitalet og Kvinneklinikken 479 29/12. Statens sykehusr\u00e5d 479\u003cbr\u003e1950. 26/1. Skr. om legeattest for sykeperm 482 28/1. Rundskr. om\u003cbr\u003einokulasjonshepatitt 482 4/4. Skr. om jordm\u00f8dre \u2014 f\u00f8dehjem (2/6-47)\u003cbr\u003e488 17/4. Skr. om studenters arbeid p\u00e5 sykehus -189 12/5. H.R.dom ang.\u003cbr\u003esykehusets ansvar for betjeningen 491 10/6. Rundskr. om kolonier m. v.\u003cbr\u003efor barn 495 20/6. Rundskr. om melding av f\u00f8dsler 499 23/6. Kgl. res.\u003cbr\u003eom laereanstalter for sykepleiere og om bemyndigelse for departementet\u003cbr\u003etil \u00e5 gi forskjellige bestemmelser etter loven 500 1/7. Rundskr. om\u003cbr\u003esykegymnaster ved sykehus 506 14/7. Lov om evsetning av\u003cbr\u003ebrennevinsavgift til sykehusanlegg .\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_2801\u003cbr\u003etype: usage\u003c/p\u003e", "x": 53.15215361598502, "y": -402.80693130171335}, {"color": "#4daf4a", "id": "1929-1965_m\u00e5l_3044", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHalse fortel, at i dei siste 16 \u00e5ra har det i heradet vore 12\u003cbr\u003eutskiftingar og 5 avl\u00f8ysingsforretningar. Dei 12 utskiftingane femner\u003cbr\u003eum ei jordvidd p\u00e5 21 106 \u003cb\u003em\u00e5l\u003c/b\u003e, 612 m\u00e5l innmark og 20 494 m\u00e5l\u003cbr\u003eutmark.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_3044\u003cbr\u003etype: usage\u003c/p\u003e", "x": 425.3640996704843, "y": -118.54900049116316}, {"color": "#4daf4a", "id": "1929-1965_m\u00e5l_1891", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eCity. S. 51. et kje \u2014 kjede av sammenhengende ringer. S. 52.\u003cbr\u003eStranger til taket = lange, tynne stenger. S. 54. En acre = ca. 4\u003cbr\u003e\u003cb\u003em\u00e5l\u003c/b\u003e. Tr\u00f8nderne \u00f8stved Sioux River \u2014 de tok til \u00e5 sl\u00e5 seg ned\u003cbr\u003ef\u00f8r helgelendingene, alt i 1866. S. 55. Redslene fra 62 \u2014 Oppstand av\u003cbr\u003esioux-indianerne i staten Minnesota.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_1891\u003cbr\u003etype: usage\u003c/p\u003e", "x": 607.6844453840022, "y": -93.44739267803685}, {"color": "#4daf4a", "id": "1929-1965_m\u00e5l_3190", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDen hadde da en besetning p\u00e5 7 hester, hvorav 1 under 3 \u00e5r, 3\u003cbr\u003eokser, 18 kyr, 3 ungnaut og kalver, 22 sauer og lam og 4 svin og\u003cbr\u003egriser og en utsed av 5 tdr. bygg, 21 tdr. havre, 2!/ 2 tdr. havre til\u003cbr\u003egr\u00f8nnfor, 90 sk\u00e5lpund gressfr\u00f8 og 15!/ 2 tdr. poteter, hvorhos 3\u003cbr\u003e\u003cb\u003em\u00e5l\u003c/b\u003e anvendtes til andre rotfrukter.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_3190\u003cbr\u003etype: usage\u003c/p\u003e", "x": 519.9573132026837, "y": -360.10263897420555}, {"color": "#f781bf", "id": "1929-1965_m\u00e5l_2812", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u00abEr det mening ti slikt,\u00bb sa han; han skalv ennu p\u00e5\u003cbr\u003e\u003cb\u003em\u00e5let\u003c/b\u003e og var hvit i ansiktet mot det svarte skjegget. \u00abNei, det\u003cbr\u003eer itte mening ti n\u00e5e laenger,\u00bb svarte s\u00f8nnen; han satte sig p\u00e5\u003cbr\u003ehundsvotten. \u00abNei,\u00bb sa Knut Strand. \u00abSaet dei oppi sessen\u003cspan style=\"color:#808080;\"\u003e.\u00bb\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_2812\u003cbr\u003etype: usage\u003c/p\u003e", "x": 750.0, "y": 591.358102639415}, {"color": "#a65628", "id": "1929-1965_m\u00e5l_4159", "label": "4", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMot overgrep fra familie-tutors side st\u00e5r den utvei apen, at\u003cbr\u003eder enten beskikkes verge eller at politi\u00f8vrigheten overtar tutelet.\u003cbr\u003eDen sinnssyke kar ogs\u00e5 seiv rett til \u00a3 begjaere sig stillet under\u003cbr\u003evergem:.l(lpv om umyndiggj\u00f8relse, \u00a7 3) eller til \u00e5 begjaere opnevnelse\u003cbr\u003eav en hjelpe-verge. * a \u0027 faJ r 1! Jvi. Jak. E. Mncterssen, s. 26.\u003cbr\u003eF\u00e5mi lie-tute let b\u0027dr vel neppe erstattes av hjelpe-verge\u003cb\u003e- m\u003c/b\u003e\u00e5l\u003cbr\u003euten saerlige grunn\u003cspan style=\"color:#808080;\"\u003eer.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_4159\u003cbr\u003etype: usage\u003c/p\u003e", "x": -690.589863791615, "y": -668.3634734604359}, {"color": "#984ea3", "id": "1929-1965_m\u00e5l_4228", "label": "5", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn slik opbygning vil gj\u00f8re det mulig \u00e5 begynne med tysk\u003cbr\u003eallerede i Iste klasse og s\u00e5ledes styrke den h\u00f8iere skoles kursus p\u00e5\u003cbr\u003evedkommende sted, men vilde ikke betinge et h\u00f8iere \u003cb\u003em\u00e5l\u003c/b\u003e ved\u003cbr\u003eavgangseksamen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_m\u00e5l_4228\u003cbr\u003etype: usage\u003c/p\u003e", "x": -246.8048146553085, "y": -271.4583537192018}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "2/-/1", "to": "1929-1965_m\u00e5l_2238", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "4/1/-", "to": "1929-1965_m\u00e5l_4228", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "4/-/4", "to": "1929-1965_m\u00e5l_3766", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "-/1/1", "to": "1929-1965_m\u00e5l_4159", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "-/1/1", "to": "1929-1965_m\u00e5l_3044", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "4/4/4", "to": "1929-1965_m\u00e5l_1867", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "-/1/1", "to": "1929-1965_m\u00e5l_3190", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "2/1/-", "to": "1929-1965_m\u00e5l_1891", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "-/1/-", "to": "1929-1965_m\u00e5l_2812", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1419", "label": "2/1/-", "to": "1929-1965_m\u00e5l_2801", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "2/1/-", "to": "1929-1965_m\u00e5l_1891", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "1/1/1", "to": "1929-1965_m\u00e5l_4159", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "2/1/0", "to": "1929-1965_m\u00e5l_2801", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "-/4/4", "to": "1929-1965_m\u00e5l_1867", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "2/-/1", "to": "1929-1965_m\u00e5l_2238", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "2/1/-", "to": "1929-1965_m\u00e5l_3044", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "2/1/1", "to": "1929-1965_m\u00e5l_3190", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "-/1/0", "to": "1929-1965_m\u00e5l_2812", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3766", "label": "3/-/2", "to": "1929-1965_m\u00e5l_4228", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "-/1/-", "to": "1929-1965_m\u00e5l_2812", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "3/3/2", "to": "1929-1965_m\u00e5l_2238", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "4/-/4", "to": "1929-1965_m\u00e5l_1891", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "-/2/1", "to": "1929-1965_m\u00e5l_4228", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "2/1/-", "to": "1929-1965_m\u00e5l_1867", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "-/-/1", "to": "1929-1965_m\u00e5l_4159", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "-/4/4", "to": "1929-1965_m\u00e5l_3044", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3190", "label": "3/3/1", "to": "1929-1965_m\u00e5l_2801", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "1/1/1", "to": "1929-1965_m\u00e5l_4228", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "1/1/1", "to": "1929-1965_m\u00e5l_2238", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "-/1/1", "to": "1929-1965_m\u00e5l_1867", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "2/1/1", "to": "1929-1965_m\u00e5l_4159", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "1/1/-", "to": "1929-1965_m\u00e5l_3044", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "-/-/1", "to": "1929-1965_m\u00e5l_2801", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2812", "label": "-/-/1", "to": "1929-1965_m\u00e5l_1891", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4159", "label": "-/1/1", "to": "1929-1965_m\u00e5l_4228", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4159", "label": "1/1/1", "to": "1929-1965_m\u00e5l_1891", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4159", "label": "1/1/-", "to": "1929-1965_m\u00e5l_1867", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4159", "label": "1/1/0", "to": "1929-1965_m\u00e5l_2238", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4159", "label": "-/1/1", "to": "1929-1965_m\u00e5l_3044", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4159", "label": "1/-/1", "to": "1929-1965_m\u00e5l_2801", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3044", "label": "3/3/1", "to": "1929-1965_m\u00e5l_2238", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3044", "label": "2/2/-", "to": "1929-1965_m\u00e5l_4228", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3044", "label": "4/4/4", "to": "1929-1965_m\u00e5l_1891", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3044", "label": "-/-/1", "to": "1929-1965_m\u00e5l_1867", "weight": 1.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_3044", "label": "3/-/1", "to": "1929-1965_m\u00e5l_2801", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4228", "label": "2/2/2", "to": "1929-1965_m\u00e5l_2238", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4228", "label": "-/2/0", "to": "1929-1965_m\u00e5l_2801", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4228", "label": "2/-/1", "to": "1929-1965_m\u00e5l_1891", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_4228", "label": "-/1/2", "to": "1929-1965_m\u00e5l_1867", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1867", "label": "2/1/0", "to": "1929-1965_m\u00e5l_2801", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1867", "label": "2/-/1", "to": "1929-1965_m\u00e5l_2238", "weight": 1.5, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_1867", "label": "2/-/-", "to": "1929-1965_m\u00e5l_1891", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2801", "label": "-/3/1", "to": "1929-1965_m\u00e5l_1891", "weight": 2.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2801", "label": "4/4/0", "to": "1929-1965_m\u00e5l_2238", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_m\u00e5l_2238", "label": "3/3/2", "to": "1929-1965_m\u00e5l_1891", "weight": 3.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>2012-2019</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#377eb8", "id": "2012-2019_side_97621", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eIf\u00f8lge dommerne var det ingen tvil om French var skyldig. I\u003cbr\u003edommen st\u00e5r det at dommerne mener at French planla \u00e5 drepe Moland. Vil\u003cbr\u003etrolig anke Aktor Hom\u00e8re Nkulu hadde lagt ned p\u00e5stand om livsvarig\u003cbr\u003efengsel for nordmannen, og dommerne tok denne p\u00e5standen til f\u00f8lge.\u003cbr\u003eFrenchs forsvarere hadde p\u00e5 sin \u003cb\u003eside\u003c/b\u003e lagt ned p\u00e5stand om at\u003cbr\u003enordmannen frikjennes for drapet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_97621\u003cbr\u003etype: usage\u003c/p\u003e", "x": 354.45158804171433, "y": -302.0116587145763}, {"color": "#377eb8", "id": "2012-2019_side_68890", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e- Mer ambisi\u00f8s Milj\u00f8politisk talsmann i H\u00f8yre, Nikolai Astrup,\u003cbr\u003eunderstreker p\u00e5 sin \u003cb\u003eside\u003c/b\u003e at Siv Jensen \u00abklart og tydelig\u003cbr\u003estiller seg bak regjeringens ambisjon om \u00e5 forsterke\u003cbr\u003eklimaforliket\u00bb.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_68890\u003cbr\u003etype: usage\u003c/p\u003e", "x": 49.5661847895513, "y": -40.937284057157726}, {"color": "#377eb8", "id": "2012-2019_side_76000", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eIf\u00f8lge USA Today ville Trump tape med 34 prosent mot Clintons\u003cbr\u003e51 prosent, mens Bush ville klare seg langt bedre med 42 prosent mot\u003cbr\u003e46 for Clinton. AP Photo/Jeff Roberson M\u00e5lingene viser ogs\u00e5 at Trump\u003cbr\u003eer den mest kjente av alle de republikanske kandidatene \u2014 bare 2\u003cbr\u003eprosent har aldri h\u00f8rt om ham, men p\u00e5 den annen \u003cb\u003eside\u003c/b\u003e er mislikt\u003cbr\u003eav hele 61 prosent av velgerne. Ut mot Mexico Etter at han for noen\u003cbr\u003euker siden lanserte kandidaturet sitt, har Trump skapt overskrifter\u003cbr\u003emed sterkt nedlatende kommentarer om Mexico og mexicanske\u003cbr\u003einnvandrere.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_76000\u003cbr\u003etype: usage\u003c/p\u003e", "x": 350.62087358379785, "y": -73.07503774577172}, {"color": "#377eb8", "id": "2012-2019_side_112787", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFlere \u003cb\u003esider\u003c/b\u003e ved gjennomf\u00f8ringen av politireformen er vi\u003cbr\u003ekritiske til. Jeg er sikker p\u00e5 at vi blir enige med Sp og andre\u003cbr\u003epartier om dette, ser St\u00f8re. Klapper for pappapermen\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_112787\u003cbr\u003etype: usage\u003c/p\u003e", "x": 333.0960460436773, "y": 110.01134967369939}, {"color": "#377eb8", "id": "2012-2019_side_105689", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eF\u00e5r ha bodene i fred Hege Johnsen var ogs\u00e5 blant dem som\u003cbr\u003etrosset det v\u00e5te sommervaeret for \u00e5 vaere p\u00e5 Martnan. Hun og datteren\u003cbr\u003eMarin Johnsen G\u00fcnther var enig i at det gjerne kunne vaert mindre\u003cbr\u003ebl\u00f8tt, men de s\u00e5 ogs\u00e5 positi\u003cb\u003eve si\u003c/b\u003eder ved at himmelens sluser\u003cbr\u003e\u00e5pnet seg. - Jeg har god forst\u00e5else for at det er lite folk her\u003cbr\u003eakkurat n\u00e5. Men det er jo bra for oss, ettersom vi f\u00e5r ha alle bodene\u003cbr\u003ei fred, sier Hege og flir\u003cspan style=\"color:#808080;\"\u003eer.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_105689\u003cbr\u003etype: usage\u003c/p\u003e", "x": -150.78540802299742, "y": 204.2006644222083}, {"color": "#377eb8", "id": "2012-2019_side_55086", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDer svarer 13 prosent at de helst reiser med naboen i \u00f8st.\u003cbr\u003eFinnene p\u00e5 sin \u003cb\u003eside\u003c/b\u003e heier p\u00e5 svenskene, men nordmenn ligger\u003cbr\u003ehakk i hael. Sp\u00e5k Bergsl\u00f8kken mener forklaringen ogs\u00e5 ligger i\u003cbr\u003espr\u00e5ket. -Svensker forst\u00e5r norsk bedre enn dansk, og dansker forst\u00e5r\u003cbr\u003enorsk bedre enn svensk, sier hun. Finsk er det f\u00e5 av oss som\u003cbr\u003ebehersker\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_55086\u003cbr\u003etype: usage\u003c/p\u003e", "x": 186.57240718165036, "y": -153.63803027554582}, {"color": "#377eb8", "id": "2012-2019_side_83577", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVolvo p\u00e5 sin \u003cb\u003eside\u003c/b\u003e bygde etter hvert et eget st\u00f8peri for\u003cbr\u003e\u00e5 lage bremseskiver etter oppskriften v\u00e5r.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_83577\u003cbr\u003etype: usage\u003c/p\u003e", "x": -61.55951862007146, "y": -231.539745351335}, {"color": "#377eb8", "id": "2012-2019_side_147294", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHolden sa tirsdag er sikre p\u00e5 at det er den samme motparten de\u003cbr\u003ehar kommunisert med fra 27. januar og til og med 8. juli. Br\u00f8ske mener\u003cbr\u003ep\u00e5 sin \u003cb\u003eside\u003c/b\u003e det er for tidlig \u00e5 konkludere med tanke p\u00e5 dette.\u003cbr\u003eHan \u00f8nsker heller ikke \u00e5 problematisere at bistandsadvokaten og\u003cbr\u003efamilien har et svaert forskjellig syn p\u00e5 situasjonen man st\u00e5r\u003cbr\u003eoverfor. Br\u00f8ske understreker at de har stor respekt for at familien\u003cbr\u003eoppfatter den nye henvendelsen som et tegn p\u00e5 at Anne-Elisabeth Hagen\u003cbr\u003eer i live\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_147294\u003cbr\u003etype: usage\u003c/p\u003e", "x": -116.46976820328177, "y": -60.81197660573342}, {"color": "#ff7f00", "id": "2012-2019_side_51919", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\"Og de m\u00f8ter gjerne ogs\u00e5 frem med mannen ved sin\u003cb\u003e sid\u003c/b\u003ee og\u003cbr\u003esier \"\"min mann skal p\u00e5 kurs hos dere i dag\"\". Det har jeg humret over\u003cbr\u003emange ganger. Vi ser med livsstilsendringer at personen m\u00e5 \u00f8nske det\u003cbr\u003eselv for at han/hun skal lykkes, men st\u00f8tte er en forsterkende\u003cbr\u003eeffe\u003cspan style=\"color:#808080;\"\u003ekt.\"\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_51919\u003cbr\u003etype: usage\u003c/p\u003e", "x": -509.57500716129545, "y": 85.08449928685957}, {"color": "#4daf4a", "id": "2012-2019_side_78721", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-N\u00e5 er vi der at obligasjoner i Farstad og Solstad handles\u003cbr\u003eoverraskende lavt. Man skvetter litt n\u00e5r man ser det, sier\u003cbr\u003ekredittanalytiker Knut Vidjeland i Fondsfinans (FA \u003cb\u003eside\u003c/b\u003e 14)\u003cbr\u003eJAKTER P\u00c5 NYE L\u00c5NTAGERE ETTER OLJEFALL. Eksportkreditt opplevde et\u003cbr\u003efall p\u00e5 42 prosent i s\u00f8knadsvolumet fra oljenaeringen, og fors\u00f8ker \u00e5\u003cbr\u003ekompensere fallet i fornybarbransjen og SMB-sektoren (FA side 20) SER\u003cbr\u003e\u00abFANTASTISKE\u00bb MULIGHETER I RUSSLAND\u003cspan style=\"color:#808080;\"\u003e.\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_78721\u003cbr\u003etype: usage\u003c/p\u003e", "x": 11.477150202718237, "y": 750.0}, {"color": "#f781bf", "id": "2012-2019_side_93735", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFra 1998 til utgangen av 2001 hadde jeg en 20%-stilling som\u003cbr\u003edaglig leder, ved \u003cb\u003esiden\u003c/b\u003e av mitt heltidsarbeid som professor og\u003cbr\u003efaggruppeleder ved UiT. Fra 2002 ble det opprettet en separat\u003cbr\u003eadministrerende direkt\u00f8r-stilling.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_side_93735\u003cbr\u003etype: usage\u003c/p\u003e", "x": -492.06169335402035, "y": -284.43524651546284}]);
+        edges = new vis.DataSet([{"color": "black", "from": "2012-2019_side_78721", "label": "2/-/1", "to": "2012-2019_side_68890", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "2/-/1", "to": "2012-2019_side_93735", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "-/2/-", "to": "2012-2019_side_83577", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "-/2/1", "to": "2012-2019_side_76000", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "-/2/1", "to": "2012-2019_side_51919", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "2/-/1", "to": "2012-2019_side_97621", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "-/2/-", "to": "2012-2019_side_147294", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "2/-/1", "to": "2012-2019_side_112787", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_78721", "label": "2/-/-", "to": "2012-2019_side_105689", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "3/-/1", "to": "2012-2019_side_97621", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "2/4/-", "to": "2012-2019_side_83577", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "3/4/-", "to": "2012-2019_side_68890", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "3/-/1", "to": "2012-2019_side_105689", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "2/-/1", "to": "2012-2019_side_55086", "weight": 1.5, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "2/4/1", "to": "2012-2019_side_147294", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "2/-/-", "to": "2012-2019_side_76000", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "-/-/1", "to": "2012-2019_side_112787", "weight": 1.0, "width": 4}, {"color": "black", "from": "2012-2019_side_93735", "label": "3/-/-", "to": "2012-2019_side_51919", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "-/4/-", "to": "2012-2019_side_147294", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "-/4/3", "to": "2012-2019_side_76000", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "-/-/4", "to": "2012-2019_side_68890", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "4/4/2", "to": "2012-2019_side_112787", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "4/-/4", "to": "2012-2019_side_83577", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "-/-/2", "to": "2012-2019_side_105689", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "2/4/1", "to": "2012-2019_side_51919", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_97621", "label": "4/4/4", "to": "2012-2019_side_55086", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "4/4/1", "to": "2012-2019_side_105689", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "4/4/-", "to": "2012-2019_side_55086", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "4/4/-", "to": "2012-2019_side_68890", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "2/4/1", "to": "2012-2019_side_51919", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "-/-/4", "to": "2012-2019_side_83577", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "4/-/3", "to": "2012-2019_side_76000", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_147294", "label": "-/4/-", "to": "2012-2019_side_112787", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_76000", "label": "4/-/3", "to": "2012-2019_side_55086", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_76000", "label": "2/-/-", "to": "2012-2019_side_51919", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_76000", "label": "-/4/3", "to": "2012-2019_side_83577", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_76000", "label": "4/4/-", "to": "2012-2019_side_112787", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_76000", "label": "4/4/3", "to": "2012-2019_side_68890", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_83577", "label": "2/-/-", "to": "2012-2019_side_51919", "weight": 2.0, "width": 4}, {"color": "black", "from": "2012-2019_side_83577", "label": "-/4/3", "to": "2012-2019_side_112787", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_83577", "label": "-/4/4", "to": "2012-2019_side_55086", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_83577", "label": "4/-/3", "to": "2012-2019_side_105689", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_side_112787", "label": "-/-/3", "to": "2012-2019_side_68890", "weight": 3.0, "width": 4}, {"color": "black", "from": "2012-2019_side_112787", "label": "-/-/4", "to": "2012-2019_side_105689", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_112787", "label": "-/4/1", "to": "2012-2019_side_51919", "weight": 2.5, "width": 4}, {"color": "black", "from": "2012-2019_side_112787", "label": "-/4/-", "to": "2012-2019_side_55086", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_68890", "label": "-/4/4", "to": "2012-2019_side_55086", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_68890", "label": "-/4/1", "to": "2012-2019_side_51919", "weight": 2.5, "width": 4}, {"color": "black", "from": "2012-2019_side_68890", "label": "-/4/-", "to": "2012-2019_side_105689", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_105689", "label": "4/-/-", "to": "2012-2019_side_55086", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_105689", "label": "-/4/-", "to": "2012-2019_side_51919", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_side_51919", "label": "2/4/-", "to": "2012-2019_side_55086", "weight": 3.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
