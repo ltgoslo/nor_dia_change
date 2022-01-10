@@ -3,7 +3,7 @@ _NorDiaChange_ is a manually annotated dataset of diachronic semantic change in 
 
 It contains two subsets, with 40 annotated words in each:
 - **[Subset 1](https://github.com/ltgoslo/nor_dia_change/tree/main/subset1)**, changes when comparing 1929-1965 to 1970-2013
-- **[Subset 2]((https://github.com/ltgoslo/nor_dia_change/tree/main/subset2))**, changes when comparing 1980-1990 to 2012-2019
+- **[Subset 2](https://github.com/ltgoslo/nor_dia_change/tree/main/subset2)**, changes when comparing 1980-1990 to 2012-2019
 
 The respective `subset1` and `subset2` directories contain raw annotation data and inferred diachronic word usage graphs (DWUGs).
 Final descriptive statistics including change scores for the annotated words can be found in the `stats` subdirectory.
