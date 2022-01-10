@@ -22,6 +22,8 @@ Both corpora are publicly avaible for downloading.
 
 [Annotators guidelines](https://github.com/ltgoslo/nor_dia_change/blob/main/guidelines.md)
 
+_NorDiaChange_ is published under the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/).
+
 
 
 ## Acknowledgements
