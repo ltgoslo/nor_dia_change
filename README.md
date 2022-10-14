@@ -1,7 +1,7 @@
 # NorDiaChange
 _NorDiaChange_ is a manually annotated dataset of diachronic semantic change in Norwegian. It is described in full in the following paper:
 
-["NorDiaChange: Diachronic Semantic Change Dataset for Norwegian"](https://arxiv.org/abs/2201.05123) by Andrey Kutuzov, Samia Touileb, Petter Mæhlum, Tita Ranveig Enstad, Alexandra Wittemann. In Proceedings of LREC'2022.
+["NorDiaChange: Diachronic Semantic Change Dataset for Norwegian"](https://aclanthology.org/2022.lrec-1.274/) by Andrey Kutuzov, Samia Touileb, Petter Mæhlum, Tita Ranveig Enstad, Alexandra Wittemann. In Proceedings of LREC'2022.
 
 _NorDiaChange_ contains two subsets, with 40 annotated words in each:
 - **[Subset 1](https://github.com/ltgoslo/nor_dia_change/tree/main/subset1)**, changes when comparing 1929-1965 to 1970-2013
