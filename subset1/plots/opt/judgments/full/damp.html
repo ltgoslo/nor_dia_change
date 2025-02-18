@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">damp (full)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "#377eb8", "date": "1929", "id": "1929-1965_damp_79", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTrondsdatter Fonn\u00e5s s\u00f8ndre, og ved midtsommertid sover en\u003cbr\u003ehvith\u00e5ret, tettfingret gutt i vuggen under de sotete slinder p\u00e5 S\u00f8stu\u003cbr\u003eFonn\u00e5s, mens R\u00f8nnaug frodig og frisk baerer vann fra br\u00f8nn til fj\u00f8s og\u003cbr\u003eKnut driver med plogen \u00f8verst i S\u00f8stujordet der B\u00e5rd brente br\u00e5te, s\u00e5\u003cbr\u003esvetten triller nedover det brune, magre ansikt og \u003cb\u003edamper\u003c/b\u003e av\u003cbr\u003eden ullgr\u00e5 skjorten. Larne6ap var lorlanZt, 03 preBten 82 ikke Btort\u003cbr\u003e6a knut korn. \u00abVette er noe ti6lig, min k)Xre knut,\u00bb 8a lian. knut 8a\u003cbr\u003elieller ikke ztort. VIDDENS HERRER\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_79\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -580.8343459223088, "y": 113.83430479637256}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_damp_368", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn sur r\u00f8k velter op mot ham, men gjennem den ser han noen\u003cbr\u003eskikkelser springe som gale under sig. En fot vann ruller over d\u00f8rken,\u003cbr\u003eog liver gang sleisene rykkes ut av fyren, faller asken ned i\u003cbr\u003eoversv\u00f8mmelsen med en fresende lyd, mens en gr\u00e5 \u003cb\u003edamp\u003c/b\u003e ryker op\u003cbr\u003eav vannet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_368\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -276.32839640580437, "y": 78.45331149673063}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_damp_394", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003eDampen\u003c/b\u003e stod av hestekroppene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_394\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -184.01642288388865, "y": -497.7901716662032}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_damp_256", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r blir vatnet til \u003cb\u003edamp\u003c/b\u003e ?\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_256\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -232.9414814622481, "y": -175.3392675873063}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_damp_285", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDampen ledes inn, og trykket stiger og det stadig h\u00f8iere enn\u003cbr\u003eden temperatur som ren \u003cb\u003edamps\u003c/b\u003e trykk tilsvarer, s\u00e5 her kan man\u003cbr\u003eikke klare sig uten et termometer.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_285\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -342.463206958986, "y": -493.6687395806496}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_damp_393", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er vinter, og isen ligger blank p\u00e5 innsj\u00f8en. Bare lengst i\u003cbr\u003esyd der elven faller ut, er det en lang, apen stripe hvorfra tynne\u003cbr\u003e\u003cb\u003edamper\u003c/b\u003e stiger op i vinterkulden. En \u00abraide\u00bb eller rekke av\u003cbr\u003ereinsdyr med sine sleder kommer kj\u00f8rende opover isen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_393\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -716.3664823255556, "y": -256.24812802582244}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_245", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOrganisk bundet kvikks\u00f8lv oksyderes til to verdig kvikks\u00f8lv i\u003cbr\u003eioneform (Hg - Deretter reduseres kvikks\u00f8lvet til elementaer tilstand\u003cbr\u003emed tinnklorid, og drives ut som \u003cb\u003edamp\u003c/b\u003e ved hjelp av helium som\u003cbr\u003ebaeregass.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_245\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -480.4973312320032, "y": 55.00213678388977}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_190", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHvert av kraftverkene antas, i henhold til s\u00f8knaden, \u00e5 ha et\u003cbr\u003egjennomsnittlig \u00e5rlig CO 2 -utslipp p\u00e5 1,05 millioner tonn og et NOx-\u003cbr\u003eutslipp p\u00e5 560 tonn. For K\u00e5rst\u00f8anlegget er det inng\u00e5tt avtale med\u003cbr\u003eStat- pipe om leveranser av \u003cb\u003edamp\u003c/b\u003e til gassbehandlings-\u003cbr\u003eanlegget.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_190\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -392.0654739723556, "y": -127.3827980605258}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_87", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eInstallasjoner for bruk i fredstid Akkumulatoranlegg Omfang\u003cbr\u003ePlassering Ventilasjon 806.7 806.8 806.9 806.10 Vern av ladeinnretning\u003cbr\u003e806.11 \u00a7808 Vern av kurser fra akkumulatorbatterier Eksplosjonsfarlige\u003cbr\u003eomr\u00e5der 808.0 Innledning 808.1 Inndeling av eksplosjonsfarlige omr\u00e5der\u003cbr\u003e808.2 Beskyttelsesarter for utstyr for bruk i omr\u00e5dekategori a\u003cbr\u003eGruppeinndeling 808.3 808.4 Maksimal overflatetemperatur -\u003cbr\u003etemperaturklasser Tenntemperatur 808.5 808.6 Godkjenning av inndeling\u003cbr\u003eav eksplosjonsfarlige omr\u00e5der Krav til elektriske anlegg i\u003cbr\u003eomr\u00e5dekategori a 808.7 808.8 Krav til elektriske anlegg i\u003cbr\u003eomr\u00e5dekategori b Krav til elektriske anlegg i omr\u00e5dekategori c og d\u003cbr\u003e808.9 Vedl.l Vedl.2 Soneinndeling Gruppeinndeling av og visse\u003cbr\u003e\u003cb\u003edata\u003c/b\u003e for en del gasser og damper Tenntemperatur og tetthet for\u003cbr\u003een del st\u00f8vskyer\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_87\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -640.8195483746223, "y": -391.5747274743964}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_239", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eLuten inneholder forholdsvis store mengder med SO2, som en\u003cbr\u003eimidlertid relativt lett kan fjerne med \u003cb\u003edamp\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_239\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -467.58623801351945, "y": -257.2119359049964}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_272", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u2014 St\u00f8rrelsen p\u00e5 de beregnede kostnader for overf\u00f8ring av\u003cbr\u003e\u003cb\u003edamp\u003c/b\u003e eller hetvann mellom Fiskaa Verk og Falconbridge er\u003cbr\u003ebedrifts\u00f8konomisk konkurransedyktig sammenliknet med kostnader til\u003cbr\u003eegenprodusert varme fra elkraft eller olje.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_272\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -461.39055274791394, "y": -478.4578932505019}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_153", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOmr\u00e5dekategori a er delt inn i f\u00f8lgende soner: - Sone 0:\u003cbr\u003eOmr\u00e5der hvor det uavbrutt eller i lange perioder forekommer en\u003cbr\u003eeksplosiv blanding av brennbar gass, \u003cb\u003edamp\u003c/b\u003e eller svevende\u003cbr\u003evaeskedr\u00e5per og luft. - Sone 1 :\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_153\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 39.086441332157705, "y": 8.001566639001725}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_17", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eKravene som stilles til beregningsresultatene skal if\u00f8lge de\u003cbr\u003eamerikanske sikkerhetsforskriftene (6), som ogs\u00e5 anvendes i Europa,\u003cbr\u003evise at: den beregnede h\u00f8yeste kapslingstemperatur ikke overstiger 1\u003cbr\u003e204\u00b0 C. den beregnede oksydasjon av kapslingsmaterialet p\u00e5 grunn av\u003cbr\u003ekjemisk reaksjon med vann og \u003cb\u003edamp\u003c/b\u003e ikke p\u00e5 noe sted overstiger\u003cbr\u003e17 pst. av den opprinnelige veggtykkelsen p\u00e5 kapslingen. den beregnede\u003cbr\u003ehydrogenproduksjon p\u00e5 grunn av kjemisk reaksjon mellom\u003cbr\u003ekapslingsmaterialet og vann/damp ikke overstiger 1 pst. av den mengden\u003cbr\u003esom ville ha vaert produsert dersom alt kapslingsmaterialet hadde\u003cbr\u003ereagert. - beregnet deformasjon av kjernen ikke skal kunne forhindre\u003cbr\u003ekj\u00f8ling. - etter en beregnet vellykket n\u00f8dkj\u00f8ling skal den beregnede\u003cbr\u003ekapslingstemperaturen forbli p\u00e5 et akseptabelt lavt niv\u00e5, og den\u003cbr\u003evarmen som fremdeles produseres skal kunne fjernes. Krav til\u003cbr\u003eberegningsmodeller Forskriftene krever en meget detaljert doku-\u003cbr\u003ementasjon.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_17\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -101.33522378713904, "y": 131.34897500840825}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_78", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er medisinsk bruk av planter som brukes \u00fcbehandlet eller i\u003cbr\u003ekonsentrater, avkok og essenser fra r\u00f8tter, stengler, blader og fr\u00f8.\u003cbr\u003eMetoden er beskrevet i punkt 6.3.9. - Inhalasjonsterapi er \u00e5 inhalere\u003cbr\u003e\u003cb\u003edamp\u003c/b\u003e med aromatiske oljer.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_78\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 115.77017121931895, "y": -343.1828501798909}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_319", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er slik oppvarming som kan vaere aktuelt i Norge. Den\u003cbr\u003eindustrielle bruk av jordvarmen ble innledet i 1840 da man begynte \u00e5\u003cbr\u003eutvinne borsyre fra \u003cb\u003edamp\u003c/b\u003e som ble tatt opp fra borehull i\u003cbr\u003eLardarello i Italia. Det var ogs\u00e5 her man begynte \u00e5 lage el-kraft fra\u003cbr\u003edampen i 1904.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_319\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -137.06396500497382, "y": -287.9530174009401}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_damp_286", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI den naermeste tiden etter en slik underjordisk eksplosjon,\u003cbr\u003evil fjellet rett over eksplosjonsstedet kollapse og danne en\u003cbr\u003e\u00abnedfalls\u00f8yle\u00bb hvor stein og fjellblokker faller ned p\u00e5 den st\u00f8rknede\u003cbr\u003emassen i eksplosjonshullet som derved ikke lenger er hermetisk lukket.\u003cbr\u003eRadioaktive gasser og \u003cb\u003edamp\u003c/b\u003e vil da lett spre seg oppover i denne\u003cbr\u003evertikale og langstrakte steinmassen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_286\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -641.0046004737297, "y": -82.40414209038315}, {"color": "#ff7f00", "date": "1929", "id": "1929-1965_damp_102", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOm en stund igjen h\u00f8rte hun klamp nede paa veien som av\u003cbr\u003ehestedrifter: pilegrimmerne, som vendte hjem fra \u003cb\u003edampen\u003c/b\u003e og\u003cbr\u003ebryggen ! . . .\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_102\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1391.8822867429337, "y": -397.6168473923311}, {"color": "#ff7f00", "date": "1929", "id": "1929-1965_damp_161", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOg han kjende sakte karane, \u2014 dei hadde jamt i det siste borda\u003cbr\u003e\u003cb\u003edampen\u003c/b\u003e med laksekassone sine. \u2014 Ja hadde der no vore bryggje\u003cbr\u003euppmed land her, so vilde de ha sloppe \u00e5 fylgja med til Reppen, let\u003cbr\u003ehan \u2014 d\u00e5 dampen for framum Totlandsgrenda.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_161\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1999.9999999999998, "y": -226.20441187048746}, {"color": "#4daf4a", "date": "1929", "id": "1929-1965_damp_306", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet stod nu vesentlig bare igjen \u00e5 gj\u00f8re maskinen klar og f\u00e5\u003cbr\u003e\u003cb\u003edampen\u003c/b\u003e op; dette arbeide gikk vi igang med allerede den 18.\u003cbr\u003emai.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_306\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 253.18407663204485, "y": 962.4185477731356}, {"color": "#4daf4a", "date": "1929", "id": "1929-1965_damp_442", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003ePlan hadde bare \u00e5 arbeide og ta i na, og det gjorde han som en\u003cbr\u003ekar. Hammer og slegge gikk i neven som med \u003cb\u003edamp\u003c/b\u003e. I visse mater\u003cbr\u003evar han ogs\u00e5 blitt noks\u00e5 trygg, for passet madam Holman s\u00e5 stritt p\u00e5\u003cbr\u003eham, s\u00e5 var dette ogs\u00e5 en sikkerhet mot at Silla tullet seg bort med\u003cbr\u003eandre.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_442\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -5.281482513902673, "y": 1424.9766782391553}, {"color": "#f781bf", "date": "1929", "id": "1929-1965_damp_16", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVar det tenkelig ar hans medreisende kunde f\u00f8lge med i de\u003cbr\u003erussiske bemerkninger som blev vekslet mellem ham og hans kone? Men\u003cbr\u003ejeg beroliget ham med at jeg bare kunde noen f\u00e5 gloser, det endte i\u003cbr\u003esp\u00f8k. Trotsky fortalte ved frokosten om sin reise ved juletid for tyve\u003cbr\u003e\u00e5r tilbake ombord i en italiensk \u003cb\u003edamper\u003c/b\u003e pa vei fra Spania til\u003cbr\u003eDe Forente Stater.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_damp_16\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1262.3976238374528, "y": 770.7885985543211}, {"color": "#f781bf", "date": "1970", "id": "1970-2015_damp_45", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEt lite jorde vest for grensen mot Lille Oust. Ovre og nedre\u003cbr\u003eMellemengene. Ostbya. Jordet vest for grensen mot Lille Oust. Veien\u003cbr\u003efra \u003cb\u003edamp\u003c/b\u003e skip sb ryggen og Bjbrnenga deler jordet.\u003cbr\u003eRingerikshaugene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_damp_45\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 597.6741523150478, "y": 470.210811193431}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_damp_79", "label": "3/3/-", "to": "1929-1965_damp_393", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "0/-/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "0/-/4", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "0/-/4", "to": "1970-2015_damp_190", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "0/-/4", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/3/-", "to": "1929-1965_damp_394", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/3/-", "to": "1970-2015_damp_272", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/-/4", "to": "1929-1965_damp_368", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/-/4", "to": "1929-1965_damp_285", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/-/4", "to": "1929-1965_damp_256", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/-/4", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_79", "label": "-/-/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "4/-/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "4/-/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "4/-/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "4/3/-", "to": "1929-1965_damp_285", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "0/-/3", "to": "1970-2015_damp_45", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/4/4", "to": "1929-1965_damp_256", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/4/-", "to": "1970-2015_damp_245", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/3/-", "to": "1970-2015_damp_239", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/4/4", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/3/4", "to": "1929-1965_damp_394", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/-/4", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/-/4", "to": "1970-2015_damp_190", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_368", "label": "-/-/4", "to": "1929-1965_damp_393", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "4/-/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "4/-/4", "to": "1929-1965_damp_256", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "4/-/4", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "4/3/-", "to": "1970-2015_damp_153", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "0/2/3", "to": "1970-2015_damp_45", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "4/3/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "4/-/4", "to": "1970-2015_damp_190", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "-/4/-", "to": "1929-1965_damp_393", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "-/3/-", "to": "1970-2015_damp_319", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "-/3/4", "to": "1929-1965_damp_285", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "-/3/-", "to": "1970-2015_damp_245", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "-/-/4", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_394", "label": "-/-/4", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_102", "label": "4/1/4", "to": "1929-1965_damp_161", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_102", "label": "-/3/-", "to": "1970-2015_damp_153", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_102", "label": "-/3/-", "to": "1970-2015_damp_78", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_161", "label": "-/1/4", "to": "1929-1965_damp_16", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_161", "label": "-/1/4", "to": "1970-2015_damp_45", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_306", "label": "4/-/-", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_306", "label": "2/-/3", "to": "1970-2015_damp_153", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_306", "label": "-/-/4", "to": "1970-2015_damp_45", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_306", "label": "-/-/4", "to": "1929-1965_damp_442", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_16", "label": "-/4/-", "to": "1970-2015_damp_45", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "3/4/4", "to": "1929-1965_damp_393", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "4/3/4", "to": "1970-2015_damp_190", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "4/-/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "4/4/3", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "4/4/-", "to": "1929-1965_damp_285", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "4/-/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "-/4/-", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "-/4/4", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "-/3/-", "to": "1970-2015_damp_45", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "-/-/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "-/-/4", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_256", "label": "-/-/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "4/-/4", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "4/4/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "4/-/-", "to": "1970-2015_damp_245", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "4/-/-", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "4/-/-", "to": "1970-2015_damp_190", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "4/3/-", "to": "1970-2015_damp_286", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "-/4/-", "to": "1929-1965_damp_393", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "-/0/4", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_285", "label": "-/-/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "3/3/-", "to": "1970-2015_damp_17", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "3/-/-", "to": "1970-2015_damp_319", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "-/4/-", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "-/4/4", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "-/4/4", "to": "1970-2015_damp_245", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "-/4/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "-/4/4", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_393", "label": "-/-/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_damp_442", "label": "-/2/3", "to": "1970-2015_damp_239", "weight": 2.5, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "4/-/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "4/4/-", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "4/-/-", "to": "1970-2015_damp_190", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "4/4/4", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "-/3/4", "to": "1970-2015_damp_319", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "-/4/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "-/4/-", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "-/3/-", "to": "1970-2015_damp_78", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_245", "label": "-/-/4", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "4/-/4", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "4/-/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "4/4/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "4/-/4", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "4/4/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "4/4/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_190", "label": "-/4/4", "to": "1970-2015_damp_87", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_87", "label": "4/-/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_87", "label": "4/-/4", "to": "1970-2015_damp_239", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_87", "label": "4/4/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_87", "label": "-/3/4", "to": "1970-2015_damp_17", "weight": 3.5, "width": 4}, {"color": "black", "from": "1970-2015_damp_87", "label": "-/3/-", "to": "1970-2015_damp_78", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_87", "label": "-/4/-", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_239", "label": "4/4/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_239", "label": "4/4/-", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_239", "label": "4/-/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_239", "label": "4/4/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_239", "label": "4/-/-", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_239", "label": "-/-/4", "to": "1970-2015_damp_272", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_45", "label": "0/4/-", "to": "1970-2015_damp_153", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_45", "label": "0/3/-", "to": "1970-2015_damp_17", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_45", "label": "-/3/-", "to": "1970-2015_damp_286", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_45", "label": "-/3/-", "to": "1970-2015_damp_78", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_272", "label": "4/-/4", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_272", "label": "-/-/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_272", "label": "-/-/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_272", "label": "-/-/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_153", "label": "4/3/4", "to": "1970-2015_damp_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_153", "label": "-/4/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_153", "label": "-/4/4", "to": "1970-2015_damp_286", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_153", "label": "-/-/4", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_17", "label": "4/4/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_17", "label": "-/4/-", "to": "1970-2015_damp_78", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_78", "label": "4/3/4", "to": "1970-2015_damp_319", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_damp_78", "label": "-/3/-", "to": "1970-2015_damp_286", "weight": 3.0, "width": 4}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "-/2/-", "to": "1929-1965_damp_442", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "-/3/1", "to": "1929-1965_damp_102", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "-/1/-", "to": "1929-1965_damp_16", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "-/-/1", "to": "1970-2015_damp_45", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "-/-/2", "to": "1929-1965_damp_306", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_368", "label": "2/1/2", "to": "1929-1965_damp_16", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_368", "label": "2/-/-", "to": "1929-1965_damp_442", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_368", "label": "2/1/1", "to": "1929-1965_damp_161", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_368", "label": "2/4/1", "to": "1929-1965_damp_102", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_368", "label": "-/1/-", "to": "1929-1965_damp_306", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_394", "label": "2/1/-", "to": "1929-1965_damp_306", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_394", "label": "2/-/1", "to": "1929-1965_damp_102", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_394", "label": "2/-/1", "to": "1929-1965_damp_161", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_394", "label": "2/-/1", "to": "1929-1965_damp_442", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_394", "label": "-/-/1", "to": "1929-1965_damp_16", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "2/-/2", "to": "1970-2015_damp_239", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "2/-/2", "to": "1929-1965_damp_285", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "2/1/1", "to": "1970-2015_damp_272", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "2/-/-", "to": "1970-2015_damp_319", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "2/-/-", "to": "1929-1965_damp_393", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "2/1/-", "to": "1970-2015_damp_286", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "-/3/1", "to": "1970-2015_damp_17", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "-/1/1", "to": "1929-1965_damp_256", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "-/2/1", "to": "1970-2015_damp_245", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "-/-/1", "to": "1970-2015_damp_87", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "-/-/1", "to": "1929-1965_damp_442", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "2/1/2", "to": "1929-1965_damp_442", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "2/1/1", "to": "1929-1965_damp_285", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "2/1/-", "to": "1970-2015_damp_87", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "2/-/-", "to": "1970-2015_damp_78", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "2/-/1", "to": "1970-2015_damp_17", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/1", "to": "1970-2015_damp_319", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/1", "to": "1970-2015_damp_286", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/-", "to": "1929-1965_damp_393", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/-", "to": "1970-2015_damp_272", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/1", "to": "1970-2015_damp_239", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/1", "to": "1970-2015_damp_153", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/1/1", "to": "1929-1965_damp_306", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_161", "label": "-/-/1", "to": "1970-2015_damp_190", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "2/-/1", "to": "1970-2015_damp_272", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "2/1/1", "to": "1929-1965_damp_393", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "2/1/1", "to": "1929-1965_damp_16", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "2/1/1", "to": "1970-2015_damp_239", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "2/-/1", "to": "1970-2015_damp_78", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "-/1/-", "to": "1970-2015_damp_286", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "-/1/-", "to": "1970-2015_damp_245", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "-/1/-", "to": "1970-2015_damp_190", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_306", "label": "-/1/1", "to": "1970-2015_damp_87", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "2/-/1", "to": "1929-1965_damp_393", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "2/2/1", "to": "1929-1965_damp_285", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "2/2/-", "to": "1970-2015_damp_17", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "2/1/-", "to": "1970-2015_damp_239", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/2/-", "to": "1970-2015_damp_319", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/1/1", "to": "1970-2015_damp_272", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/1/1", "to": "1970-2015_damp_286", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/2/-", "to": "1970-2015_damp_245", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/2/1", "to": "1970-2015_damp_153", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/-/1", "to": "1929-1965_damp_442", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/-/1", "to": "1929-1965_damp_256", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/-/1", "to": "1970-2015_damp_190", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/-/1", "to": "1970-2015_damp_78", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_16", "label": "-/-/1", "to": "1970-2015_damp_87", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_256", "label": "2/-/2", "to": "1929-1965_damp_442", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_285", "label": "2/2/1", "to": "1929-1965_damp_442", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_393", "label": "2/-/-", "to": "1929-1965_damp_442", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "2/3/1", "to": "1970-2015_damp_272", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "2/2/3", "to": "1970-2015_damp_286", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "2/2/1", "to": "1970-2015_damp_245", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "2/-/1", "to": "1970-2015_damp_17", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "-/2/-", "to": "1970-2015_damp_319", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "-/2/1", "to": "1970-2015_damp_153", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "-/-/1", "to": "1970-2015_damp_78", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "-/-/1", "to": "1970-2015_damp_45", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_442", "label": "-/-/2", "to": "1970-2015_damp_87", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_damp_245", "label": "-/-/1", "to": "1970-2015_damp_45", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_damp_87", "label": "-/3/1", "to": "1970-2015_damp_45", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_damp_45", "label": "0/2/1", "to": "1970-2015_damp_272", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "0/-/-", "to": "1970-2015_damp_78", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "0/-/-", "to": "1929-1965_damp_161", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_damp_79", "label": "0/-/-", "to": "1970-2015_damp_286", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_damp_102", "label": "0/-/-", "to": "1970-2015_damp_45", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1970-2015_damp_190", "label": "0/-/-", "to": "1970-2015_damp_45", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1970-2015_damp_239", "label": "0/-/-", "to": "1970-2015_damp_45", "weight": NaN, "width": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>
