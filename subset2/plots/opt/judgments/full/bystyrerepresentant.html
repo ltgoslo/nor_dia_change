@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">bystyrerepresentant (full)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_10", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBystyret vedtok i m\u00f8te 4.2.1987 (sak 95) \u00e5 kj\u00f8pe syv\u003cbr\u003eselveierleiligheter i Rosteds gt. 12 fra Oslo Byfornyelse A/S.\u003cbr\u003e\u003cb\u003eBystyrerepresentant\u003c/b\u003e Sigurd \u00d8sten var i 1987 medlem av styret i\u003cbr\u003eOslo Byfornyelse A/S, men unnlot \u00e5 fratre*. i. Bystyret vedtok\u003cbr\u003e4.3.1987 (sak 176) \u00e5 kj\u00f8pe 30 sameieleiligheter i Norbygt. 19-35 fra\u003cbr\u003eGr\u00f8nland Byfornyelse A/S. Bystyrerepresentant Peter N. Myhre var\u003cbr\u003esamtidig styremedlem i Gr\u00f8nland Byfornyelse A/S.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_10\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 533.8180289329356, "y": -2000.0}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_16", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUnder 9.2.1.3 pkt. b ovenfor er det p\u00e5vist at\u003cbr\u003e\u003cb\u003ebystyrerepresentantene\u003c/b\u003e Sigurd \u00d8sten, Tove Heggen Larsen og\u003cbr\u003eWenche Naerup som f\u00f8lge av sitt styremedlemskap i Oslo Naeringsselskap\u003cbr\u003eA/S var inhabile under bystyrebehandlingen av utkastet til avtale\u003cbr\u003emellom kommunen og Oslo Naeringsselskap A/S.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_16\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -627.7108479526215, "y": -166.29349095624156}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_7", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe unnlot imidlertid \u00e5 fratre. Habilitetsreglene er brutt ogs\u00e5\u003cbr\u003eunder behandlingen av denne saken i flere av de forberedende organer,\u003cbr\u003ese naermere under 9.2.2 pkt. b nedenfor. c. Bystyret fattet i m\u00f8te\u003cbr\u003e12.11.1986 (sak 605) vedtak om salg av Gr\u00f8nlandsleiret 30, 32 og 34\u003cbr\u003etil Gr\u00f8nland Byfornyelse A/S. \u003cb\u003eBystyrerepresentant\u003c/b\u003e Peter N.\u003cbr\u003eMyhre var i 1986 medlem av styret i Gr\u00f8nland Byfornyelse A/S, men\u003cbr\u003eunnlot \u00e5 fratre. d. Bystyret fattet i m\u00f8te 17.6.1987 (sak 464) vedtak\u003cbr\u003eom salg av eiendommene Pilestredet 45 B, 47, 47 B og 53 og Parkvn. 2 B\u003cbr\u003etil OBOS.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_7\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -380.2459538230809, "y": -753.7314247630075}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_3", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eF\u00f8rst og fremst klager mange \u003cb\u003ebystyrerepresentanter\u003c/b\u003e over\u003cbr\u003eat det ikke lenger er mulig \u00e5 f\u00e5 saker godt opplyst gjennom kontakter\u003cbr\u003emed administrasjonen p\u00e5 forh\u00e5nd, at saksframstillingen fra byr\u00e5det\u003cbr\u003eofte er for snau og at byr\u00e5det lanserer for f\u00e5 tunge policysaker for\u003cbr\u003ebystyret.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_3\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 259.34558117072606, "y": -1117.945289769828}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_18", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUnder 9.2.1.5 ovenfor er det p\u00e5vist at\u003cbr\u003e\u003cb\u003ebystyrerepresentantene\u003c/b\u003e Tove Heggen Larsen, Wenche Naerup og\u003cbr\u003eSigurd \u00d8sten var inhabile under bystyrebehandlingen av sp\u00f8rsm\u00e5let om\u003cbr\u003ehvorvidt kommunens fordring p\u00e5 Oslo Naeringsselskap A/S skulle\u003cbr\u003eanvendes til \u00e5 forh\u00f8ye selskapets aksjekapital.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_18\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1733.2781023557886, "y": -198.95329932638697}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_2", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSaerlig \u003cb\u003ebystyrerepresentantene\u003c/b\u003e ga uttrykk for at\u003cbr\u003ereformen neppe hadde satt bystyret i stand til \u00e5 se sektorsaker i\u003cbr\u003esammenheng, og komit\u00e9representantene kunne for sin del, for arbeidet\u003cbr\u003einnenfor komiteene, i liten grad oppdage at de koplet til andre\u003cbr\u003ekomit\u00e9ers saker og synspunkter.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_2\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1838.6991824540821, "y": 11.268315322328093}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_11", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHan fratr\u00e5dte likevel ikke under bystyrets behandling av saken.\u003cbr\u003ej. Bystyret vedtok 21.5.1987 (sak 405) \u00e5 kj\u00f8pe 15 leiligheter i Oslo\u003cbr\u003eByfornyelse A/S\u0027 nybygg i Borggt. 14-16. \u003cb\u003eBystyrerepresentant\u003c/b\u003e\u003cbr\u003eSigurd \u00d8sten var styremedlem i Oslo Byfornyelse A/S, men fratr\u00e5dte\u003cbr\u003eikke bystyret ved behandling av saken*. 9.2.1.4 Andre saker med\u003cbr\u003etilknytning til Oslo Byfornyelse A/S Utvalget har i tillegg konstatert\u003cbr\u003ef\u00f8lgende saker ang\u00e5ende Oslo Byfornyelse A/S der fratreden ikke er\u003cbr\u003eskjedd: a. Bystyret behandlet 28.6.1989 (sak 410) den \u00f8konomiske\u003cbr\u003esituasjon i Oslo Byfornyelse A/S.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_11\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -974.2621008676931, "y": 1527.5773945036663}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_4", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHeller ikke i disse tilfellene har bystyrerepresentanter med\u003cbr\u003estyreverv i det samarbeidende selskap konsekvent fratr\u00e5dt under\u003cbr\u003ebystyrebehandlingen av saken, slik loven p\u00e5legger dem. Utvalget\u003cbr\u003ekonstaterer manglende fratreden i f\u00f8lgende saker: a. Bystyret\u003cbr\u003ebehandlet i m\u00f8te 5.3.1986 (sak 114) sp\u00f8rsm\u00e5l om hvorvidt kommunen\u003cbr\u003eskulle inng\u00e5 avtale med Gr\u00f8nland Byfornyelse A/S om fornyelse av\u003cbr\u003ePilestredet 28 og 30 a, b og c. \u003cb\u003eBystyrerepresentant\u003c/b\u003e Peter N.\u003cbr\u003eMyhre var i 1986 medlem av styret i Gr\u00f8nland Byfornyelse A/S.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_4\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1040.130554008044, "y": -1363.4255191428856}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_19", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI brev av 31.7.1990 til granskingsutvalget har Sigurd \u00d8sten\u003cbr\u003euttalt f\u00f8lgende om sin rolle som kommunepolitiker og formann i styret\u003cbr\u003efor Oslo Naeringsselskap A/S: \u00abImidlertid kan jeg bekrefte at i de 31\u003cbr\u003e\u00e5r jeg har vaert medlem av Oslo bystyre har det vaert \u00abgod latin\u00bb \u00e5\u003cbr\u003eoppnevne \u003cb\u003ebystyrerepresentanter\u003c/b\u003e som styremedlemmer i organer\u003cbr\u003envor det var vesentlig at Oslo kommune var sikret styringen. Oslo\u003cbr\u003eNaeringsselskap A/S, hvor Oslo kommune eide 99,7% av aksjekapitalen,\u003cbr\u003eer eksempel p\u00e5 et slikt organ.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_19\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1239.8416073179196, "y": 714.9660528463515}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_17", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003eBystyrerepresentant\u003c/b\u003e Peter N. Myhre var i 1987 medlem av\u003cbr\u003estyret for Gr\u00f8nland Byfornyelse A/S.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_17\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1126.2529503374149, "y": -1314.1689926711695}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_bystyrerepresentant_13", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003eBystyrerepresentant\u003c/b\u003e Jo Frisch deltok i bystyrets\u003cbr\u003ebehandling av saken til tross for at han var styremedlem i Oslo\u003cbr\u003eByfornyelse A/S. 2 9.2.1.5 Andre saker av betydning for Oslo\u003cbr\u003eNaeringsselskap AJS 22.5.1985 hadde bystyret til behandling sp\u00f8rsm\u00e5l\u003cbr\u003eom hvorvidt kommunens fordring p\u00e5 Oslo Naeringsselskap A/S skulle\u003cbr\u003eanvendes til \u00e5 forh\u00f8ye selskapets aksjekapital (sak 235).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_bystyrerepresentant_13\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1504.7159192511353, "y": -878.9463787939272}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_360", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er klart at resultatet av kommunevalget vil ha en betydelig\u003cbr\u003epsykologisk effekt f\u00f8r neste stortingsvalg. Milj\u00f8partiet De Gr\u00f8nne i\u003cbr\u003en\u00f8kkelposisjon Milj\u00f8partiet De Gr\u00f8nne kryper stadig fremover og ville\u003cbr\u003ef\u00e5tt fire \u003cb\u003ebystyrerepresentanter\u003c/b\u003e med denne m\u00e5lingen.\u003cbr\u003eVenstresiden ville da, med st\u00f8tte fra De Gr\u00f8nne, hatt flertall i\u003cbr\u003eOslo.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_360\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -367.7460456987414, "y": 568.524110048131}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_441", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFRYKTER IKKE KJ\u00d8NNSLEMLESTELSE: Bashe Musse, somalisk-norsk\u003cbr\u003e\u003cb\u003ebystyrerepresentant\u003c/b\u003e mener somaliere i Norge har endret holdning\u003cbr\u003etil kj\u00f8nnslemlestelse. Foto: Trond Solberg 530 somalisk-norske jenter\u003cbr\u003ei alderen 6-13 \u00e5r ble i tidsrommet 2001-2012 sendt ut av Norge, if\u00f8lge\u003cbr\u003een fersk rapport fra Institutt for samfunnsforskning.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_441\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1614.435183116348, "y": 780.6057621987113}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_494", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHer m\u00e5 man se p\u00e5 gebyrniv\u00e5et i kommunen, og vurdere landbruket\u003cbr\u003eseparat fra annen type eiendom, mener han. Som eneste\u003cbr\u003e\u003cb\u003ebystyrerepresentant\u003c/b\u003e fra det landbruksvennlige partiet, peker\u003cbr\u003eBj\u00f8rdal p\u00e5 utfordringene med \u00e5 ta vare p\u00e5 b\u00f8ndene i kommunen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_494\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1889.8073456035809, "y": 962.7011028143372}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_515", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er den politiske avstanden til Frp som ble avgj\u00f8rende for\u003cbr\u003epartiet. \u2013 Vi valgte \u00e5 starte forhandlingene med Ap og SV fordi vi\u003cbr\u003etror det er de partiene vi f\u00e5r mest gjennomslag med, sier\u003cbr\u003e\u003cb\u003ebystyrerepresentant\u003c/b\u003e Lan Marie Nguyen Berg for MDG til VG. Hun\u003cbr\u003eforteller at partiet ogs\u00e5 har hatt gode samtaler med H\u00f8yre.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_515\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 476.153717069731, "y": 1847.0690805898541}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_875", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSend ditt innlegg til debatt@vg.no eller SMS med kodeord sidet\u003cbr\u003etil 2200 EIVIND TRAeDAL, \u003cb\u003ebystyrerepresentant\u003c/b\u003e i Oslo (MDG) I dag\u003cbr\u003ehevder VG p\u00e5 lederplass at \u00abVi trenger nye E18\u00bb.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_875\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 589.2782352814876, "y": 246.715341890643}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_432", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eAt flertallsbyr\u00e5det ryker i Erna Solbergs hjemby, pekes p\u00e5 som\u003cbr\u003esvaert uheldig. \u003cb\u003eBystyrerepresentant\u003c/b\u003e Robert Monsen er en av dem\u003cbr\u003esom har tatt Fr\u00f8lich i forsvar.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_432\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1630.3513110227666, "y": -742.215922486822}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_883", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet er like fullt n\u00f8dvendig \u00e5 legge til grunn en enkel standard\u003cbr\u003ep\u00e5 denne strekningen, noe det ogs\u00e5 legges opp til i forprosjektet\u00bb\u003cbr\u003eheter det i innstillingen fra byr\u00e5d for milj\u00f8 og byutvikling Anna\u003cbr\u003eElisa Tryti (Ap). Skjedde ogs\u00e5 p\u00e5 Flesland \u003cb\u003eBystyrerepresentant\u003c/b\u003e\u003cbr\u003eSondre B\u00e5tstrand (MDG) reagerer p\u00e5 denne forutsetningen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_883\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 293.1419519862533, "y": 1091.6378003394514}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_504", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMen n\u00e5r det gjelder hvor \u003cb\u003ebystyrerepresentantene\u003c/b\u003e er\u003cbr\u003ebosatt, er det alts\u00e5 store forskjeller mellom bydelene. Kun tre\u003cbr\u003erepresentanter har adresse Fyllingsdalen: Liv Wigdis Smith og Rolf\u003cbr\u003eJens Brunstad fra Ap og Mikkel Gr\u00fcner (SV). - Byens innbyggere hadde\u003cbr\u003evaert tjent med at hele byen er representert i bystyret.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_504\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1167.8009412166646, "y": 1259.3687073154958}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_293", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMed dagens politikk produserer man taper, som enten blir fanget\u003cbr\u003eopp av kriminelle eller ekstremister, sier \u003cb\u003ebystyrerepresentant\u003c/b\u003e\u003cbr\u003eog leder av Holmlia Ap, Elvis Chi Nwosu til Dagbladet. Nwosu mener de\u003cbr\u003estore klasseforskjellene i Oslo skaper god grobunn for kriminalitet og\u003cbr\u003eekstremisme. - Kommunene som er hardest rammet som Oslo og Drammen\u003cbr\u003eburde etablert et ungdomsl\u00f8ft.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_293\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 971.7602093082974, "y": -460.09408195690514}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_581", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI Stovner bydel stemmer de fleste p\u00e5 Arbeiderpartiet, men\u003cbr\u003e\u003cb\u003ebystyrerepresentant\u003c/b\u003e Koc snakker engasjert om H\u00f8yres\u003cbr\u003epolitikk.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_581\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -305.250178342636, "y": 1809.3566445947913}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_bystyrerepresentant_625", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMen if\u00f8lge dokumenter offentliggjort av\u003cbr\u003e\u003cb\u003ebystyrerepresentant\u003c/b\u003e Ivar Johansen (SV), er Urbanium AS\u003cbr\u003einnstilt. Prisen: 30 millioner kroner.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_bystyrerepresentant_625\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -438.0486366754972, "y": -1824.015912596307}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_16", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_3", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_7", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_2", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_11", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_10", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_11", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_2", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_3", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_7", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_16", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_3", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_2", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_11", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_7", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_11", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/-/-", "to": "1980-1990_bystyrerepresentant_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_2", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "-/0/4", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_3", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_11", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_18", "label": "-/-/4", "to": "1980-1990_bystyrerepresentant_2", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_11", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "4/-/4", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_2", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "4/-/-", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/4", "to": "1980-1990_bystyrerepresentant_4", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_11", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/-/4", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/-", "to": "1980-1990_bystyrerepresentant_19", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_4", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_17", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/-", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_19", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/4", "to": "1980-1990_bystyrerepresentant_13", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_17", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_360", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_bystyrerepresentant_13", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_441", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "-/0/4", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_360", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_494", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_441", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_515", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_494", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_515", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_875", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_875", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_875", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_875", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_432", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_875", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_875", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_875", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_432", "label": "4/4/-", "to": "2012-2019_bystyrerepresentant_883", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_432", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_432", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_432", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_883", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_883", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_883", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_504", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_883", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_504", "label": "4/4/4", "to": "2012-2019_bystyrerepresentant_293", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_504", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_504", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_293", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_293", "label": "-/4/4", "to": "2012-2019_bystyrerepresentant_581", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_bystyrerepresentant_581", "label": "-/4/-", "to": "2012-2019_bystyrerepresentant_625", "weight": 4.0, "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>

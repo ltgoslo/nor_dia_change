@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">nett (full)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "k", "date": "1980", "id": "1980-1990_nett_461", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eVi venta og trudde tross alt p\u00e5 miraklet som snart m\u00e5tte skje,\u003cbr\u003emed alvor og skjemt, ikkje minst det siste. Mismod? \u00c5 nei, stort sett\u003cbr\u003eikkje! Pessimisme? Langt derifr\u00e5! Matl\u00f8yse? Nei, heller ikkje det,\u003cbr\u003eiallfall for presten! Ein dag eg sat i stova og prata med far, som\u003cbr\u003e\u003cb\u003enett\u003c/b\u003e da vitja meg, steig ein mann inn med stor ryggsekk p\u00e5 seg:\u003cbr\u003e\u00abEg slakta her om dagen - s\u00e5 tenkte eg: N\u00e5 treng sikkert\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_461\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -59.623052943223904, "y": 1181.7962580621695}, {"color": "k", "date": "1980", "id": "1980-1990_nett_66", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eIkkje dei som \u003cb\u003enett\u003c/b\u003e har laert det, og ser at det g\u00e5r\u003cbr\u003eframover nesten kvar dag. Eg meiner dei som strevar heile barneskolen,\u003cbr\u003eog framleis ikkje les flytande n\u00e5r dei kjem i ungdomsskolen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_66\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 2000.0, "y": 739.2582293799729}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_156", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSjjtg i n g s omr\u00e5de 198 Bredb\u00e5ndskommunikas jon 10 3\u003cbr\u003eSatellittkommunikas jon 124 Mobilkommunikasjon 107 Optikk og\u003cbr\u003emikroelektronikk 178 Teletjenester og terminaler 126 ISDN, \u003cb\u003enett\u003c/b\u003e\u003cbr\u003eog tjenester 170 Bedriftskommunikas jon 65 Drift og vedlikehold 118\u003cbr\u003eAnnen virksomhet 342 1988 1.9 .8.9 276 (buds jett-tall) 49 .\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_156\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -133.53505194958393, "y": -121.552284608376}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_603", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 denne m\u00e5ten kan en vaere med p\u00e5 \u00e5 utvikle avanserte\u003cbr\u003el\u00f8sninger i \u003cb\u003enettet\u003c/b\u003e som vil vaere av stor betydning for det\u003cbr\u003enorske samfunn, ikke minst for norske bedrifters\u003cbr\u003ekonkurranseevne.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_603\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -54.46468126655009, "y": -95.80867158272804}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_370", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTeleverket har hittil konsentrert seg om levering av interne\u003cbr\u003e\u003cb\u003enett\u003c/b\u003e for telefoni knyttet til offentlige tjenestenett, mens det\u003cbr\u003eer apen konkurranse med lite eller intet engasjement fra Televerkets\u003cbr\u003eside i utbygging av lukkede nett og interne nett for dataoverf\u00f8ring\u003cbr\u003etilknyttet offentlige nett.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_370\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -128.699016378608, "y": -147.49028634391178}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_352", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDersom det skulle vaere tilfeller hvor brukere kan bygge ut et\u003cbr\u003e\u003cb\u003enett\u003c/b\u003e raskere enn det Televerket kan klare p\u00e5 grunn av manglende\u003cbr\u003ebevilgninger p\u00e5 det aktuelle tidspunktet, b\u00f8r dette fortsatt skje i\u003cbr\u003eTeleverkets regi, men midlertidig finansiert av brukerne.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_352\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -108.85821917366398, "y": -138.2224587030024}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_400", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEt meget stort antall, om \u00f8nskelig hundrevis, av fjernsyns- og\u003cbr\u003elydprogram vil i dette nettet kunne overf\u00f8res til abonnentene etter\u003cbr\u003eindividuelt valg. Teleadministrasjoner i flere land er igang med\u003cbr\u003etekniske pr\u00f8ver og planlegging av slike \u003cb\u003enett\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_400\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -81.31136319233113, "y": -135.65968875623986}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_301", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTradisjonelt har Televerket hatt praktisk talt monopol p\u00e5\u003cbr\u003eabonnentinstalllas joner knyttet til de offentlige \u003cb\u003enett\u003c/b\u003e eller\u003cbr\u003etil leide samhand i Televerkets nett, dvs.: \u2014 hussentraler for\u003cbr\u003etelefoni (PABX), \u2014 teleks, inklusive egne teleks hussentraler i de\u003cbr\u003esiste \u00e5r, \u2014\u0027 datel og datex (modem og\u003cbr\u003edatakommuriikasjonsutstyr).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_301\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -154.93982980686403, "y": -146.97824683233364}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_nett_1006", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDepartementet har finansiert forskningsprosjektene \u00abEDB og\u003cbr\u003esysselsetting i kontorsektoren\u00bb FFI/Mycron Samkj\u00f8ring av datamaskiner\u003cbr\u003ei \u003cb\u003enett\u003c/b\u003e. St\u00f8tte: 700 000.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_1006\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -94.64630462124734, "y": -163.46124276788953}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_2377", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI videoer og bilder som ble lastet opp p\u00e5 \u003cb\u003enettet\u003c/b\u003e av\u003cbr\u003eaktivister i helga avsl\u00f8res det ogs\u00e5 rene massegraver p\u00e5 gata i\u003cbr\u003eHoms.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_2377\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -81.17118277393222, "y": -97.98833732318882}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_15554", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet m\u00f8rke nettet beskrives som et parallelt \u003cb\u003enett\u003c/b\u003e,\u003cbr\u003eutenfor rekkeviden til ordinaere google-s\u00f8k, som krever at man har\u003cbr\u003einstallert spesiell programvare for \u00e5 f\u00e5 tilgang til\u003cbr\u003enettstedene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_15554\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -97.10836649061957, "y": -57.70653998560231}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_23299", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet lokale kulturlivet for barn og unge er derfor en\u003cbr\u003ebaerebjelke i det nasjonale kulturlivet, og m\u00e5 prioriteres. 3rd-party-\u003cbr\u003ebio Fakta: Hva er et Si ;D-innlegg? \u2013 Si ;D er Aftenpostens\u003cbr\u003edebattsider for ungdom mellom 13 og 21 \u00e5r \u2013 Vi publiserer cirka 20\u003cbr\u003einnlegg i uken b\u00e5de p\u00e5 papir og \u003cb\u003enett\u003c/b\u003e \u2013 M\u00e5let er \u00e5 l\u00f8fte frem\u003cbr\u003eunge stemmer i samfunnsdebatten\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_23299\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -109.32283972308272, "y": -71.59905962370472}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_10576", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eReaksjonen til Zlatan g\u00e5r n\u00e5 som ild i t\u00f8rt gress p\u00e5\u003cbr\u003e\u003cb\u003enettet\u003c/b\u003e og i sosiale medier. I stedet for \u00e5 dytte tilbake,\u003cbr\u003efinner nemlig Paris Saint Germain-proffen fram sitt mest intense\u003cbr\u003e\u00abd\u00f8dsblikk\u00bb (se video \u00f8verst i saken).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_10576\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -120.97222281941964, "y": -49.45570211614466}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_14439", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r flere via \u003cb\u003enettet\u003c/b\u003e Telenorsjef Jon Fredrik Baksaas\u003cbr\u003esier til Aftenposten at tilgangen til nettet brer seg, og dermed er\u003cbr\u003edet lettere \u00e5 n\u00e5 frem med informasjon og undervisning p\u00e5\u003cbr\u003efjerntliggende steder. - Selv i et fattig landbruksland som\u003cbr\u003eBangladesh, med relativt svakt utbygd infrastruktur, er mobildekningen\u003cbr\u003ep\u00e5 98 prosent.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_14439\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -112.80578502365749, "y": -110.63674526106784}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_17352", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet m\u00f8rke \u003cb\u003enettet\u003c/b\u003e Anders Tendenes kan det meste om IT.\u003cbr\u003eHan er opptatt av sikkerhet for seg selv og kundene sine. FOTO: Anders\u003cbr\u003eMinge P\u00e5 \u00abdet m\u00f8rke nettet\u00bb selges narkotika i stor stil,\u003cbr\u003ebarnpornografi, v\u00e5pen og pass, men her har ogs\u00e5 Facebook opprettet en\u003cbr\u003eegen side, og her jobber menneskerettighetsaktivister, opposisjonelle\u003cbr\u003eog antiautoritaere aktivister i vesten i skjul for all verdens\u003cbr\u003emyndigheter, ogs\u00e5 de som kun \u00f8nsker \u00e5 vaere i fred for overv\u00e5kning og\u003cbr\u003ekommersiell sporing gj\u00f8r se usynlige her. Noen mener at du og jeg og\u003cbr\u003eHvermansen om f\u00e5 \u00e5r vil bruke teknologien som tar oss ned p\u00e5 det m\u00f8rke\u003cbr\u003enettet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_17352\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -103.80501628947377, "y": -87.50074413774345}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_12551", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eBildene som n\u00e5 sirkulerer p\u00e5 \u003cb\u003enettet\u003c/b\u003e viser en mann \u2013\u003cbr\u003eangivelig piloten \u2013 ikledd en oransje drakt. Mens han befinner seg i\u003cbr\u003eet slags bur, settes han fyr p\u00e5 gjennom brennbart stoff som leder til\u003cbr\u003eham. Mannen (26) ble tatt til fange da flyet hans krasjet under et\u003cbr\u003ekampoppdrag for den USA-ledede koalisjonen i Syria. IS hevdet at de\u003cbr\u003eskj\u00f8t ned jagerflyet med en varmes\u00f8kende rakett.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_12551\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -128.28790343033, "y": -75.91709006168043}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_7389", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDe tiltalte er en 19 \u00e5r gammel pakistaner, en 26 \u00e5r gammel\u003cbr\u003enordmann og to norske kvinner p\u00e5 19 og 21 \u00e5r. V\u00e5ren 2011 slo de seg\u003cbr\u003esammen der de flere uker p\u00e5 rad klarte \u00e5 lure menn i en sexfelle der\u003cbr\u003ede klarte \u00e5 presse mennene for flere hundre tusen kroner. Hund, v\u00e5pen\u003cbr\u003eog verkt\u00f8y Metoden var den samme hver gang. De to jentene, som den\u003cbr\u003egang var 17 og 19 \u00e5r gamle, chattet p\u00e5 \u003cb\u003enettet\u003c/b\u003e med menn som\u003cbr\u003eviste sin interesse.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_7389\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -110.4135981407809, "y": -98.18847317013311}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_26334", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI stedet ser de for seg at det arrangeres en sentral debatt ett\u003cbr\u003ested, som sendes direkte p\u00e5 \u003cb\u003enett\u003c/b\u003e til samtlige skoler og hvor\u003cbr\u003eelevene p\u00e5 hver skole kan delta via sosiale medier eller p\u00e5 andre\u003cbr\u003em\u00e5ter for \u00e5 stille sp\u00f8rsm\u00e5l til ungdomspolitikerne.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_26334\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -85.07531800985632, "y": -73.63166306849013}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_nett_4217", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSamtidig har 35.000 midlertidig ansatte i USAs st\u00f8rste\u003cbr\u003evarehuskjede f\u00e5tt fast deltidsstilling og ytterligere 35.000\u003cbr\u003edeltidsansatte har f\u00e5tt fulltidsjobb. Wal-Mart har tatt opp\u003cbr\u003ekonkurransen med blant andre Amazon og eBay om \u00e5 selge mer over\u003cbr\u003e\u003cb\u003enett\u003c/b\u003e. Svak vekst i butikkene Konkurranse mellom\u003cbr\u003enetthandelsselskapene og vanlig varehandel er skjerpet de senere\u003cbr\u003e\u00e5rene. Stadig flere kunder velger \u00e5 handle p\u00e5 nettet i stedet for \u00e5 g\u00e5\u003cbr\u003ei butikken.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_4217\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -137.3734033820053, "y": -86.23321619510091}, {"color": "#ff7f00", "date": "1980", "id": "1980-1990_nett_52", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r det gjelder realisering av tiltakene i kapittel 8, vil\u003cbr\u003earbeid med dem kunne iverksettes n\u00e5r som helst og drives kontinuerlig.\u003cbr\u003eDe vil vesentlig kreve innsats p\u00e5 niv\u00e5 av det enkelte laerested, det\u003cbr\u003eenkelte institutt/avdeling/linje og den enkelte laerer og student.\u003cbr\u003eKvaliteten i arbeidet p\u00e5 dette niv\u00e5et vil etter utvalgets mening vaere\u003cbr\u003eavhengig av hva som skjer med de tiltak som er foresl\u00e5tt i kapittel 7.\u003cbr\u003e1) Begrepet \u00abinfrastruktur\u00bb brukes her til en viss grad i overf\u00f8rt\u003cbr\u003ebetydning. Leksikalsk er betydningen \u00abdet \u003cb\u003enett\u003c/b\u003e av faste anlegg\u003cbr\u003esom er grunnlaget for en virksomhet\u00bb.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_52\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 42.42040200706934, "y": -84.60550490405396}, {"color": "#ff7f00", "date": "1980", "id": "1980-1990_nett_176", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTilknytningsavgift beregnes etter lov av 31. mai 1974 for\u003cbr\u003etilknytning av private vann- og avl\u00f8psledninger til kommunalt\u003cbr\u003e\u003cb\u003enett\u003c/b\u003e. I flere kommuner praktiseres graderte\u003cbr\u003etilknytningsavgifter som delvis erstatning for refusjonsberegning i\u003cbr\u003ehver enkelt sak. Intensjonene er at refusjon, tilknytningsavgift og\u003cbr\u003e\u00e5rsavgift samlet skal bidra til fullfinansiering av kommunens\u003cbr\u003einvesteringer, vedlikeholds- og driftsutgifter for eksterne anlegg. c)\u003cbr\u003eAndre juridiske virkemidler Plan- og bygningslovens bestemmelser gir\u003cbr\u003ekommunene gode styringsmuligheter ved planlegging av\u003cbr\u003eutbyggingsm\u00f8nster, og ved planlegging og utforming av\u003cbr\u003eboligomr\u00e5der.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_nett_176\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 9.836064937288402, "y": -102.39633070352613}, {"color": "#4daf4a", "date": "2012", "id": "2012-2019_nett_21820", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eP\u00e5 andre siden av \u003cb\u003enettet\u003c/b\u003e sto Helene Abusdal, som\u003cbr\u003eallerede har vunnet norgesmesterskapet hele fire ganger i\u003cbr\u003edamesingle.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_nett_21820\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -149.8433115291291, "y": 23.977798702776887}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_nett_156", "label": "4/-/-", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "4/3/4", "to": "1980-1990_nett_400", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "3/3/4", "to": "2012-2019_nett_26334", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "3/3/-", "to": "2012-2019_nett_15554", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "4/-/3", "to": "1980-1990_nett_301", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "3/-/4", "to": "2012-2019_nett_17352", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "3/4/4", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "3/4/-", "to": "2012-2019_nett_12551", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/3/4", "to": "2012-2019_nett_23299", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/4/4", "to": "1980-1990_nett_352", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/4/3", "to": "1980-1990_nett_1006", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/3/3", "to": "1980-1990_nett_603", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/-/4", "to": "1980-1990_nett_370", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/-/3", "to": "2012-2019_nett_10576", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_156", "label": "-/-/4", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_52", "label": "4/-/3", "to": "1980-1990_nett_603", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_52", "label": "-/-/4", "to": "1980-1990_nett_176", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "3/4/2", "to": "2012-2019_nett_2377", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "4/4/-", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "4/-/3", "to": "1980-1990_nett_1006", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "3/-/4", "to": "2012-2019_nett_4217", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "3/4/-", "to": "2012-2019_nett_15554", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "-/4/4", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "-/4/-", "to": "1980-1990_nett_176", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "-/4/0", "to": "2012-2019_nett_23299", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "-/0/3", "to": "1980-1990_nett_400", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "-/3/-", "to": "2012-2019_nett_10576", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_603", "label": "-/-/3", "to": "1980-1990_nett_352", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "3/-/2", "to": "2012-2019_nett_2377", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "3/4/-", "to": "2012-2019_nett_7389", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "4/-/4", "to": "1980-1990_nett_301", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "4/-/2", "to": "2012-2019_nett_14439", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "3/3/-", "to": "2012-2019_nett_4217", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "3/-/3", "to": "2012-2019_nett_10576", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "3/4/1", "to": "2012-2019_nett_23299", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "3/-/-", "to": "2012-2019_nett_15554", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "2/-/3", "to": "1980-1990_nett_176", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "-/3/2", "to": "2012-2019_nett_26334", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "-/3/-", "to": "2012-2019_nett_17352", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "-/4/3", "to": "1980-1990_nett_400", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "-/4/-", "to": "1980-1990_nett_1006", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "-/4/4", "to": "1980-1990_nett_352", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_370", "label": "-/-/3", "to": "2012-2019_nett_12551", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "3/-/-", "to": "2012-2019_nett_14439", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "3/4/2", "to": "2012-2019_nett_7389", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "4/-/-", "to": "1980-1990_nett_301", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "3/4/-", "to": "2012-2019_nett_12551", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "3/-/-", "to": "2012-2019_nett_4217", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "3/4/1", "to": "2012-2019_nett_15554", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "-/4/-", "to": "2012-2019_nett_2377", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "-/4/2", "to": "2012-2019_nett_23299", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "-/4/2", "to": "2012-2019_nett_17352", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "-/4/4", "to": "1980-1990_nett_400", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_352", "label": "-/-/3", "to": "1980-1990_nett_1006", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_176", "label": "-/4/1", "to": "2012-2019_nett_7389", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "4/-/-", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "4/-/-", "to": "1980-1990_nett_1006", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "3/4/-", "to": "2012-2019_nett_2377", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "3/-/-", "to": "2012-2019_nett_26334", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "3/-/4", "to": "2012-2019_nett_17352", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "3/-/-", "to": "2012-2019_nett_7389", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "3/4/-", "to": "2012-2019_nett_15554", "weight": 3.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_400", "label": "-/2/3", "to": "2012-2019_nett_10576", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_301", "label": "3/3/2", "to": "2012-2019_nett_26334", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_301", "label": "3/-/-", "to": "2012-2019_nett_17352", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_301", "label": "4/2/3", "to": "1980-1990_nett_1006", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_301", "label": "3/3/4", "to": "2012-2019_nett_7389", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_301", "label": "-/4/-", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_301", "label": "-/4/2", "to": "2012-2019_nett_4217", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_1006", "label": "3/-/2", "to": "2012-2019_nett_7389", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_1006", "label": "3/-/2", "to": "2012-2019_nett_2377", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_1006", "label": "3/-/2", "to": "2012-2019_nett_17352", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_1006", "label": "3/-/2", "to": "2012-2019_nett_12551", "weight": 2.5, "width": 4}, {"color": "black", "from": "1980-1990_nett_1006", "label": "3/3/3", "to": "2012-2019_nett_4217", "weight": 3.0, "width": 4}, {"color": "black", "from": "1980-1990_nett_1006", "label": "-/-/4", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "3/4/-", "to": "2012-2019_nett_14439", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "4/4/4", "to": "2012-2019_nett_10576", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "4/-/4", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "4/4/4", "to": "2012-2019_nett_17352", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "4/4/4", "to": "2012-2019_nett_12551", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "4/-/-", "to": "2012-2019_nett_23299", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_2377", "label": "-/4/-", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_21820", "label": "-/-/4", "to": "2012-2019_nett_10576", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "4/4/-", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "3/-/4", "to": "2012-2019_nett_14439", "weight": 3.5, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "4/4/-", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "4/4/-", "to": "2012-2019_nett_23299", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "4/-/-", "to": "2012-2019_nett_17352", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "-/4/-", "to": "2012-2019_nett_12551", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "-/4/-", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_15554", "label": "-/-/4", "to": "2012-2019_nett_10576", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_23299", "label": "3/4/4", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_23299", "label": "4/-/4", "to": "2012-2019_nett_10576", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_23299", "label": "4/4/4", "to": "2012-2019_nett_12551", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_23299", "label": "4/4/4", "to": "2012-2019_nett_17352", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_23299", "label": "4/4/-", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_23299", "label": "-/-/4", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_10576", "label": "4/4/4", "to": "2012-2019_nett_12551", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_10576", "label": "4/4/4", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_10576", "label": "3/4/4", "to": "2012-2019_nett_14439", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_10576", "label": "4/-/4", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_10576", "label": "-/4/4", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_10576", "label": "-/-/4", "to": "2012-2019_nett_17352", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_14439", "label": "3/4/4", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_14439", "label": "3/4/4", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_14439", "label": "3/4/4", "to": "2012-2019_nett_17352", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_14439", "label": "3/4/4", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_14439", "label": "3/4/4", "to": "2012-2019_nett_12551", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_17352", "label": "4/4/-", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_17352", "label": "-/4/-", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_17352", "label": "-/4/4", "to": "2012-2019_nett_12551", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_17352", "label": "-/4/4", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_12551", "label": "4/-/-", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_12551", "label": "4/4/-", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_12551", "label": "-/4/-", "to": "2012-2019_nett_7389", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_7389", "label": "4/-/-", "to": "2012-2019_nett_26334", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_nett_26334", "label": "4/-/-", "to": "2012-2019_nett_4217", "weight": 4.0, "width": 4}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "1/0/-", "to": "1980-1990_nett_370", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/0/1", "to": "2012-2019_nett_21820", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_156", "label": "2/-/1", "to": "1980-1990_nett_52", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_156", "label": "-/1/1", "to": "2012-2019_nett_21820", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_156", "label": "-/-/1", "to": "1980-1990_nett_176", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_156", "label": "-/-/1", "to": "2012-2019_nett_2377", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/1/-", "to": "2012-2019_nett_21820", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/1/1", "to": "2012-2019_nett_14439", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/1/1", "to": "2012-2019_nett_7389", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/-/-", "to": "2012-2019_nett_2377", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/-/-", "to": "1980-1990_nett_400", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/1/-", "to": "1980-1990_nett_352", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "2/1/-", "to": "2012-2019_nett_10576", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "-/1/-", "to": "2012-2019_nett_23299", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "-/1/1", "to": "2012-2019_nett_4217", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "-/1/-", "to": "2012-2019_nett_15554", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "-/-/1", "to": "2012-2019_nett_26334", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "-/-/1", "to": "2012-2019_nett_12551", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "-/-/2", "to": "1980-1990_nett_1006", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_603", "label": "-/1/1", "to": "2012-2019_nett_21820", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_603", "label": "-/2/-", "to": "2012-2019_nett_12551", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_603", "label": "-/-/2", "to": "2012-2019_nett_7389", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_603", "label": "-/-/2", "to": "1980-1990_nett_370", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_352", "label": "2/-/-", "to": "2012-2019_nett_21820", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_352", "label": "2/1/-", "to": "1980-1990_nett_176", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_352", "label": "-/-/2", "to": "2012-2019_nett_10576", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/-/-", "to": "1980-1990_nett_1006", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/1/-", "to": "2012-2019_nett_17352", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/-/-", "to": "1980-1990_nett_301", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/1/1", "to": "2012-2019_nett_2377", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/-/-", "to": "1980-1990_nett_400", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/4/1", "to": "2012-2019_nett_4217", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "2/1/-", "to": "2012-2019_nett_10576", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "-/1/1", "to": "2012-2019_nett_23299", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "-/1/1", "to": "2012-2019_nett_26334", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "-/1/1", "to": "2012-2019_nett_21820", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "-/1/1", "to": "2012-2019_nett_15554", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "-/-/1", "to": "2012-2019_nett_12551", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_400", "label": "2/1/0", "to": "2012-2019_nett_21820", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_400", "label": "-/-/2", "to": "1980-1990_nett_301", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "3/1/2", "to": "2012-2019_nett_12551", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "3/1/-", "to": "2012-2019_nett_10576", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "-/1/1", "to": "2012-2019_nett_21820", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "-/-/2", "to": "2012-2019_nett_2377", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "-/-/2", "to": "2012-2019_nett_15554", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "-/-/2", "to": "2012-2019_nett_23299", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_1006", "label": "-/1/-", "to": "2012-2019_nett_23299", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_1006", "label": "-/1/-", "to": "2012-2019_nett_15554", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_2377", "label": "2/1/1", "to": "2012-2019_nett_21820", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "2/1/1", "to": "2012-2019_nett_26334", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "2/1/-", "to": "2012-2019_nett_7389", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "2/1/-", "to": "2012-2019_nett_15554", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "2/-/1", "to": "2012-2019_nett_4217", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "2/1/1", "to": "2012-2019_nett_17352", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "-/1/1", "to": "2012-2019_nett_12551", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "2012-2019_nett_21820", "label": "-/-/1", "to": "2012-2019_nett_14439", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/0/0", "to": "1980-1990_nett_156", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/-/0", "to": "1980-1990_nett_52", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/-/0", "to": "1980-1990_nett_400", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/-/-", "to": "1980-1990_nett_603", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/0/-", "to": "2012-2019_nett_12551", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/-/0", "to": "1980-1990_nett_1006", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/0/-", "to": "2012-2019_nett_4217", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/-/0", "to": "2012-2019_nett_15554", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/0/0", "to": "1980-1990_nett_352", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "0/0/0", "to": "2012-2019_nett_23299", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/0/0", "to": "2012-2019_nett_26334", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/0/0", "to": "2012-2019_nett_10576", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/0/0", "to": "1980-1990_nett_301", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/0/0", "to": "2012-2019_nett_14439", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/0/0", "to": "1980-1990_nett_176", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/-/0", "to": "2012-2019_nett_2377", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_461", "label": "-/-/0", "to": "2012-2019_nett_7389", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_156", "label": "-/-/0", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_52", "label": "0/0/-", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_603", "label": "-/0/-", "to": "1980-1990_nett_301", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_603", "label": "-/0/0", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_370", "label": "-/0/0", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_352", "label": "0/0/0", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_176", "label": "-/0/-", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_400", "label": "-/0/-", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_301", "label": "0/0/-", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_1006", "label": "-/0/0", "to": "1980-1990_nett_66", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_1006", "label": "-/0/-", "to": "2012-2019_nett_10576", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_1006", "label": "-/0/-", "to": "2012-2019_nett_26334", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "0/0/0", "to": "2012-2019_nett_21820", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "0/-/-", "to": "2012-2019_nett_12551", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "0/-/0", "to": "2012-2019_nett_15554", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "-/0/0", "to": "2012-2019_nett_7389", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "-/0/0", "to": "2012-2019_nett_17352", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "-/-/0", "to": "2012-2019_nett_26334", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1980-1990_nett_66", "label": "-/-/0", "to": "2012-2019_nett_4217", "weight": NaN, "width": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>

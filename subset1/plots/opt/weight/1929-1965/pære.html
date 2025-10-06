@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">pære (1929-1965)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "#4daf4a", "date": "1929", "id": "1929-1965_p\u00e6re_4", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003ePaer\u003c/b\u003e tendte p\u00e5 pipen ved en glo fra aren. \u00abBron?\u00bb\u003cbr\u003eLykkjeknut fikk nu ogs\u00e5 pipen frem. \u00abJa \u2014 lj\u00f8sbron.\u00bb Paer Halstensen\u003cbr\u003edrog p\u00e5 pipen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_4\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -132.79553005128122, "y": 474.52086741648435}, {"color": "#ff7f00", "date": "1929", "id": "1929-1965_p\u00e6re_39", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFinn det, kjaere; \u2014 jeg kan kun se en overmoden \u003cb\u003epaere\u003c/b\u003e.\u003cbr\u003eNei, Yduns-eplet fattes, det er sagen, og Balder flytter senest i\u003cbr\u003eapril; se, derfor lakker det mot endskaps-dagen, tross slag av k\u00f8ller\u003cbr\u003eog tross skudd med pil; heng alts\u00e5 t\u00e5lsomt ditt gevaer i hvil, \u2014 stig\u003cbr\u003eopp p\u00e5 bordet, sy de falnes lagen; ti det du vite m\u00e5: en gud som\u003cbr\u003eblunder, kan aldri ruskes opp; han f\u00e5r g\u00e5 under.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_39\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 134.58447067511904, "y": -85.88164571637765}, {"color": "#ff7f00", "date": "1929", "id": "1929-1965_p\u00e6re_20", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e1 Dyre- og planteliv. agn (p\u00e5 korn) alfuru buske (men busk -en)\u003cbr\u003egople (manet) gorrkyte alke and drift (heste-) gran due grashoppe (men\u003cbr\u003egrashopp, -en) bergflette (bot.) bergfru(e) (bot.) berggylte dylle\u003cbr\u003e(bot.) eik gro (padde) gulrot engsprette (el. eng sprett, -en)\u003cbr\u003ebergnebbe bergsugge bikkje gylte (sugge) g\u00e5s erle ert havelle (fugl)\u003cbr\u003eheilo esje (fiske\u00e5t) fegre (bot.) hind firfisle hoppe blankr\u00f8ye fj\u00f8r\u003cbr\u003e(f ugle-) humle (insekt) hyse bleike (fisk) flue blese (men bles, -et)\u003cbr\u003eblokke (blad) flyndre h\u00f8ne furu h\u00e5kjerring kaie bl\u00e5klokke (bot.)\u003cbr\u003ebl\u00e5symre (bot.) boso (grise-) gagl katte (men katt, -en) gaupe geit\u003cbr\u003ebrosme brugde geite (p\u00e5 traer) gimmer (b. f . gimra) kjempe (bot.)\u003cbr\u003ekjette burot (bot.) gjedde kj\u00f8e klenge klo kolje kolle (ku uten horn)\u003cbr\u003ekongro krongle el. krungle; -bj\u00f8rk krykkje (fugl) kr\u00f8kle (fisk) kr\u00f8kle\u003cbr\u003e(kroket tre) kr\u00e5ke ku kusymre (bot.) kvasse (piggvar) kvein (bot.)\u003cbr\u003ekveis (i fisk) kveite (fisk) kveke kvige lange (fisk) lerke (fugl)\u003cbr\u003elilje (bot.) lo (fugl) lodde (fisk) loppe lus l\u00f8ve (zool.) l\u00f8ye (fisk)\u003cbr\u003el\u00e5g (nedfalt tre; fl. laeger) marflo marihand marih\u00f8ne marik\u00e5pe\u003cbr\u003emarimjelle molte (baer) mure (bot.) mus mynte (bot.) myrsnipe myrull\u003cbr\u003enepe nesle never nise nype n\u00f8tt osp padde plomme (frukt) purke\u003cbr\u003e\u003cb\u003epaere\u003c/b\u003e (frukt) reke revebjelle (bot.) rikse (\u00e5ker-) riske (sopp)\u003cbr\u003erogn (i fisk) rokke (fisk) rose (bot.) rot (plantedel) rotte rove\u003cbr\u003erugde rumpe rype r\u00f8y r\u00f8ye (fisk) selje (bot.) selsnepe sild sildre\u003cbr\u003e(berg-; bot siriss(e) sisselrot (bot.) sjuskjaere (bot.) sj\u00f8lilje\u003cbr\u003esj\u00f8p\u00f8lse sj\u00f8stjerne skate (fisk) skate (fugl) skilpadde skinntryte\u003cbr\u003eskjebbe (fisk) skjor skjaere (fugl) skogstjerne skrike (fugl) skrubbe\u003cbr\u003e(fisk) sleve (orm) slo (orm-) sl\u00f8ke (bot.) smelle (bot.) smelte (fisk)\u003cbr\u003esnelle (bot.) snerpe (men snerp, -et; p\u00e5 korn) snipe soleie spette\u003cbr\u003e(el. spett, -en; fugl) stinte (fisk) st\u00f8rje sugge sule (hav-) svale\u003cbr\u003esveve (bot.) symre (bot.) syre (bot.) s\u00f8renne (fisk) s\u00f8te (i tre) s\u00f8ye\u003cbr\u003e(sau) s\u00e5 (p\u00e5 korn) tall (sml. toll) tepperot (bot.) terne tik\u003cbr\u003etiritunge tispe 2 aksel (fjell-) attlege bakevje Bl\u00e5myra (sj\u00f8en)\u003cbr\u003ebratte braut brekke brun bukt bygd b\u00f8lgje (men b\u00f8lge, -en) b\u00e5re (i\u003cbr\u003esj\u00f8en) deld dogg dokk (fordypn.) dolp dragsu ekre eJte (leir-) elv eng\u003cbr\u003eesje (slags kleberstein) toll (tre) trane tuppe NatursMldrende evje\u003cbr\u003efonn gate gj\u00f8rme glenne gloppe glove grend grop grov gr\u00f8ft gutu halv\u00f8y\u003cbr\u003etite (men tit, -en; fugl) tokn (gjeller) tryte (fisk) tunge (fisk)\u003cbr\u003eturt (bot.) t\u00e5g (trevl; fl. taeger) ord. Ord for fjaere el. fj\u00f8re\u003cbr\u003eflat(e) (flat mark) fleine (bar flekk) fles (skjaer) flindre (stein-)\u003cbr\u003eflo (motsatt fjaere) flu (skjaer) fly (fjellvidd) fl\u00e5 hamn (for\u003cbr\u003ebuskap) hei ugle vemme (fisk) vidje vikke (bot.) vipe yte (p\u00e5 traer)\u003cbr\u003eaer (fugl) \u00f8rekyte \u00e5kerrikse \u00e5me \u00e5te sted og plass. helle hole horg h\u00f8\u003cbr\u003e(rundaktig fjell topp) h\u00f8gd (om lende) ie ile (oppkomme) jord (i\u003cbr\u003eufolk. m\u00e5l bruk -en) kjelde] kleiv klopp kl\u00f8ft kreppe (sml. Lange\u003cbr\u003esunds-kreppa) kvissel (av elv) k\u00f8yte (dam)\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_20\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 96.38568360133023, "y": -60.30116292304668}, {"color": "#ff7f00", "date": "1929", "id": "1929-1965_p\u00e6re_18", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eKj\u00f8lelagrede \u003cb\u003epaerer\u003c/b\u003e til hermetikk. SALTHERMETIKK 141\u003cbr\u003e\u00abHalvkonserver\u00bb.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_18\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 121.11711316815125, "y": -74.4222775823747}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_p\u00e6re_6", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eJeg lyste med lommelykten pa bokhyllene; \u003cb\u003epaeren\u003c/b\u003e holdt pa\u003cbr\u003ea gl\u00f8de ut, men jeg kikk inntrykk av at en advokat hadde bodd her. Jeg\u003cbr\u003es\u00e5 et billede over sengen, et uutgrundelig fotografi med bl\u00f8tt spill\u003cbr\u003emellem lys og skygge; var det et kvinneansikt? Lykten sluknet; jeg la\u003cbr\u003emig i stummende m\u00f8rke. Utp\u00e5 natten var jeg s\u00e5 medtatt av veggedyr at\u003cbr\u003ejeg gikk ut og la mig p\u00e5 marken; snart efter kom Walter og de\u003cbr\u003eandre.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_6\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -97.44863596837412, "y": -127.08702921122698}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_p\u00e6re_12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHovedkvarteret bestod av tre sm\u00e5 rum hvor nakne elektriske\u003cbr\u003e\u003cb\u003epaerer\u003c/b\u003e brente dag og natt. Fra et forvaerelse hvor en del\u003cbr\u003eofficerer satt og ventet, kom vi inn i generalens kontor. Rundt\u003cbr\u003eskrivebordet stod seks*\u00e5tte menn, b\u00f8id over et kart. De fylte hele\u003cbr\u003erummet; mellem de spente khakiryggene skimtet jeg p\u00e5 veggen et stort\u003cbr\u003emaleri av en ung, gyllenblek andalu* serinne i sittende doven\u003cbr\u003estilling. Ellers var rummet bart. Miaja tok oss inn i det tredje og\u003cbr\u003esiste av rummene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_12\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -71.47964211524241, "y": -119.0317375134601}, {"color": "k", "date": "1929", "id": "1929-1965_p\u00e6re_32", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eLeponti, jof. borg Heilag. I, 693 20 ) Heilag. I. 694 12 ; bar\u003cbr\u003e(nt. i Papeyju a: .Pa\u0026amp;ia) dx upp Martinus biskup. ok bann \u00e5\u003cbr\u003e\u003cb\u003epar\u003c/b\u003e hdfufikirkju eina Symb. \u0026gt; 19 6 ; peir atburfiir urfiu\u003cbr\u003ejafnan i hdfufikirkju i borginni Heilag. I, 627 23 ; |\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_32\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -602.9137045025027, "y": 1816.1381846820054}, {"color": "k", "date": "1929", "id": "1929-1965_p\u00e6re_5", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI Norge har de \u003cb\u003epar\u003c/b\u003e monumenter som kan g\u00e5 ned i d6t 11.\u003cbr\u003e\u00e5rhundre, den mer almene benediktinerstil.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_5\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 107.69759721779246, "y": -122.51899139433728}, {"color": "k", "date": "1929", "id": "1929-1965_p\u00e6re_24", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e4) sperra e-n fr\u00e5 e-u o: fortraenge, \u00fcbeluffe; hann skal\u003cbr\u003e\u003cb\u003epar\u003c/b\u003e med kaupa s\u00e9r hinn tiundhlutinn i himinriki, er madrinn var\u003cbr\u003ei fyrstunni til skapadr ok sidan i fr\u00e5 sperdr med fj\u00e5ndans \u00e5eggjan NL.\u003cbr\u003eI, 459 13 ; upp- Bpertr Hrafnh. 18 jjDf. v. 1. 1. sperra, f. i)\u003cbr\u003eSjaelfe, (ifaer fir-- DN. V, 137 6 ); pat er ok fyrirbodit, at\u003cbr\u003enokkurii utlenzkir menn kaupi sperrur, bordvid eda rapta Eb. 53 15 ,\u003cbr\u003ejbf. 114 (204 22 ); sperrur edr skatvidu yfir bann veg faera\u003cbr\u003efyrirbjodum v\u00e9r ollungis nverjum manni DN. I, 595 38 ; baendr\u003cbr\u003efyrrnefndir skulu hafa frj\u00e5lsan veg utan at fyrrnefndum gardi til\u003cbr\u003eskipa at fara, rida, ganga ok aka med jpeim varningi, sem pen par\u003cbr\u003ekaupa, en eigi meo sperrum, bordvidu edr skatvidu DN. I, 682 16 ;\u003cbr\u003eherra tvarr profastr \u2014 krafdi, at hann (o: sira Matthias) l\u00e9ti koma p\u00e5\u003cbr\u003emunka af Hofudey stefnda til stefnu at svara honum logum ok r\u00e9ttindum,\u003cbr\u003eer i v\u00e5ru at taka med val di ok r\u00e5ni fyrir honum sperrur hans DN. 111,\u003cbr\u003e123 11 jbf. IV, 148 10 .\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_24\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -979.7439101522544, "y": -1311.712065335798}, {"color": "k", "date": "1929", "id": "1929-1965_p\u00e6re_33", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e3) gibe fit Samtfyffe til noget (e-u), at bet ffal ffe, fomme i\u003cbr\u003e\u00a9tanb; lysing er at engu nyt, nema b\u00e5dir j\u00e5tti kaupi ok sali Gul. 272\u003cbr\u003e2 ; naergi er hon jattar r\u00e5dafari, p\u00e5 m\u00e5 s\u00e5 madr festa ok f\u00e5 hennar,\u003cbr\u003eef vitni vitu Frost. 3, 22 5 ; pvi j\u00e5ttadu ok sampyktu allir Noregs\u003cbr\u003emenn \u2014, at pessi skipan skal \u003cb\u003epar\u003c/b\u003e um standa aefinliga Landsl. 2,\u003cbr\u003e3 13 ; petta er vel maelt, segir Gestr, ok mun ek pessu j\u00e5ta fyrir mik\u003cbr\u003eok mina heimamenn Nj. 104 (162 14 ); g\u00e9ngu til saetta vid biskup ok\u003cbr\u003ej\u00e5ta med eidum hans domi hverr \u00e5 sinum m\u00e5lum Sturi. I. 218 19 ; jbf.\u003cbr\u003e11, 2 5 ; j\u00e5ta e-m at e-u, til e-s a: gibe fit \u00a9amtfyffe bertil, at en\u003cbr\u003effal btibe tit noget, ffal bcere noget: fognudu allir per vinir pinir\u003cbr\u003e\u2014, ok j\u00e5tudu p\u00e9r at konungi Fris. 301 8 (Mork. 190 26 ); g\u00e9ngu p\u00e5\u003cbr\u003eallir baendr undir borgils ok j\u00e5ttu honum til yfirmanns j Sturi. 11,\u003cbr\u003e236 10 ; j\u00e5tast til e-s o: beb S\u00f8-fte eUer \u00a9amtt)ffe forbligte fig til\u003cbr\u003enoget: j\u00e5ttudust allir Vestfirdingar til hlydni vid J)6rd Sturi 11, 78\u003cbr\u003e30 ; er hv\u00e5rt- peirra j\u00e5tast odru til hjiiskapar DI. I, 287 29 (HE. I,\u003cbr\u003e247 3 ); Gyrdr \u2014 hafdi sik til j\u00e5tat, at pessir lutir skyldu\u003cbr\u003etrakterast HE. I, 528\"; j\u00e5tast undir e-t o: beb fit \u00a9amtfyffe baatage\u003cbr\u003efig noget etter forbligte fig bertil: S. btfdst til at vera yfirmadr\u003cbr\u003epeirra i stad Hrafnkels, menn j\u00e5tudust undir pat Hrafnk. 22 29 ; j\u00e5tir\u003cbr\u003ehann sik undir skriptina Heilag. I, 40 1 ; veit ek eigi, hv\u00e5rt fvrr\u003cbr\u003emvndi fara, at H. konungr mundi slikt nidingsverk fyrir mik leggja edr\u003cbr\u003eek munda undir pat j\u00e5tast Sturi. 11, 129 7 ; jbf.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_33\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 960.4171117195314, "y": 570.2995943179243}, {"color": "k", "date": "1929", "id": "1929-1965_p\u00e6re_37", "label": "-1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003emundr, m. = mund \u00bb. fe \u00a9ibe 745a 27 . mundridi, m. \u00a7aanbfang\u003cbr\u003epaa \u00a9fjolb; S. hvatti dxi, II hnaud hjalt \u00e5 sverd, Hoskuldr trevsti\u003cbr\u003emundrida i skildi Nj. AA (66 24 ); B.\" helt skildinura sv\u00e5, at\u003cbr\u003ehandleggr hans var i mundrifianum Hitd. 65\u0027 5 ; skaut K. spj\u00e5tinu. ok\u003cbr\u003ekom i skjold b\u00e5r\u00e5lfs fyrir ofan mundrifiann Laxd. 49 (146 31 );\u0027 b.\u003cbr\u003ehjo til hans med sverdi ok klauf skjold hans allan nidr i mundrida\u003cbr\u003eSvarfd. 9* 2 ; p. br\u00e5 sverdi ok hj\u00e5 til Finboga, hann klauf skjdldinn\u003cbr\u003eddrum megin mundrida Fiid). 48 24 ; ven faii hina vinstri hond faina\u003cbr\u003evel at gaeta beizls ok mundrida Kgs. 84\u00b0; gildr skal tr\u00e9skjdldr hverr\u003cbr\u003efaaema monnum (v. I heimanidnnum), er farj\u00e5r j\u00e5rnspengr liggja ura\u003cbr\u003efaveran ok fark mundridar innan vid ok traustliga negklir Landsl. 3,\u003cbr\u003e11\u0027 5 ; mundridar ok 511 bond skjaldarins v\u00e5ru af silki ok med gulli\u003cbr\u003efaiiin ok silki Kim. 440 9 f3-. mungadarmadr, ro. forn er bteben\u003cbr\u003eborrn, er tommen tit \u00a9fja-fg Star og 2ltber, fanbffyntigbig for\u003cbr\u003emung\u00e5tsmadr o: Sperfon forn fan bcere meb fybor ber briffeg Dt (i\u00bb!\u003cbr\u003emilki, mjdlki), bettage i SDriffetag (dl 2. mung\u00e5t 2) jbf. gfb.\u003cbr\u003emungatsmaen, mungatsgaerb, nmngatstifair Schlyter 447 b; A. \u2014 keypti\u003cbr\u003eaf Signi \u2014 halft niunda aerthoga land \u2014 i \u2014, Ingeldstafium firir 7\u003cbr\u003elaupa hvaert aeiris bon]; kaeindis fa\u00e5 Signi fyrnaemd. at loket vai-\u003cbr\u003efirir 1 aeyris hool, ok firir annat lauk A. Signi aeina ku o. f. b.;\u003cbr\u003een halft 3 aerthogha hool skal standa til vaedaes \u003cb\u003epaer\u003c/b\u003e till er\u003cbr\u003esysturborn Signi vaer da munghadar maen DN. VIII, 174\u0027\u00b0f8.. ning\u00e5t, n.\u003cbr\u003e1) Dd forn er brfygget fyjemme eller inbentanbg, = dl 1, forffjelligt\u003cbr\u003efra bj\u00e5rr (jbf. mung\u00e5t NL. IV, 351 26 = norst dl 359 4 ). OH. 33 24\u003cbr\u003e(fe unber mjdlk). Bp. 848 7 ; Sb. 10; Mk. 58 24 ; DN. 11, 115. IV,\u003cbr\u003e167, fe unber m\u00e5ldrykkja; menn M. konungs l\u00e9tu saekja s\u00e9r mung\u00e5t ofan\u003cbr\u003ei baeinn (ni. Nifiar\u00e5s) Fm VIII, 87 8 ; faar var mjddr blandinn ok\u003cbr\u003emung\u00e5t heitt Sturi 1, 396 33 ; faar var mung\u00e5t heitt ok undir lagt,\u003cbr\u003efa\u00e5 kom ekki gerd i mung\u00e5t Bp. 1, 340 17 17fs(1 23 f8-); jbf. 339 s\u003cbr\u003efBB- (8 30 f88-); er madr skyldi mung\u00e5t gera, ok horffiist \u00e5\u003cbr\u003euvaenliga, kvikurnar vildu ekki duga \u2014, fa\u00e5 h\u00e9t hann \u00e5 heilaga\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_p\u00e6re_37\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 2000.0, "y": 419.22111623775606}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_p\u00e6re_39", "label": 2.5, "to": "1929-1965_p\u00e6re_5", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_p\u00e6re_39", "label": 4, "to": "1929-1965_p\u00e6re_20", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_p\u00e6re_39", "label": 4, "to": "1929-1965_p\u00e6re_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_p\u00e6re_6", "label": 4, "to": "1929-1965_p\u00e6re_12", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_p\u00e6re_20", "label": 2.5, "to": "1929-1965_p\u00e6re_5", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_p\u00e6re_20", "label": 4, "to": "1929-1965_p\u00e6re_18", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_p\u00e6re_5", "label": 4, "to": "1929-1965_p\u00e6re_18", "weight": 4.0, "width": 4}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": 1, "to": "1929-1965_p\u00e6re_39", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": 1, "to": "1929-1965_p\u00e6re_6", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": 1, "to": "1929-1965_p\u00e6re_18", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": 1, "to": "1929-1965_p\u00e6re_12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": 1, "to": "1929-1965_p\u00e6re_5", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_39", "label": 1.5, "to": "1929-1965_p\u00e6re_6", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_39", "label": 2, "to": "1929-1965_p\u00e6re_12", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": 1.5, "to": "1929-1965_p\u00e6re_18", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": 2, "to": "1929-1965_p\u00e6re_20", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_5", "label": 1.5, "to": "1929-1965_p\u00e6re_12", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_18", "label": 1, "to": "1929-1965_p\u00e6re_33", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_18", "label": 1, "to": "1929-1965_p\u00e6re_12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": NaN, "to": "1929-1965_p\u00e6re_32", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": NaN, "to": "1929-1965_p\u00e6re_20", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_4", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_39", "label": NaN, "to": "1929-1965_p\u00e6re_32", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_39", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_39", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_39", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": NaN, "to": "1929-1965_p\u00e6re_32", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_6", "label": NaN, "to": "1929-1965_p\u00e6re_5", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_32", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_32", "label": NaN, "to": "1929-1965_p\u00e6re_5", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_32", "label": NaN, "to": "1929-1965_p\u00e6re_18", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_32", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_32", "label": NaN, "to": "1929-1965_p\u00e6re_20", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_32", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_20", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_20", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_20", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_5", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_5", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_5", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_18", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_18", "label": NaN, "to": "1929-1965_p\u00e6re_24", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_24", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_24", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_24", "label": NaN, "to": "1929-1965_p\u00e6re_12", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_12", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_12", "label": NaN, "to": "1929-1965_p\u00e6re_33", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_p\u00e6re_33", "label": NaN, "to": "1929-1965_p\u00e6re_37", "weight": NaN, "width": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>

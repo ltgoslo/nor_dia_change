@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">storby (full)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_4", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eForbedringene kom ikke tilfeldig, men skyldtes at avissalget i\u003cbr\u003e\u003cb\u003estorbyene\u003c/b\u003e i Europa og De Forente Stater hadde \u00f8kt, bl.a. ved en\u003cbr\u003emer utbredt leseferdighet og ved st\u00f8rre l\u00f8nninger for folk\u003cbr\u003eflest.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_4\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 247.57375324459343, "y": -1246.1406089966235}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_122", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDette viser at tidsbesparelsen ved de forbedrede\u003cbr\u003etransportmulighetene har blitt oppveiet av at arbeidsreisene er blitt\u003cbr\u003elengre. Geografiske variasjoner Forstadskommunene rundt\u003cbr\u003e\u003cb\u003estorbyene\u003c/b\u003e er den kommunetype som har den h\u00f8yeste\u003cbr\u003ebiltettheten.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_122\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -791.1257155167101, "y": 597.4704351014442}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_135", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI \u003cb\u003estorbyene\u003c/b\u003e \u00e5pner bilen for et aktivitetsm\u00f8nster som\u003cbr\u003eprivatiserer og individualiserer folks dagligliv (eks week-end-kj\u00f8ring\u003cbr\u003etil hytta).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_135\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 980.5125974587157, "y": -76.42492891720354}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_72", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eKartleggingen avbarnevernsbarnas sosiale bakgrunn i\u003cbr\u003e\u003cb\u003estorbyene\u003c/b\u003e viser at det i hovedsak er de samme ytre kjennetegn\u003cbr\u003eved barnevernsfamiliene i 1985 som 10 \u00e5r tidligere:\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_72\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -725.0150399668685, "y": -1884.375743619552}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_131", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eStadig flere bosetter seg i \u003cb\u003estorbyenes\u003c/b\u003e forsteder\u003cbr\u003e(suburbs) - noe som bidrar til lavere botetthet og desentralisering av\u003cbr\u003earbeidsplasser, service og aktivitetstilbud 21) .\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_131\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -900.1594455014782, "y": 1395.3530863849967}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_157", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI l\u00f8pet av 1970-tallet skiftet dette bildet, og\u003cbr\u003e\u003cb\u003estorbyene\u003c/b\u003e kunne mer enn kompensere for et svekket\u003cbr\u003ef\u00f8dselsoverskudd \"p\u00e5 bekostning av\" alle andre regiontyper.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_157\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -184.94559134356513, "y": 1740.0681266748531}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_61", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003eStorbyene\u003c/b\u003e (sentraliseringsregionene) gir bedre rom for\u003cbr\u003esamfunnsmessig mistilpassete grupper.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_61\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1996.708828296851, "y": -524.4076370215156}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_219", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMan snakker om et regionalt nullsum-spill med hensyn p\u00e5\u003cbr\u003ebefolkningstilveksten p\u00e5 regionalt niv\u00e5. For flyttinger kan\u003cbr\u003eutviklingen kort uttrykkes ved at tilb\u00f8yeligheten til \u00e5 flytte ut fra\u003cbr\u003e\u003cb\u003estorbyene\u003c/b\u003e er avtakende og tilb\u00f8yeligheten til \u00e5 flytte inn til\u003cbr\u003edisse er raskt \u00f8kende.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_219\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1428.310219469048, "y": -1156.5601226432757}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_226", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r det gjelder st\u00f8rrelsen p\u00e5 de statlige overf\u00f8rincene, kan\u003cbr\u003eman finne nok av beviser p\u00e5 at \u003cb\u003estorbyene\u003c/b\u003e p\u00e5 sikt har kommet\u003cbr\u003ed\u00e5rligere ut enn mindre kommuner (1 : ) .\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_226\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1253.893881257951, "y": -1525.0583149331712}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_221", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI tettsteder er tal let 15 prosent, og i spredtbygd str\u00f8k var\u003cbr\u003edet bare 8 prosent av dem som reiste p\u00e5 sommerferie som brukte fly.\u003cbr\u003eForklaringen m\u00e5 vaere at en forholdsvis \u003cb\u003estor\u003c/b\u003e andel av dem som\u003cbr\u003evar bosatt i storbyene og delvis i tettsteder i naerheten av disse\u003cbr\u003evalgte reisem\u00e5l s\u00e5 langt unna at bil var et uaktuelt transportmiddel.\u003cbr\u003e18 prosent av de ferierende fra storbyene reiste til S\u00f8r-Europa og\u003cbr\u003eandre fjerntliggende reisem\u00e5l, mens bare 5 prosent av\u003cbr\u003ereiselivsdeltakerne fra spredtbygde str\u00f8k av landet valgte slike\u003cbr\u003efjerne reisem\u00e5l.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_221\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -74.62351638781332, "y": 937.1802710501581}, {"color": "#377eb8", "date": "1980", "id": "1980-1990_storby_207", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTilsvarende fant Cullberg og Stephanssonienunders\u00f8kelse fra\u003cbr\u003eStockholm at tendensen til \u00e5 s\u00f8ke psykiatrisk hjelp var klart st\u00f8rst i\u003cbr\u003enye lavstatus omr\u00e5der i periferien av \u003cb\u003estorbyen\u003c/b\u003e (Cullberg \u0026amp;\u003cbr\u003eStephansson,l9Bl).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1980\u003cbr\u003egrouping: 1980-1990\u003cbr\u003eidentifier: 1980-1990_storby_207\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 440.8092306599391, "y": -1903.2531142221037}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_775", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI \u003cb\u003estorbyer\u003c/b\u003e som Oslo, London og Berlin er Mikkel Rev\u003cbr\u003estadig oftere \u00e5 se. FOTO: JOERG CARSTENSEN/DPA I fjor oppdaget\u003cbr\u003eh\u00e5ndverkerne som jobbet p\u00e5 Storbritannias h\u00f8yeste bygning, The Shard\u003cbr\u003eBuilding rett ved London Bridge, at en rev allerede hadde flyttet inn\u003cbr\u003ei skyskraperen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_775\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1683.5723731413718, "y": 401.49588308938337}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_1423", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMan m\u00e5 definitivt gj\u00f8re noe med utslippene fra luftfarten, og\u003cbr\u003edet vil bli svaert upopulaert dersom det vil koste mye mer \u00e5 dra p\u00e5\u003cbr\u003elanghelg til \u003cb\u003estorbyer\u003c/b\u003e eller p\u00e5 ferie til Thailand, sier han.\u003cbr\u003eMen b\u00e5de Kalbekken og Tveitdal peker p\u00e5 positive punkter i\u003cbr\u003esamarbeidserklaeringen, som utbygging av fornybar energi, \u00f8kning i\u003cbr\u003eavkastning fra milj\u00f8teknologifondet og l\u00f8ftet om ikke \u00e5 \u00e5pne for\u003cbr\u003epetroleumsvirksomhet utenfor Lofoten, Vester\u00e5len og Senja i\u003cbr\u003estortingsperioden.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_1423\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 830.1991550984968, "y": 847.841940046877}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_4643", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHun f\u00f8ler seg ensom og fortapt; men finner gradvis fotfestet og\u003cbr\u003eselvsikkerhet i storbyenes \u003cb\u003estorby\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_4643\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -634.4874265868211, "y": -1003.3039472477143}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_414", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDenne kontoen tilh\u00f8rte en mann ved navn Alpha Kallon, og til\u003cbr\u003etross for at norske myndigheter har sendt rettsanmodning til Liberia\u003cbr\u003eom \u00e5 finne ut mer om denne mannen, samt hatt kontakt med liberisk\u003cbr\u003epoliti, har de ikke funnet ham. Sent i g\u00e5r kveld norsk tid m\u00f8tte VG\u003cbr\u003eden liberiske mannen (41) i Brooklyn Park like utenfor \u003cb\u003estorbyen\u003c/b\u003e\u003cbr\u003eMinneapolis i delstaten Minnesota.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_414\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1603.696764458706, "y": 1105.1407787875153}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_6094", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI den amerikanske \u003cb\u003estorbyen\u003c/b\u003e p\u00e5 vestkysten, ble gjengene\u003cbr\u003esom n\u00e5 heter MS-13 og Barrio 18, opprettet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_6094\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 845.6059364159897, "y": 1773.2104917111355}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_2556", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e- Den islamske staten i Irak og Levanten - har p\u00e5 kort tid\u003cbr\u003einntatt og tatt kontroll over \u003cb\u003estore\u003c/b\u003e omr\u00e5der i Irak, n\u00e5 sist\u003cbr\u003estorbyen Mosul. Gruppen sier n\u00e5 de skal marsjere mot Bagdad, som ledd\u003cbr\u003ei sitt m\u00e5l om en islamsk stat, et sunnimuslimsk kalifat, p\u00e5 tvers av\u003cbr\u003edagens etablerte landegrenser.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_2556\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -2000.0, "y": -486.865433414862}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_1740", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r 11 millioner mennesker sprengfyrer med kull hjemme, p\u00e5 jobb\u003cbr\u003eog offentlige bygninger seks m\u00e5neder i \u00e5ret - \u00e5r etter \u00e5r - kan det g\u00e5\u003cbr\u003esom i den kinesiske \u003cb\u003estorbyen\u003c/b\u003e Harbin de f\u00f8rste dagene denne uka.\u003cbr\u003eSkoler og barnehager har vaert stengt p\u00e5 grunn av tett og helsefarlig\u003cbr\u003er\u00f8ykt\u00e5ke med svevest\u00f8v, som m\u00e5ler opptil 400 ganger h\u00f8yere\u003cbr\u003ekonsentrasjoner enn det Verdens Helseorganisasjon (WHO) anbefaler som\u003cbr\u003eforsvarlig niv\u00e5. WHOs krisealarm for live og helse g\u00e5r p\u00e5 en tredel av\u003cbr\u003em\u00e5lingene som er gjort i Harbin sist uke. Tirsdag ble flyplassen i\u003cbr\u003eKinas 7. st\u00f8rste by helt stengt fordi sikten var mindre enn 10 meter.\u003cbr\u003eHarbin ligger helt nord\u00f8st i Kina, i Heilongjiang, fire timers flytur\u003cbr\u003efra hovedstaden Beijing (22 millioner innbyggere).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_1740\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1950.1224969661876, "y": 1563.2574411940602}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_1882", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEt liv uten stresset og maset i \u003cb\u003estorbyen\u003c/b\u003e gir rett og\u003cbr\u003eslett mer overskudd og produktivitet.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_1882\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1686.0514963902087, "y": 410.41655481822477}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_7147", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eArbeiderpartiet er derimot i en viss fremgang, selv om Gunnar\u003cbr\u003eWilhelmsen-effekten s\u00e5 langt ser ut til \u00e5 la vente p\u00e5 seg. Partiet har\u003cbr\u003eimidlertid tatt et \u003cb\u003estort\u003c/b\u003e byks fremover fra krisem\u00e5lingen for\u003cbr\u003eett \u00e5r siden, med 16,9 prosent. Troms\u00f8 preges ellers av det samme\u003cbr\u003efenomenet som i \u00f8vrige storbyer med en ung og h\u00f8yt utdannet\u003cbr\u003ebefolkning.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_7147\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -961.058917386708, "y": -251.61513663639678}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_2765", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eMen det er ogs\u00e5 slik at n\u00e5r vi naermer oss \u003cb\u003estorbyene\u003c/b\u003e med\u003cbr\u003eomland, s\u00e5 er veinettet generelt bedre, sier Haaland.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_2765\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 18.13023190915059, "y": -122.3649390882436}, {"color": "#377eb8", "date": "2012", "id": "2012-2019_storby_1409", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u00c5 ringe til, eller opps\u00f8ke politistasjonen, gj\u00f8r man bare n\u00e5r\u003cbr\u003edet virkelig spisser seg til. La ikke morgendagens politi bli som i\u003cbr\u003e\u003cb\u003estorbyene\u003c/b\u003e i USA.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 2012\u003cbr\u003egrouping: 2012-2019\u003cbr\u003eidentifier: 2012-2019_storby_1409\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 742.3456485585972, "y": -591.0650821180315}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1980-1990_storby_4", "label": "4/-/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/-", "to": "1980-1990_storby_122", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/4", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/-/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/4", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/4", "to": "1980-1990_storby_72", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/-/4", "to": "1980-1990_storby_131", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/-/-", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/-/4", "to": "1980-1990_storby_157", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/-/-", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "4/4/4", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "-/4/-", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "-/4/-", "to": "1980-1990_storby_61", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "-/4/4", "to": "1980-1990_storby_135", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "-/4/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "-/4/-", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_4", "label": "-/4/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/4", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/4", "to": "1980-1990_storby_135", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/-/-", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "4/4/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/4/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/4/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/0/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/4/4", "to": "1980-1990_storby_131", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/4/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/4/4", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/-/4", "to": "1980-1990_storby_157", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/-/4", "to": "1980-1990_storby_72", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_122", "label": "-/-/4", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/4/-", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/4/4", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/-/-", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/-/-", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/-/4", "to": "1980-1990_storby_131", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/4/-", "to": "1980-1990_storby_72", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/-/-", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/-/-", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/4/-", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/4/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "4/-/-", "to": "1980-1990_storby_61", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "-/4/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "-/4/-", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "-/4/4", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "-/-/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "-/-/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_135", "label": "-/-/4", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/4/4", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/4", "to": "1980-1990_storby_61", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/4", "to": "1980-1990_storby_131", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/0/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/4", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/4/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "4/-/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "-/4/4", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "-/4/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "-/4/-", "to": "1980-1990_storby_157", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "-/4/4", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_72", "label": "-/4/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "4/4/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "4/4/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "4/4/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "4/4/4", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "4/-/4", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "4/4/-", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "-/4/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "-/4/4", "to": "1980-1990_storby_61", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "-/4/4", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "-/4/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "-/-/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_131", "label": "-/-/4", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/4/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/-/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/4/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/-/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/4/4", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/4/-", "to": "1980-1990_storby_61", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/-/-", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/4/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "4/-/-", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "-/4/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "-/4/-", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "-/4/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "-/-/4", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "-/-/4", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_157", "label": "-/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "4/-/4", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "4/-/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "4/-/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "4/4/-", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "4/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/4/4", "to": "1980-1990_storby_219", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/4/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/-/4", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/-/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/-/4", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/-/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_61", "label": "-/-/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/4/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/4/-", "to": "1980-1990_storby_226", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/4/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/-/4", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/-/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/4/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/0/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/-/-", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "4/4/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "-/4/4", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_219", "label": "-/4/-", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "4/0/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "4/-/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "4/-/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "4/4/-", "to": "1980-1990_storby_207", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "4/0/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "4/4/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_226", "label": "-/4/-", "to": "1980-1990_storby_221", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "4/0/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "4/4/-", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "4/4/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "4/-/-", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "-/4/-", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "-/4/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "-/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "-/-/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "-/-/4", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_221", "label": "-/-/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "4/-/4", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "4/-/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "4/-/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "4/4/4", "to": "2012-2019_storby_775", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "4/-/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "-/4/4", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "-/4/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "-/4/-", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "1980-1990_storby_207", "label": "-/-/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "4/4/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "4/-/-", "to": "2012-2019_storby_1423", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "4/4/-", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "4/4/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "4/-/4", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "-/4/4", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "-/4/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_775", "label": "-/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "4/4/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "4/-/4", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "4/-/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "-/4/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "-/4/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "-/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "-/-/4", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "-/-/4", "to": "2012-2019_storby_4643", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1423", "label": "-/-/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "4/4/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "4/0/4", "to": "2012-2019_storby_414", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "4/4/4", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "4/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "4/-/4", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "4/4/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "-/4/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_4643", "label": "-/-/4", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "4/4/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "4/-/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "4/4/-", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "4/4/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "-/4/-", "to": "2012-2019_storby_6094", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "-/4/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_414", "label": "-/-/4", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_6094", "label": "4/4/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_6094", "label": "4/4/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_6094", "label": "4/4/-", "to": "2012-2019_storby_1740", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_6094", "label": "-/4/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_6094", "label": "-/-/4", "to": "2012-2019_storby_2556", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_6094", "label": "-/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_2556", "label": "4/-/4", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_2556", "label": "4/-/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_2556", "label": "4/-/-", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_2556", "label": "-/4/-", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1740", "label": "4/4/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1740", "label": "4/4/4", "to": "2012-2019_storby_1882", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1740", "label": "4/-/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1882", "label": "-/4/-", "to": "2012-2019_storby_7147", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1882", "label": "-/4/-", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_1882", "label": "-/-/4", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_7147", "label": "4/-/-", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_7147", "label": "4/4/4", "to": "2012-2019_storby_2765", "weight": 4.0, "width": 4}, {"color": "black", "from": "2012-2019_storby_2765", "label": "-/4/-", "to": "2012-2019_storby_1409", "weight": 4.0, "width": 4}, {"color": "lightgray", "from": "1980-1990_storby_61", "label": "-/0/-", "to": "1980-1990_storby_207", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "2012-2019_storby_1740", "label": "-/0/-", "to": "2012-2019_storby_7147", "weight": NaN, "width": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>

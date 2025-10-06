@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">forhold (full)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_2998", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDeretter oppfordrer han dem til \u00e5 vise ham \u00abskattens mynt\u00bb,\u003cbr\u003edvs. den (romerske) mynt hvori skatten skulle betales, og lar dem s\u00e5\u003cbr\u003eseiv erklaere at den penning (denar) de rakte ham, bar keiserens bilde\u003cbr\u003eog navn, og dermed har de da i virkeligheten, riktignok uten seiv \u00e5\u003cbr\u003eforst\u00e5 det, allerede besvart det framsatte sp\u00f8rsm\u00e5l med ja. Ved \u00e5 g\u00e5\u003cbr\u003emed den keiserlige mynt i lommen og bruke den i handel og vandel har\u003cbr\u003ede jo seiv allerede faktisk anerkjent keiseren som sin herre, men s\u00e5\u003cbr\u003ef\u00e5r de da ogs\u00e5 oppfylle de forpliktelser som er gitt med dette av dem\u003cbr\u003eseiv anerkjente unders\u00e5ttsforhold. Uten \u00e5 innlate seg p\u00e5 sp\u00f8rsm\u00e5let om\u003cbr\u003erettmessigheten av det romerske herred\u00f8mme eller p\u00e5 andre lignende\u003cbr\u003esp\u00f8rsm\u00e5l uttaler s\u00e5 Jesus seiv i V. 21 b: hva som er den n\u00f8dvendige\u003cbr\u003ekonsekvens av det faktiske \u003cb\u003eforhold\u003c/b\u003e (\u00abda\u00bb alts\u00e5).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_2998\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 523.8951011614436, "y": -76.4777402081517}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_12989", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eFormannen har til plikt \u00e5 skaffe sig greie p\u00e5 \u003cb\u003eforholdene\u003c/b\u003e\u003cbr\u003eved de enkelte biblioteker og kan ta med sig andre medlemmer av r\u00e5det\u003cbr\u003ep\u00e5 sine informasjonsreiser.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_12989\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -3.5988033890967075, "y": -965.0320888093811}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_4129", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u201eHan kan aldri g\u00e5, har aldri g\u00e5tt frivillig fra noen\u003cbr\u003emaktposisjon.\" Statsadvokaten nedla p\u00e5stand om d\u00f8dsstraff, som under\u003cbr\u003ehele krigen gjaldt for krigsforraederi, og som for tiltalens post 2 og\u003cbr\u003e3 hadde hjemmel i provisorisk anordning av 3 / 10 1941, for post 5 i\u003cbr\u003eprovisorisk anordning av 22 /i 1942, men her ikke kunde id\u00f8mmes for\u003cbr\u003e\u003cb\u003eforhold\u003c/b\u003e som l\u00e5 forut for disse anordninger.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_4129\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -245.887095378669, "y": -802.8253922511649}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_9012", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDette var det tredje av de store u\u00e5r, og som man kan vente, var\u003cbr\u003edet ikke nettop glimrende \u00f8konomiske \u003cb\u003eforhold\u003c/b\u003e der ved denne tid.\u003cbr\u003eP\u00e5 skifteauksjon i november 1743 efter Jons f\u00f8rste hustru, Anne\u003cbr\u003eB\u00e5rdsdatter, blev solgt 1 hest, 1 ku, 2 lam, 2 unggeiter og 1 kidd\u003cbr\u003esamt 4 % tdr. bygg og 6 8 /\u00bb tdr. havre. Aktiva blev p\u00e5 denne m\u00e5te 28\u003cbr\u003erdl. 1 ort 15 sk. og beholdningen 13 rdl. 12 sk. Til begravelsen blev\u003cbr\u003einnr\u00f8mmet 3 rdl. Jon seiv d\u00f8de i 1754. Den registrerte besetning var\u003cbr\u003eda 2 kyr, 3 sm\u00e5 kalver, 5 sauer og 1 svin. Aktiva blev 49 rdl. 3 ort 2\u003cbr\u003esk. og beholdningen 22 rdl. 3 ort 10 sk. Enken, Dor tea Nilsdatter,\u003cbr\u003eblev \u00e5ret efter gift med Jon Ingebrlgtsen M\u00e5lset, som fikk bygselbrev\u003cbr\u003eav prost Thode 31. oktober 1755, tgl. 4. mars 1756.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_9012\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -337.3620542499326, "y": -282.7520805677349}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_9629", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTilsier \u003cb\u003eforholdene\u003c/b\u003e ikke at man lar en fors\u00f8mmelse fra\u003cbr\u003efullmaktsgiverens side av den art som her er nevnt f\u00e5 til f\u00f8lge at han\u003cbr\u003eblir bundet ved fullmektigens handling, kan der vaere grunn til \u00e5 la\u003cbr\u003eham erstatte den negative interesse. 83 Jfr. BRDD. VI. nr. 866. 34 Se\u003cbr\u003eovenfor \u00a7 15. IX. 85 Se saerlig Bj6rl i n g: O\u00e5terkallelig fullmakt (i\u003cbr\u003eFestskrift fdr Grotenfelt 1929.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_9629\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 28.76547130934884, "y": -573.8366832891747}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_2167", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eSom en av de f\u00f8rste skrev han i \u00e5rb\u00f8kene 1909 og 1917\u003cbr\u003ehenholdsvis om Finnmark og Nordland som fotturdistrikter, og 1924\u003cbr\u003ebehandlet han skogfinnene i Nordmarken. Fra 1918 var han varamann til\u003cbr\u003eog 1921 \u2014 26 medlem av Turistforeningens direksjon. Nytt land har N.\u003cbr\u003efremfor alt brutt i Norges eldre kartografi, som tiltrakk sig hans\u003cbr\u003eopmerksomhet under studiet av lappenes \u003cb\u003eforhold\u003c/b\u003e i eldre tid og\u003cbr\u003eunder grenseforhandlingene mellem Norge og Finnland; fra dette omr\u00e5de,\u003cbr\u003ehvor han kar foretatt omfattende forskninger, foreligger en rekke\u003cbr\u003everdifulle resultater (utrykte redegj\u00f8relser for Utenriksdepartementet\u003cbr\u003ejuli 1922; Aftenposten 1931 nr. 625; Boken om b\u00f8ker 111, 1932;\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_2167\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 299.64947153781407, "y": -437.38298191387946}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_2974", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI denne salme, som den bekjente bibelfortolker Delitzsch kaller\u003cbr\u003e\u00abet speil til advarsel, hentet fra historien fra Moses til David\u00bb, er\u003cbr\u003eIsraels tidligere historie, saerlig utfrielsen fra Egypt og\u003cbr\u003e\u00f8rkenvandringen, benyttet som en lignelse for dikterens samtidige,\u003cbr\u003eidet han har villet at de skal anvende de historiske kjensgjerninger\u003cbr\u003ehan minner om, p\u00e5 bestemte tilstander og \u003cb\u003eforhold\u003c/b\u003e som tilh\u00f8rer\u003cbr\u003ehans egen tid. Og denne dikterens belaerelse av folket i parabolisk og\u003cbr\u003eg\u00e5tefull form har da Matt. betraktet som et av Guds \u00c5nd skapt forbilde\u003cbr\u003ep\u00e5 Jesu paraboliske laerem\u00e5te: Liksom Jesus overbodet er oppfyllelsen\u003cbr\u003eav den gtl. historie, s\u00e5 er han det ogs\u00e5 som profet i alt det som er\u003cbr\u003eeiendommelig for profeten, og til den profetiske forkynnelses\u003cbr\u003eeiendommelighet h\u00f8rte bl. a. evnen tii \u00e5 forkynne den guddommelige\u003cbr\u003esannhet i de former som til enhver tid var form\u00e5lstjenlige, og da ogs\u00e5\u003cbr\u003ei tilfelle \u00e5 forkynne den p\u00e5 en slik m\u00e5te at det krevdes ettertanke\u003cbr\u003efor \u00e5 utfinne den virkelige mening. I stedet for det i den hebraiske\u003cbr\u003egrunntekst benyttede uttrykk \u00abg\u00e5tefulle ord fra fordums tid\u00bb har Matt.\u003cbr\u003esatt \u00abdet som har vaert skjult, fra verdens grunnvoll ble lagt\u00bb, og\u003cbr\u003ederved har han da \u00e5penbart tenkt p\u00e5 Gudsrikets \u00abhemmeligheter\u00bb, som\u003cbr\u003ehittil har vaert skjult (sml. til v. 11). h) Tydning av\u003cbr\u003eugraslignelsen, 13, 36\u20144-3. V. 36: Etter \u00e5 ha foredratt de i det\u003cbr\u003eforeg\u00e5ende gjengitte lignelser lot Jesus folket fare og gikk inn i\u003cbr\u003ehuset, hvor disiplene gikk til ham og bad ham tyde den om\u003cbr\u003eugraset.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_2974\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 358.1013877639869, "y": -671.8500612090905}, {"color": "#377eb8", "date": "1929", "id": "1929-1965_forhold_8193", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI enkelte tilfelle har det forekommet at p\u00e5talemyndigheten har\u003cbr\u003eansett medlemskapet straffbart, mens retten p\u00e5 grunnlag av\u003cbr\u003eopplysningene under hovedforhandlingen er kommet til et annet\u003cbr\u003eresultat, og har frifunnet tiltalte. s ) For det annet er det etter\u003cbr\u003estraffeprossesslovens \u00a7 85 unnlatt p\u00e5tale mot en rekke\u003cbr\u003epolititjenestemenn, og i mange slike tilfelle er det fra\u003cbr\u003ep\u00e5talemyndighetenes side henvist til landssvikanordningens \u00a7 5 og\u003cbr\u003euttrykkelig gitt uttrykk for at siktedes \u003cb\u003eforhold\u003c/b\u003e ikke kunne\u003cbr\u003eantas \u00e5 betinge anvendelse av straff.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_8193\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -285.2984955281616, "y": -529.5075143764379}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_forhold_26572", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eHan hadde likevel ikke tro p\u00e5 at han kunne ha funnet p\u00e5 dette\u003cbr\u003eselv. Arnkvaern la til at uttalelsen ble lest opp p\u00e5\u003cbr\u003erepresentantskapsm\u00f8tet, uten at det kom innvendinger fra\u003cbr\u003erepresentanter fra administrasjonen eller konsernstyret. Dersom\u003cbr\u003eArnkvaern hadde vaert klar over de faktiske \u003cb\u003eforhold\u003c/b\u003e ville\u003cbr\u003euttalelsen vaert formulert anderledes, bl a ville risikoen om \u00e5 m\u00e5tte\u003cbr\u003eforeta salg vaert p\u00e5pekt.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_26572\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -42.94852356252803, "y": -734.1156078048124}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_forhold_111903", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eUnders\u00f8kelsen p\u00e5peker til slutt tre \u003cb\u003eforhold\u003c/b\u003e som synes \u00e5\u003cbr\u003eha betydning for et velfungerende utvalg: Fordi det i stor grad er opp\u003cbr\u003etil likestillingsutvalgene \u00e5 ta initiativ og sette likestilling p\u00e5\u003cbr\u003edagsordenen, er det viktig at det oppnevnes medlemmer som er\u003cbr\u003einteressert i likestillingsarbeid.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_111903\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 178.22251666784157, "y": -205.05314345839835}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_forhold_194915", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eTil sva ende m\u00e5 departementet fortsatt legge \u003cb\u003eforholdene\u003c/b\u003e\u003cbr\u003eti. reite for at Politiskolen ogs\u00e5 fremtidig benytter alle muligheter\u003cbr\u003etil \u00e5 f\u00f8lge samfunnsutviklingen, utvikllngen i det alminnelige\u003cbr\u003eskoleverk og i etatsskolene Sc mt i politiet, og at utviklingpn\u003cbr\u003el\u00f8pende b ir avspeilet i politiutdannelsen.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_194915\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -134.49708541121265, "y": -316.44958869138804}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_forhold_166772", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDet m\u00e5 understrekes at i et system der skatteinntekter utgj\u00f8r\u003cbr\u003een viktig finansieringskilde av den kommunale driften, vil det skje\u003cbr\u003eendringer i inntektsfordelingen, ogs\u00e5 i penoder uten skattereform,\u003cbr\u003ebl.a. som f\u00f8lge av konjunkturelle \u003cb\u003eforhold\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_166772\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 11.549501061035102, "y": -340.5695803866798}, {"color": "#377eb8", "date": "1970", "id": "1970-2015_forhold_172173", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eO J \u00ab W 0 3 28 1968\u201469: 11 2 1969\u201470: 12 2 0 2 20\u003cbr\u003eKommunalministeren 2 2 5 4 1 10 1970\u201471: 7 3 1971\u201472: 4 3 1945\u201446: 3\u003cbr\u003e1947: 1948: Opprettet 20/12 -48 9 3 3 10 1949: 9 Forsvarsministeren\u003cbr\u003e1945\u201446: 15 1950: 10 9 7 1 20 1951: 7 6 7 5 16 2 0 5 2 5 0 0 0 0 0 4 5\u003cbr\u003e32 1952: 11 7 1947: 13 3 1953: 15 4 1 5 10 1948: 18 1 1 5 26 1954: 9\u003cbr\u003e1955: 12 1956: 16 1957: 7 1958: 16 1959: 13 4 1949: 7 4 0 1 11 4 1 3\u003cbr\u003e23 1950: 7 2 0 15 7 3 4 27 1951: 11 0 0 2 18 4 1 3 13 1952: 8 1 0 1 27\u003cbr\u003e8 3 5 18 1953: 9 4 0 3 15 0 1 16 3 1954: 6 2 0 3 16 1959\u201460: 13\u003cbr\u003e1960\u201461: 17 1961\u201462: 14 1962\u201463: 25 1963\u201464: 16 1964\u201465: 15 1965\u201466:\u003cbr\u003e16 1966\u201467: 20 1967\u201468: 17 1968\u201469: 15 1969\u201470: 16 1970\u201471: 14\u003cbr\u003e1971\u201472: 14 8 6 6 21 1955: 12 1 0 1 21 3 7 31 1956: 13 1 0 3 14 6 5 2\u003cbr\u003e6 14 1957: 14 7 0 0 10 7 3 5 26 1958: 8 4 0 0 17 2 2 10 16 6 5 29\u003cbr\u003e1959: 10 2 0 0 11 9 5 29 1959\u201460: 8 4 0 \u0026gt; 1 16 4 6 21 1960\u201461: 13 1\u003cbr\u003e0 2 25 6 4 2 3 13 1961\u201462: 9 2 118 7 4 4 21 1962\u201463: 8 1 0 2 12 5 3 3\u003cbr\u003e24 1963\u201464: 8 2 0 2 7 8 6 4 35 1964\u201465: 5 0 0 1 13 7 2 7 21 1965\u201466: 5\u003cbr\u003e0 0 2 12 6 3 8 44 1966\u201467: 3 4 0 13 Statssekretaerordningen m. m.\u003cbr\u003eBilag 3. \u003cb\u003eForholdene\u003c/b\u003e i andre land Utvalget har s\u00f8kt \u00e5 innhente\u003cbr\u003eopplysninger om ordninger som svarer til v\u00e5r statssekretaerordning i\u003cbr\u003eenkelte fremmede land med et styresett som er likeartet med\u003cbr\u003ev\u00e5rt.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_172173\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -496.66640828098343, "y": -634.3673264628414}, {"color": "#4daf4a", "date": "1929", "id": "1929-1965_forhold_8037", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eI den omhandlede betenkning uttaler Castberg bl. a. ang\u00e5ende\u003cbr\u003e\u003cb\u003eforholdet\u003c/b\u003e til grunnlovens \u00a7 1: Grunnloven og Norges deltakelse\u003cbr\u003ei internasjonale organisasjoner.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_8037\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1102.9132586999788, "y": 464.3656926699534}, {"color": "#4daf4a", "date": "1929", "id": "1929-1965_forhold_12929", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e1 Da han fem \u00e5r senere m\u00f8tte Ibsen igjen i Stockholm, s\u00e5 han\u003cbr\u003eanderledes p\u00e5 det enn f\u00f8r. Da hadde gifterm\u00e5let og\u003cbr\u003edepartementsarbeidet f\u00f8rt ham inn i en konflikt i \u003cb\u003eforholdet\u003c/b\u003e til\u003cbr\u003ehans milj\u00f8, som skulde kreve all hans vilje og handlingskraft for \u00e5\u003cbr\u003eovervinnes.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_12929\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 929.4976185445073, "y": 818.0377336392904}, {"color": "#4daf4a", "date": "1970", "id": "1970-2015_forhold_142014", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eEn annen sak er imidlertid at den manglende henvisningen til\u003cbr\u003ekonvensjonen i reindriftsloven \u00a7 3 kan bli oppfattet som en svekkelse\u003cbr\u003eav konvensjonens betydning ved anvendelsen av denne loven, i\u003cbr\u003e\u003cb\u003eforhold\u003c/b\u003e til dens betydning ved anvendelsen av finnmarksloven.\u003cbr\u003eSamerettsutvalget har s\u00e5ledes kommet til at reindriftsloven \u00a7 3 b\u00f8r\u003cbr\u003eformuleres p\u00e5 samme m\u00e5te som finnmarksloven \u00a7 3. En slik endring vil\u003cbr\u003eneppe ha noen rettslig betydning. Henvisningen til folkeretten i\u003cbr\u003ereindriftsloven \u00a7 3 m\u00e5 som fremholdt i punkt 16.6.2.1, anses som en\u003cbr\u003ebegrenset inkorporasjon av den relevante folkeretten, hvor ILO-\u003cbr\u003ekonvensjonen st\u00e5r sentralt.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_142014\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 178.16140494744047, "y": 1146.7633932297947}, {"color": "#4daf4a", "date": "1970", "id": "1970-2015_forhold_200774", "label": "2", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOgs\u00e5 \u003cb\u003eforholdet\u003c/b\u003e mellom l\u00f8nnet og ul\u00f8nnet arbeid m\u00e5 tas\u003cbr\u003eopp til ny vurdering.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_200774\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": 1969.5161211512184, "y": 539.0411777275094}, {"color": "#f781bf", "date": "1929", "id": "1929-1965_forhold_12552", "label": "3", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eDa jeg kom hjem, fikk jeg hore at presten og min far var blitt\u003cbr\u003euenige i forlikskommisjonen. Presten, som var forlikskommissaer, hadde\u003cbr\u003evtret at han syntes min far ien sak for for hardt frem, og min far\u003cbr\u003ehadde gitt ham et br\u00e5tt svar. Det var i anledning herav at kritikken\u003cbr\u003eover oss nu var sloppet los i presteg\u00e5rden. Oss barn gav dette\u003cbr\u003e\u003cb\u003eforhold\u003c/b\u003e mellom de voksne en utrygg skyhet, og jeg husker at jeg\u003cbr\u003ei begynnelsen endog var bange for \u00e5g\u00e5 forbi presteg\u00e5rden, da jeg mulig\u003cbr\u003ekunne treffe presten p\u00e5 veien.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1929\u003cbr\u003egrouping: 1929-1965\u003cbr\u003eidentifier: 1929-1965_forhold_12552\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -1999.9999999999998, "y": -631.8262566009054}, {"color": "#ff7f00", "date": "1970", "id": "1970-2015_forhold_172868", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e3.6.2 Den danske arbejdsgruppe dr\u00f8ftet, men tok avstand fra et\u003cbr\u003eforslag om \u00e5 gj\u00f8re underleverand\u00f8rens ansvar subsidiaert i\u003cbr\u003e\u003cb\u003eforhold\u003c/b\u003e til ferdigvareprodusenten.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_172868\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -388.4613602499334, "y": 1319.1138487607507}, {"color": "#ff7f00", "date": "1970", "id": "1970-2015_forhold_40960", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eN\u00e5r det gjelder \u003cb\u003eforholdet\u003c/b\u003e mellom rente og sparing, gir\u003cbr\u003eimidlertid ikke livssyklusteorien noen st\u00f8rre klarhet i det\u003cbr\u003efundamentale sp\u00f8rsm\u00e5l om det er substitusjons- eller inntektseffekten\u003cbr\u003esom dominerer.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_40960\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -576.8479730566818, "y": 767.5022049360855}, {"color": "#ff7f00", "date": "1970", "id": "1970-2015_forhold_104934", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eRelativt vide sosiale lag vil kunne oppfatte NAMITs\u003cbr\u003emilj\u00f8alternativer som en f\u00f8lbar begrensning i \u003cb\u003eforhold\u003c/b\u003e til\u003cbr\u003emulighetene i trendalternativene.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_104934\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -258.34835360645724, "y": 1035.8945264164092}, {"color": "#ff7f00", "date": "1970", "id": "1970-2015_forhold_187467", "label": "1", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003eOm utseendet p\u00e5 denne i \u003cb\u003eforhold\u003c/b\u003e til den primaere\u003cbr\u003einntektsfordelingen og til fordelingen av disponibel inntekt i land\u003cbr\u003esom er sammenliknbare med Norge har det vaert fremkastet flere ulike\u003cbr\u003ehypoteser.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1970\u003cbr\u003egrouping: 1970-2015\u003cbr\u003eidentifier: 1970-2015_forhold_187467\u003cbr\u003etype: usage\u003cbr\u003epos: NN\u003c/p\u003e", "x": -810.3557001309497, "y": 1111.3274686502568}]);
+        edges = new vis.DataSet([{"color": "black", "from": "1929-1965_forhold_2998", "label": "0/3/-", "to": "1970-2015_forhold_194915", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "0/3/-", "to": "1970-2015_forhold_104934", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/3/-", "to": "1929-1965_forhold_8037", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/3/-", "to": "1929-1965_forhold_8193", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/3/-", "to": "1929-1965_forhold_12929", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/3/-", "to": "1929-1965_forhold_4129", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/-/4", "to": "1929-1965_forhold_2167", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/-/4", "to": "1929-1965_forhold_2974", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2998", "label": "-/-/4", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "4/-/-", "to": "1929-1965_forhold_4129", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "4/3/-", "to": "1929-1965_forhold_8193", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "4/4/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "4/3/-", "to": "1970-2015_forhold_111903", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "4/3/-", "to": "1929-1965_forhold_9629", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "4/-/-", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "-/3/-", "to": "1929-1965_forhold_2167", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12989", "label": "-/-/4", "to": "1929-1965_forhold_2974", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "4/-/-", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "4/4/4", "to": "1970-2015_forhold_26572", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "4/4/-", "to": "1929-1965_forhold_2974", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "4/4/4", "to": "1929-1965_forhold_8193", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "4/-/4", "to": "1929-1965_forhold_9012", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "-/3/-", "to": "1970-2015_forhold_172173", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "-/4/-", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_4129", "label": "-/-/4", "to": "1929-1965_forhold_9629", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "4/-/4", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "4/4/-", "to": "1970-2015_forhold_111903", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "4/-/-", "to": "1929-1965_forhold_2167", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "4/4/4", "to": "1929-1965_forhold_8193", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "4/3/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "-/4/-", "to": "1970-2015_forhold_26572", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "-/4/4", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "-/3/-", "to": "1970-2015_forhold_40960", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9012", "label": "-/-/4", "to": "1929-1965_forhold_9629", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8037", "label": "2/4/-", "to": "1970-2015_forhold_142014", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8037", "label": "2/3/-", "to": "1970-2015_forhold_111903", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8037", "label": "-/3/-", "to": "1970-2015_forhold_200774", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8037", "label": "-/4/-", "to": "1929-1965_forhold_12929", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8037", "label": "-/3/0", "to": "1929-1965_forhold_2167", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "4/4/4", "to": "1929-1965_forhold_2974", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "4/-/-", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "4/4/4", "to": "1970-2015_forhold_111903", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "4/-/-", "to": "1929-1965_forhold_8193", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "4/-/4", "to": "1929-1965_forhold_2167", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "-/4/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "-/-/4", "to": "1970-2015_forhold_26572", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_9629", "label": "-/-/4", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "4/-/-", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "-/4/-", "to": "1970-2015_forhold_111903", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "-/3/-", "to": "1970-2015_forhold_172173", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "-/4/-", "to": "1929-1965_forhold_2974", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "-/-/4", "to": "1929-1965_forhold_8193", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "-/-/4", "to": "1970-2015_forhold_26572", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2167", "label": "-/-/4", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2974", "label": "4/3/-", "to": "1970-2015_forhold_194915", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2974", "label": "4/-/4", "to": "1970-2015_forhold_26572", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_2974", "label": "-/-/4", "to": "1970-2015_forhold_111903", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12929", "label": "2/3/-", "to": "1970-2015_forhold_111903", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12929", "label": "2/3/-", "to": "1970-2015_forhold_166772", "weight": 2.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12929", "label": "-/3/4", "to": "1970-2015_forhold_142014", "weight": 3.5, "width": 4}, {"color": "black", "from": "1929-1965_forhold_12929", "label": "-/3/-", "to": "1970-2015_forhold_200774", "weight": 3.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8193", "label": "4/4/4", "to": "1970-2015_forhold_26572", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8193", "label": "4/-/-", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8193", "label": "-/-/4", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1929-1965_forhold_8193", "label": "-/-/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_142014", "label": "4/-/-", "to": "1970-2015_forhold_104934", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_142014", "label": "4/-/4", "to": "1970-2015_forhold_172868", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_26572", "label": "4/4/-", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_26572", "label": "4/4/4", "to": "1970-2015_forhold_111903", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_26572", "label": "4/-/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_172868", "label": "4/-/-", "to": "1970-2015_forhold_40960", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_172868", "label": "4/4/4", "to": "1970-2015_forhold_104934", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_172868", "label": "-/4/4", "to": "1970-2015_forhold_187467", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_40960", "label": "4/3/4", "to": "1970-2015_forhold_187467", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_40960", "label": "-/3/-", "to": "1970-2015_forhold_111903", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_40960", "label": "-/3/-", "to": "1970-2015_forhold_166772", "weight": 3.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_40960", "label": "-/-/4", "to": "1970-2015_forhold_104934", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_111903", "label": "4/-/-", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_111903", "label": "4/-/-", "to": "1970-2015_forhold_194915", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_104934", "label": "4/-/-", "to": "1970-2015_forhold_187467", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_194915", "label": "4/-/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_194915", "label": "-/4/4", "to": "1970-2015_forhold_166772", "weight": 4.0, "width": 4}, {"color": "black", "from": "1970-2015_forhold_166772", "label": "4/-/4", "to": "1970-2015_forhold_172173", "weight": 4.0, "width": 4}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/2/-", "to": "1929-1965_forhold_9629", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/2/1", "to": "1970-2015_forhold_142014", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/2/-", "to": "1970-2015_forhold_172173", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "-/2/-", "to": "1970-2015_forhold_111903", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "-/-/1", "to": "1929-1965_forhold_12552", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "-/-/1", "to": "1970-2015_forhold_200774", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "2/2/1", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "2/-/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "2/-/1", "to": "1970-2015_forhold_200774", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "2/2/1", "to": "1970-2015_forhold_40960", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "-/1/1", "to": "1970-2015_forhold_172868", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "-/2/-", "to": "1929-1965_forhold_12552", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "-/-/1", "to": "1929-1965_forhold_12929", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12989", "label": "-/-/1", "to": "1970-2015_forhold_104934", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "2/-/-", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "2/-/-", "to": "1929-1965_forhold_8037", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "2/-/1", "to": "1970-2015_forhold_172868", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "2/2/1", "to": "1929-1965_forhold_12552", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "-/2/-", "to": "1929-1965_forhold_2167", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "-/2/-", "to": "1970-2015_forhold_104934", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "-/-/1", "to": "1970-2015_forhold_187467", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "-/-/1", "to": "1929-1965_forhold_12929", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_4129", "label": "-/-/1", "to": "1970-2015_forhold_40960", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "2/2/-", "to": "1970-2015_forhold_172868", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "2/-/1", "to": "1929-1965_forhold_12552", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "2/-/1", "to": "1929-1965_forhold_8037", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "-/3/1", "to": "1929-1965_forhold_12929", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "-/2/-", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "-/2/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9012", "label": "-/3/1", "to": "1970-2015_forhold_104934", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "2/-/-", "to": "1970-2015_forhold_26572", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "2/2/-", "to": "1970-2015_forhold_40960", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "2/-/-", "to": "1970-2015_forhold_194915", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "2/2/-", "to": "1929-1965_forhold_8193", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "-/2/1", "to": "1970-2015_forhold_172173", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "-/2/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "-/-/1", "to": "1970-2015_forhold_104934", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "-/-/1", "to": "1970-2015_forhold_166772", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "2/-/-", "to": "1970-2015_forhold_172868", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "2/2/1", "to": "1929-1965_forhold_12929", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "2/-/-", "to": "1970-2015_forhold_104934", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "2/2/-", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "-/2/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "-/2/-", "to": "1929-1965_forhold_12552", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "-/2/-", "to": "1970-2015_forhold_200774", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_9629", "label": "-/-/1", "to": "1970-2015_forhold_40960", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2167", "label": "2/2/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2167", "label": "2/-/1", "to": "1929-1965_forhold_12552", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2167", "label": "-/2/-", "to": "1970-2015_forhold_200774", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2167", "label": "-/2/1", "to": "1929-1965_forhold_12929", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2167", "label": "-/-/1", "to": "1970-2015_forhold_172868", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2167", "label": "-/-/1", "to": "1970-2015_forhold_104934", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "2/2/4", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "2/2/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "2/-/1", "to": "1929-1965_forhold_12929", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "2/2/1", "to": "1970-2015_forhold_104934", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "-/2/-", "to": "1970-2015_forhold_172868", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "-/2/-", "to": "1970-2015_forhold_200774", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "-/-/1", "to": "1970-2015_forhold_40960", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2974", "label": "-/-/1", "to": "1929-1965_forhold_12552", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "2/-/0", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "2/2/-", "to": "1970-2015_forhold_111903", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "2/2/4", "to": "1970-2015_forhold_194915", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "2/2/1", "to": "1970-2015_forhold_172173", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "2/2/-", "to": "1970-2015_forhold_187467", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "2/1/-", "to": "1970-2015_forhold_166772", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "-/3/1", "to": "1970-2015_forhold_26572", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "-/2/1", "to": "1929-1965_forhold_8193", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12552", "label": "-/-/1", "to": "1970-2015_forhold_40960", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "2/2/4", "to": "1970-2015_forhold_104934", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "2/-/-", "to": "1970-2015_forhold_172868", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "2/2/-", "to": "1929-1965_forhold_8193", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "2/-/-", "to": "1970-2015_forhold_40960", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "-/2/-", "to": "1970-2015_forhold_26572", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "-/1/-", "to": "1970-2015_forhold_172173", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "-/2/-", "to": "1970-2015_forhold_194915", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_12929", "label": "-/-/1", "to": "1970-2015_forhold_187467", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8193", "label": "2/-/-", "to": "1970-2015_forhold_142014", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8193", "label": "2/2/1", "to": "1970-2015_forhold_172868", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8193", "label": "2/-/-", "to": "1970-2015_forhold_200774", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8193", "label": "-/2/-", "to": "1970-2015_forhold_40960", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_8193", "label": "-/-/1", "to": "1970-2015_forhold_187467", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_142014", "label": "2/-/-", "to": "1970-2015_forhold_194915", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_142014", "label": "2/-/1", "to": "1970-2015_forhold_26572", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_142014", "label": "2/-/1", "to": "1970-2015_forhold_111903", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_142014", "label": "-/-/1", "to": "1970-2015_forhold_166772", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_142014", "label": "-/-/1", "to": "1970-2015_forhold_172173", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_142014", "label": "-/-/1", "to": "1970-2015_forhold_40960", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_26572", "label": "2/2/1", "to": "1970-2015_forhold_172868", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_26572", "label": "2/-/1", "to": "1970-2015_forhold_187467", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_26572", "label": "-/1/-", "to": "1970-2015_forhold_40960", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_26572", "label": "-/2/1", "to": "1970-2015_forhold_104934", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_26572", "label": "-/-/1", "to": "1970-2015_forhold_200774", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_172868", "label": "2/1/-", "to": "1970-2015_forhold_194915", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_172868", "label": "2/2/-", "to": "1970-2015_forhold_172173", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_172868", "label": "-/2/1", "to": "1970-2015_forhold_111903", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_172868", "label": "-/-/1", "to": "1970-2015_forhold_200774", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_172868", "label": "-/-/1", "to": "1970-2015_forhold_166772", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_40960", "label": "2/-/-", "to": "1970-2015_forhold_172173", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_40960", "label": "-/-/1", "to": "1970-2015_forhold_194915", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_111903", "label": "2/-/1", "to": "1970-2015_forhold_200774", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_111903", "label": "2/-/1", "to": "1970-2015_forhold_104934", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_104934", "label": "-/1/-", "to": "1970-2015_forhold_200774", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_104934", "label": "-/2/-", "to": "1970-2015_forhold_172173", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_187467", "label": "2/-/-", "to": "1970-2015_forhold_172173", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_187467", "label": "-/2/-", "to": "1970-2015_forhold_194915", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_200774", "label": "2/-/1", "to": "1970-2015_forhold_194915", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1970-2015_forhold_200774", "label": "-/2/1", "to": "1970-2015_forhold_172173", "weight": 1.5, "width": 2}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/-/-", "to": "1970-2015_forhold_187467", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/-/-", "to": "1970-2015_forhold_172868", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/-/-", "to": "1970-2015_forhold_40960", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_forhold_2998", "label": "0/-/-", "to": "1929-1965_forhold_9012", "weight": NaN, "width": 1.0}, {"color": "lightgray", "from": "1929-1965_forhold_8037", "label": "-/-/0", "to": "1929-1965_forhold_2974", "weight": NaN, "width": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>
