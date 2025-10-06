@@ -28,6 +28,8 @@ _NorDiaChange_ is published under the [Creative Commons Attribution license](htt
 
 Version: 1.0.1, 11.1.2025. Correct target word and target sentence indices. Map judgment identifiers to use identifiers. Clean comment column. Keep excluded nodes with cluster '-1'. Regenerate graphs. Update plots. Use '.csv' file ending. 
 
+Version: 1.0.2, 06.10.2025. Use `.tsv` file extension again.
+
 As described in the paper below, the data was further optimized for the CoMeDi shared task. Version 1.0.1 reflects some of the changes described in the paper, i.e., correction of target word and target sentence indices, plus minor additional changes.
 
 ["The CoMeDi Shared Task: Median Judgment Classification & Mean Disagreement Ranking with Ordinal Word-in-Context Judgments"](https://aclanthology.org/2025.comedi-1.4/) by Dominik Schlechtweg, Tejaswi Choppa, Wei Zhao, Michael Roth. In Proceedings of the 1st Workshop on Context and Meaning--Navigating Disagreements in NLP Annotations. 2025.
